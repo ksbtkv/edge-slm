@@ -1,0 +1,41 @@
+# Base topology shared by both modes. Apply with an override:
+#   CPU : docker compose -f compose.yaml -f compose.cpu.yaml ...
+#   CUDA: docker compose -f compose.yaml -f compose.cuda.yaml ...
+# (the Makefile wires these up for you)
+
+services:
+  ollama:
+    image: ollama/ollama:${OLLAMA_TAG:-0.5.7}
+    container_name: edge-slm-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+    # The 16 GB system-RAM target lives here. Overridable via .env.
+    mem_limit: ${MEM_LIMIT:-16g}
+    memswap_limit: ${MEMSWAP_LIMIT:-18g}   # allow a little swap, like a real laptop
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "ollama", "ps"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  bench:
+    build:
+      context: ..
+      dockerfile: docker/bench.Dockerfile
+    container_name: edge-slm-bench
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: "http://ollama:11434"
+      MODELS: "${MODELS:-}"
+    volumes:
+      - ../results:/work/results
+    # bench is a one-shot; start it explicitly with `make bench`
+    profiles: ["manual"]
+
+volumes:
+  ollama-models:

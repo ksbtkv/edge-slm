@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Local sandbox runtime (do NOT commit local env / venvs)
+sandbox/docker/.env
+sandbox/native/.venv/
+
+# OS
+.DS_Store
+
+# NOTE: sandbox/results/ IS intentionally tracked — the benchmark JSON and
+# REPORT.md are project deliverables (Stage 0 findings).

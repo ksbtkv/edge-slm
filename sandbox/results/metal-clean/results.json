@@ -1,0 +1,204 @@
+{
+  "label": "metal-clean",
+  "timestamp_utc": "2026-06-26T19:32:55.614150+00:00",
+  "ollama_host": "http://localhost:11434",
+  "memory_source": "psutil",
+  "mem_cap_gb": 48.0,
+  "accelerator": "apple-metal",
+  "gpu_present": true,
+  "apple_gpu_wired_limit_mb": 0,
+  "models": [
+    {
+      "model": "qwen2.5:3b",
+      "memory_source": "psutil",
+      "baseline_used_gb": 26.87,
+      "load_footprint_gb": 1.89,
+      "peak_used_gb": 29.02,
+      "peak_swap_gb": 4.55,
+      "load_swap_gb": 4.55,
+      "ollama_size_gb": 2.6,
+      "ollama_size_vram_gb": 2.6,
+      "baseline_vram_used_mb": 1891,
+      "load_vram_used_mb": 4542,
+      "peak_vram_used_mb": 5010,
+      "mean_tokens_per_sec": 91.7,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 73,
+          "tokens_per_sec": 90.5,
+          "response_preview": "-\nLocal deployment reduces latency by minimizing network round-trip times.\n-\nData privacy and security are enhanced as data stays within a controlled environment.\n-\nCost savings can be achieved due to"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 33,
+          "tokens_per_sec": 92.2,
+          "response_preview": "The checkpoint is converted to GGUF Q4_K_M format. Not stated in the provided text is whether anyone runs the Pawsey jobs interactively or not."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 114,
+          "tokens_per_sec": 92.5,
+          "response_preview": "[{\"instruction\":\"Create an instruction to explain what a local language model is.\",\"response\":\"Understand that a local language model is a machine learning model trained on specific data relevant to a"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 87,
+          "tokens_per_sec": 92.6,
+          "response_preview": "A policy outlines broad guidelines or principles that govern how an organization should operate or make decisions, while a procedure provides detailed steps for carrying out specific tasks or processe"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 69,
+          "tokens_per_sec": 90.5,
+          "response_preview": "I don't have access to specific financial data for Visagio or any particular office. To provide an accurate total revenue for Visagio's Perth office in the second quarter of 2026 would require detaile"
+        }
+      ],
+      "warmup_response": "ready"
+    },
+    {
+      "model": "gemma3:4b",
+      "memory_source": "psutil",
+      "baseline_used_gb": 26.55,
+      "load_footprint_gb": 4.07,
+      "peak_used_gb": 31.06,
+      "peak_swap_gb": 4.55,
+      "load_swap_gb": 4.55,
+      "ollama_size_gb": 3.54,
+      "ollama_size_vram_gb": 3.54,
+      "baseline_vram_used_mb": 1997,
+      "load_vram_used_mb": 6449,
+      "peak_vram_used_mb": 6907,
+      "mean_tokens_per_sec": 73.0,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 119,
+          "tokens_per_sec": 73.2,
+          "response_preview": "- Enhanced Privacy: Data remains entirely within your control, eliminating concerns about external access and potential breaches.\n- Reduced Latency: Faster response times due to the absence of network"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 28,
+          "tokens_per_sec": 72.7,
+          "response_preview": "The checkpoint is converted to GGUF Q4_K_M. The team has no interactive access to the Pawsey jobs."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 156,
+          "tokens_per_sec": 71.9,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Explain what a local language model is in simple terms.\",\n    \"response\": \"A local language model is an AI that runs directly on your computer or device, rather than "
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 102,
+          "tokens_per_sec": 71.6,
+          "response_preview": "Policies establish the overarching principles and guidelines a company follows to achieve its goals, essentially stating *what* needs to be done. Conversely, procedures detail the specific steps emplo"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 36,
+          "tokens_per_sec": 75.9,
+          "response_preview": "I do not have access to real-time financial data for specific companies like Visagio\u2019s Perth office. Therefore, I cannot provide the exact total revenue for that period."
+        }
+      ],
+      "warmup_response": "ready\n"
+    },
+    {
+      "model": "llama3.2:3b",
+      "memory_source": "psutil",
+      "baseline_used_gb": 27.74,
+      "load_footprint_gb": 2.95,
+      "peak_used_gb": 30.97,
+      "peak_swap_gb": 4.55,
+      "load_swap_gb": 4.55,
+      "ollama_size_gb": 3.92,
+      "ollama_size_vram_gb": 3.92,
+      "baseline_vram_used_mb": 1928,
+      "load_vram_used_mb": 5690,
+      "peak_vram_used_mb": 6145,
+      "mean_tokens_per_sec": 100.6,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 93,
+          "tokens_per_sec": 98.9,
+          "response_preview": "- - Improved security and data privacy by storing sensitive information locally.\n- - Reduced latency and faster response times due to lower network latency and increased bandwidth.\n- - Increased contr"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 71,
+          "tokens_per_sec": 104.6,
+          "response_preview": "Not stated in the provided text.\n\nThe context only mentions that the fine-tuned checkpoint is \"quantized to GGUF Q4_K_M\" but does not mention whether this conversion was done interactively or not. Add"
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 96,
+          "tokens_per_sec": 98.7,
+          "response_preview": "[\n  {\"instruction\": \"What is a transformer in NLP?\", \"response\": \"A transformer is a type of neural network architecture used for natural language processing tasks.\"},\n  {\"instruction\": \"How do I fine"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 189,
+          "tokens_per_sec": 100.4,
+          "response_preview": "In a corporate setting, a policy is a high-level guideline that outlines an organization's overall approach to a particular issue or area of operation, often established by senior management or the bo"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 73,
+          "tokens_per_sec": 100.4,
+          "response_preview": "I don't have access to that specific information. I'm a large language model, my knowledge cutoff is December 2023, and I don't have real-time data or information about future events or companies' fin"
+        }
+      ],
+      "warmup_response": "ready."
+    },
+    {
+      "model": "phi3.5",
+      "memory_source": "psutil",
+      "baseline_used_gb": 27.58,
+      "load_footprint_gb": 5.49,
+      "peak_used_gb": 33.51,
+      "peak_swap_gb": 4.55,
+      "load_swap_gb": 4.55,
+      "ollama_size_gb": 8.53,
+      "ollama_size_vram_gb": 8.53,
+      "baseline_vram_used_mb": 1705,
+      "load_vram_used_mb": 10413,
+      "peak_vram_used_mb": 11099,
+      "mean_tokens_per_sec": 108.1,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 148,
+          "tokens_per_sec": 106.5,
+          "response_preview": "- Enhanced data privacy and security as sensitive information is processed within your infrastructure rather than being transmitted to external servers.\n- Reduced latency due to proximity of computati"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 125,
+          "tokens_per_sec": 111.4,
+          "response_preview": "The context provided states that the fine-tuned checkpoint is quantized to GGUF Q4_K_M for local use. However, it does not mention anything about an interactive user running the Pawsey jobs; instead, "
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 228,
+          "tokens_per_sec": 109.4,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Describe the basic concept of local language models in natural language processing.\",\n    \"response\": \"Local language models are specialized machine learning algorith"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 256,
+          "tokens_per_sec": 109.2,
+          "response_preview": "A policy is a formal statement or guideline established by an organization to guide decision making on specific issues that reflects its values, objectives, and priorities; it sets out what employees "
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 76,
+          "tokens_per_sec": 104.1,
+          "response_preview": "I do not have access to specific financial data or databases to provide the exact total revenue for Visagio's Perth office in the second quarter of 2 extraterrestrial year 2026. My design is based on "
+        }
+      ],
+      "warmup_response": "Ready.\n\n-----\n\nThis response is a simple one-word reply to your instruction, mirroring the simplicity and brevity of \"re"
+    }
+  ]
+}

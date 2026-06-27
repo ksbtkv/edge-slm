@@ -1,0 +1,22 @@
+# CUDA override — run on a host with an NVIDIA GPU + NVIDIA Container Toolkit.
+# This is the ONLY mode that yields real VRAM numbers (the outstanding
+# "16 GB Windows/Linux + dGPU" validation). nvidia-smi is exposed to the bench
+# container so the harness can read device-level VRAM.
+services:
+  ollama:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: ["gpu"]
+
+  bench:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: ["gpu", "utility"]   # utility => nvidia-smi

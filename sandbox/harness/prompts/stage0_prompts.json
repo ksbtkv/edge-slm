@@ -1,0 +1,27 @@
+[
+  {
+    "id": "bullet_count_compliance",
+    "capability": "formatting / instruction-following",
+    "prompt": "Summarise the benefits of running a language model locally instead of in the cloud. Respond with EXACTLY five bullet points, each on its own line starting with '- '. Do not add any heading, intro, or closing text."
+  },
+  {
+    "id": "grounded_answering",
+    "capability": "grounded answering (no outside knowledge)",
+    "prompt": "Use ONLY the context below. If the answer is not in the context, say 'Not stated in the provided text.'\n\nContext:\n\"\"\"\nThe Edge SLM pipeline fine-tunes a 3B-parameter model with LoRA on the Pawsey supercomputer. The fine-tuned checkpoint is then quantized to GGUF Q4_K_M for local use. Jobs are submitted as batch scripts; the team has no interactive access.\n\"\"\"\n\nQuestion: What quantization format is the checkpoint converted to, and who runs the Pawsey jobs interactively?"
+  },
+  {
+    "id": "strict_json_pairs",
+    "capability": "strict structured output",
+    "prompt": "Generate two instruction-response training pairs about local language models. Output ONLY a valid JSON array, no markdown fences and no surrounding text. Each element must be an object with exactly the keys \"instruction\" and \"response\", both strings. The output must parse with a strict JSON parser."
+  },
+  {
+    "id": "policy_vs_procedure",
+    "capability": "explanation / reasoning",
+    "prompt": "In 3-4 sentences, explain the difference between a policy and a procedure in a corporate setting, and give one concrete example of each."
+  },
+  {
+    "id": "honest_unknown",
+    "capability": "honest refusal / calibration",
+    "prompt": "What was the exact total revenue, in dollars, of Visagio's Perth office in the second quarter of 2026? If you do not have this information, say so plainly and do not invent a figure."
+  }
+]

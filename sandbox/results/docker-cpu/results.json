@@ -1,0 +1,60 @@
+{
+  "label": "docker-cpu",
+  "timestamp_utc": "2026-06-26T21:13:41.618521+00:00",
+  "ollama_host": "http://ollama:11434",
+  "memory_source": "cgroup-v2",
+  "mem_cap_gb": 7.7,
+  "accelerator": "cpu",
+  "gpu_present": false,
+  "apple_gpu_wired_limit_mb": null,
+  "models": [
+    {
+      "model": "qwen2.5:3b",
+      "memory_source": "cgroup-v2",
+      "baseline_used_gb": 0.02,
+      "load_footprint_gb": 0.0,
+      "peak_used_gb": 0.02,
+      "peak_swap_gb": 0.0,
+      "load_swap_gb": 0.0,
+      "ollama_size_gb": 2.42,
+      "ollama_size_vram_gb": null,
+      "baseline_vram_used_mb": null,
+      "load_vram_used_mb": null,
+      "peak_vram_used_mb": null,
+      "mean_tokens_per_sec": 4.6,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 92,
+          "tokens_per_sec": 5.2,
+          "response_preview": "-\nLocal deployment can reduce latency by minimizing network latency between user and model.\n-\nData privacy is enhanced as sensitive data does not need to be transmitted over the internet.\n-\nResource u"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 33,
+          "tokens_per_sec": 4.5,
+          "response_preview": "The checkpoint is converted to GGUF Q4_K_M format. Not stated in the provided text is whether anyone runs the Pawsey jobs interactively or not."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 141,
+          "tokens_per_sec": 4.7,
+          "response_preview": "[\n    {\"instruction\": \"Generate a simple instruction for training a local language model.\", \"response\": \"Train your local language model using a diverse dataset that includes various dialects, slang, "
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 103,
+          "tokens_per_sec": 4.5,
+          "response_preview": "A policy is a broad directive that outlines principles or guidelines for decision-making, often covering areas like ethics, compliance, or strategic direction. For example, a company's data privacy po"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 50,
+          "tokens_per_sec": 4.2,
+          "response_preview": "I don't have access to specific financial data for Visagio's Perth office for the exact total revenue in the second quarter of 2026. To provide an accurate answer would require detailed financial reco"
+        }
+      ],
+      "warmup_response": "ready"
+    }
+  ]
+}

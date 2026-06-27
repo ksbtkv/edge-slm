@@ -1,0 +1,7 @@
+# CPU-only override — Apple-Silicon host or any machine without an NVIDIA GPU.
+# Inference runs on CPU inside the container. No VRAM numbers are produced.
+services:
+  ollama:
+    environment:
+      # be explicit: never try to use a GPU in this mode
+      OLLAMA_NUM_GPU: "0"

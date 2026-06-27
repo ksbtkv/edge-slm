@@ -1,0 +1,204 @@
+{
+  "label": "metal-cap2",
+  "timestamp_utc": "2026-06-26T20:29:46.032952+00:00",
+  "ollama_host": "http://localhost:11434",
+  "memory_source": "psutil",
+  "mem_cap_gb": 48.0,
+  "accelerator": "apple-metal",
+  "gpu_present": true,
+  "apple_gpu_wired_limit_mb": 2048,
+  "models": [
+    {
+      "model": "qwen2.5:3b",
+      "memory_source": "psutil",
+      "baseline_used_gb": 24.27,
+      "load_footprint_gb": 2.39,
+      "peak_used_gb": 26.71,
+      "peak_swap_gb": 4.52,
+      "load_swap_gb": 4.52,
+      "ollama_size_gb": 5.45,
+      "ollama_size_vram_gb": 2.14,
+      "baseline_vram_used_mb": 1730,
+      "load_vram_used_mb": 893,
+      "peak_vram_used_mb": 2406,
+      "mean_tokens_per_sec": null,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        }
+      ],
+      "warmup_response": ""
+    },
+    {
+      "model": "gemma3:4b",
+      "memory_source": "psutil",
+      "baseline_used_gb": 24.82,
+      "load_footprint_gb": 4.02,
+      "peak_used_gb": 29.13,
+      "peak_swap_gb": 4.52,
+      "load_swap_gb": 4.52,
+      "ollama_size_gb": 5.88,
+      "ollama_size_vram_gb": 0.12,
+      "baseline_vram_used_mb": 1612,
+      "load_vram_used_mb": 2048,
+      "peak_vram_used_mb": 2119,
+      "mean_tokens_per_sec": 22.7,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 98,
+          "tokens_per_sec": 23.7,
+          "response_preview": "- Enhanced Privacy: Data remains entirely within your control, avoiding potential breaches and third-party access.\n- Reduced Latency: Faster response times due to elimination of network delays and clo"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 29,
+          "tokens_per_sec": 24.7,
+          "response_preview": "The checkpoint is converted to GGUF Q4_K_M, and the team does not run the Pawsey jobs interactively."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 178,
+          "tokens_per_sec": 21.5,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Explain what a local language model is in simple terms.\",\n    \"response\": \"A local language model is an AI that's run directly on your computer or device, rather than"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 122,
+          "tokens_per_sec": 21.6,
+          "response_preview": "Here\u2019s an explanation of the difference between policies and procedures within a corporate setting: A **policy** is a broad statement outlining an organization's overall stance on a particular issue \u2013"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 36,
+          "tokens_per_sec": 21.9,
+          "response_preview": "I do not have access to real-time financial data for specific companies like Visagio\u2019s Perth office. Therefore, I cannot provide the exact total revenue for that period."
+        }
+      ],
+      "warmup_response": "ready\n"
+    },
+    {
+      "model": "llama3.2:3b",
+      "memory_source": "psutil",
+      "baseline_used_gb": 26.67,
+      "load_footprint_gb": 2.05,
+      "peak_used_gb": 29.63,
+      "peak_swap_gb": 4.52,
+      "load_swap_gb": 4.52,
+      "ollama_size_gb": 7.07,
+      "ollama_size_vram_gb": 2.33,
+      "baseline_vram_used_mb": 1478,
+      "load_vram_used_mb": 2290,
+      "peak_vram_used_mb": 2153,
+      "mean_tokens_per_sec": null,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        }
+      ],
+      "warmup_response": ""
+    },
+    {
+      "model": "phi3.5",
+      "memory_source": "psutil",
+      "baseline_used_gb": 26.42,
+      "load_footprint_gb": 2.44,
+      "peak_used_gb": 29.19,
+      "peak_swap_gb": 4.52,
+      "load_swap_gb": 4.52,
+      "ollama_size_gb": 11.28,
+      "ollama_size_vram_gb": 1.3,
+      "baseline_vram_used_mb": 1502,
+      "load_vram_used_mb": 2043,
+      "peak_vram_used_mb": 2045,
+      "mean_tokens_per_sec": null,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        }
+      ],
+      "warmup_response": "Ready.\n\n-----\n\nThe response is succinct and directly addresses the Em"
+    }
+  ]
+}

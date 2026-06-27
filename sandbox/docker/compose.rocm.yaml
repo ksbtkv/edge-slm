@@ -1,0 +1,47 @@
+# ROCm override — run on a Linux host with an AMD GPU (Radeon / Instinct) +
+# the amdgpu kernel driver + ROCm. Uses Ollama's official ROCm image and passes
+# the kernel-fusion-driver and DRI render nodes into the container.
+#
+# This is the AMD equivalent of compose.cuda.yaml: it yields REAL VRAM numbers
+# (read via rocm-smi) under the same 16 GB system-RAM cap from compose.yaml.
+#
+#   docker compose -f compose.yaml -f compose.rocm.yaml up -d ollama
+#
+# Notes:
+#  * AMD GPUs are Linux-only here — macOS/Windows cannot pass an AMD GPU to a
+#    Linux container. Run this on a native Linux box with the AMD card.
+#  * If your GPU is not officially supported, you may need HSA_OVERRIDE_GFX_VERSION
+#    (e.g. "10.3.0" for some RDNA2 cards). Set it under environment below.
+services:
+  ollama:
+    image: ollama/ollama:rocm
+    devices:
+      - /dev/kfd       # AMD kernel fusion driver
+      - /dev/dri       # direct rendering / render nodes
+    group_add:
+      - video
+      - render
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      # Uncomment + set if your card needs a gfx override to be recognised:
+      # HSA_OVERRIDE_GFX_VERSION: "10.3.0"
+      ROCR_VISIBLE_DEVICES: "0"
+
+  bench:
+    image: ollama/ollama:rocm   # reuse so rocm-smi is available to the harness
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    group_add:
+      - video
+      - render
+    # override the ollama image entrypoint to run our python harness instead
+    entrypoint: ["/bin/sh", "-lc"]
+    command:
+      - >
+        pip install --no-cache-dir -q -r /work/harness/requirements.txt &&
+        python3 /work/harness/stage0_bench.py --label rocm
+    volumes:
+      - ../harness:/work/harness
+      - ../results:/work/results
