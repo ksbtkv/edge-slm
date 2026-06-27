@@ -1,0 +1,232 @@
+{
+  "label": "metal-budget4",
+  "timestamp_utc": "2026-06-27T03:31:26.219755+00:00",
+  "ollama_host": "http://localhost:11434",
+  "memory_source": "psutil",
+  "mem_cap_gb": 48.0,
+  "accelerator": "apple-metal",
+  "gpu_present": true,
+  "apple_gpu_wired_limit_mb": 0,
+  "models": [
+    {
+      "model": "qwen2.5:3b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 4.0,
+        "block_count": 36,
+        "num_gpu": 36,
+        "full_vram_gb": 2.6,
+        "achieved_vram_gb": 2.54
+      },
+      "baseline_used_gb": 28.55,
+      "load_footprint_gb": 2.46,
+      "peak_used_gb": 32.05,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 3.05,
+      "ollama_size_vram_gb": 2.54,
+      "baseline_vram_used_mb": 1594,
+      "load_vram_used_mb": 4116,
+      "peak_vram_used_mb": 5053,
+      "mean_tokens_per_sec": 87.8,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 109,
+          "tokens_per_sec": 87.3,
+          "response_preview": "-\nLocal models can be more secure as data stays within an organization's control reducing risk of exposure to external threats.\n-\nTraining and inference times for local models are often faster due to "
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 33,
+          "tokens_per_sec": 84.8,
+          "response_preview": "The checkpoint is converted to GGUF Q4_K_M format. Not stated in the provided text is whether anyone runs the Pawsey jobs interactively or not."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 126,
+          "tokens_per_sec": 88.9,
+          "response_preview": "[{\"instruction\":\"Create an instruction to explain what a local language model is.\",\"response\":\"Understand that a local language model is a machine learning model trained on specific data relevant to a"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 81,
+          "tokens_per_sec": 89.6,
+          "response_preview": "A policy outlines broad guidelines or principles that govern how an organization should operate or make decisions, while a procedure provides detailed steps on how to carry out specific tasks or proce"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 78,
+          "tokens_per_sec": 88.4,
+          "response_preview": "I don't have access to real-time or historical financial data for specific companies like Visagio. Without having the exact figures for Visagio's Perth office in the second quarter of 2026, I cannot p"
+        }
+      ],
+      "warmup_response": "ready"
+    },
+    {
+      "model": "gemma3:4b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 4.0,
+        "block_count": 34,
+        "num_gpu": 34,
+        "full_vram_gb": 3.54,
+        "achieved_vram_gb": 2.59
+      },
+      "baseline_used_gb": 28.5,
+      "load_footprint_gb": 4.99,
+      "peak_used_gb": 33.63,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 3.51,
+      "ollama_size_vram_gb": 2.59,
+      "baseline_vram_used_mb": 1514,
+      "load_vram_used_mb": 4498,
+      "peak_vram_used_mb": 4949,
+      "mean_tokens_per_sec": 71.4,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 98,
+          "tokens_per_sec": 70.6,
+          "response_preview": "- Enhanced Privacy: Data remains entirely within your control, avoiding potential breaches and third-party access.\n- Reduced Latency: Faster response times due to elimination of network delays and clo"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 28,
+          "tokens_per_sec": 73.7,
+          "response_preview": "The checkpoint is converted to GGUF Q4_K_M. The team has no interactive access to the Pawsey jobs."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 164,
+          "tokens_per_sec": 71.3,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Explain what a local language model is in simple terms.\",\n    \"response\": \"A local language model is an AI that's run directly on your computer or device, rather than"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 102,
+          "tokens_per_sec": 69.6,
+          "response_preview": "Policies establish the overarching principles and guidelines a company follows to achieve its goals, essentially stating *what* needs to be done. Conversely, procedures detail the specific steps emplo"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 36,
+          "tokens_per_sec": 71.8,
+          "response_preview": "I do not have access to real-time financial data for specific companies like Visagio\u2019s Perth office. Therefore, I cannot provide the exact total revenue for that period."
+        }
+      ],
+      "warmup_response": "ready\n"
+    },
+    {
+      "model": "llama3.2:3b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 4.0,
+        "block_count": 28,
+        "num_gpu": 28,
+        "full_vram_gb": 3.92,
+        "achieved_vram_gb": 3.8
+      },
+      "baseline_used_gb": 28.4,
+      "load_footprint_gb": 4.7,
+      "peak_used_gb": 33.35,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 4.42,
+      "ollama_size_vram_gb": 3.8,
+      "baseline_vram_used_mb": 1525,
+      "load_vram_used_mb": 5427,
+      "peak_vram_used_mb": 5856,
+      "mean_tokens_per_sec": 93.1,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 86,
+          "tokens_per_sec": 95.0,
+          "response_preview": "- Reduced latency and lower latency variability by minimizing network latency.\n- Improved data privacy and security as sensitive user data is stored locally rather than being transmitted to a cloud se"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 76,
+          "tokens_per_sec": 91.9,
+          "response_preview": "Not stated in the provided text.\n\nThe context only mentions that the fine-tuned checkpoint is \"quantized to GGUF Q4_K_M\" but does not mention whether this conversion was done interactively or as part "
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 99,
+          "tokens_per_sec": 91.9,
+          "response_preview": "[\n  {\"instruction\": \"What is the purpose of local language models?\", \"response\": \"Local language models are designed to process data within a specific geographic region or community, taking into accou"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 135,
+          "tokens_per_sec": 91.7,
+          "response_preview": "In a corporate setting, a policy is a broad, overarching guideline that outlines an organization's overall approach to a particular issue or area of operation, such as employee conduct or data protect"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 76,
+          "tokens_per_sec": 95.1,
+          "response_preview": "I don't have access to that information. I'm a large language model, my knowledge cutoff is December 2023, and I don't have real-time data or specific financial reports for companies like Visagio's Pe"
+        }
+      ],
+      "warmup_response": "ready."
+    },
+    {
+      "model": "phi3.5",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 4.0,
+        "block_count": 32,
+        "num_gpu": 15,
+        "full_vram_gb": 8.53,
+        "achieved_vram_gb": 3.87
+      },
+      "baseline_used_gb": 28.37,
+      "load_footprint_gb": 6.73,
+      "peak_used_gb": 35.21,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 8.77,
+      "ollama_size_vram_gb": 3.87,
+      "baseline_vram_used_mb": 1544,
+      "load_vram_used_mb": 5789,
+      "peak_vram_used_mb": 5974,
+      "mean_tokens_per_sec": 49.6,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 151,
+          "tokens_per_sec": 52.9,
+          "response_preview": "- Enhanced data privacy and security as sensitive information is processed within your infrastructure rather than being transmitted to external servers.\n- Reduced latency due to proximity of computati"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 91,
+          "tokens_per_sec": 52.3,
+          "response_preview": "The context provided states that the fine-tuned checkpoint is quantized to GGUF Q4_K_M for local use. However, it does not mention anything about an interactive user or team running the Pawsey jobs; a"
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 226,
+          "tokens_per_sec": 45.7,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Describe the primary function of local language models in natural language processing.\",\n    \"response\": \"Local language models are designed to understand, generate, "
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 256,
+          "tokens_per_sec": 45.5,
+          "response_preview": "A policy is a formalized statement that outlines an organization's principles or rules to guide decision making and behavior within its structure; it sets forth general guidel extrinsic expectations f"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 54,
+          "tokens_per_sec": 51.8,
+          "response_preview": "I do not have access to specific financial data or databases to provide the exact total revenue for Visagio's Perth office in the second quarter of 2lausduring 2026. Therefore, I am unable to supply t"
+        }
+      ],
+      "warmup_response": "Ready."
+    }
+  ]
+}

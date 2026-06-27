@@ -22,6 +22,11 @@ Usage:
     python stage0_bench.py --label clean
     python stage0_bench.py --label multitask --models qwen2.5:3b,gemma3:4b
     OLLAMA_HOST=http://ollama:11434 python stage0_bench.py --label clean
+
+VRAM-budget mode (faithful, preferred over the iogpu.wired_limit_mb cap): simulate a
+GPU VRAM budget by setting Ollama num_gpu so surplus layers offload to CPU like a real
+VRAM-limited card -- yields slow-but-working output instead of empty failures:
+    python stage0_bench.py --label budget4 --vram-budget-gb 4
 """
 from __future__ import annotations
 
@@ -328,7 +333,10 @@ def evict_all(timeout: float = 60.0) -> None:
     raise RuntimeError("runtime still has models resident after evict timeout")
 
 
-def generate(model: str, prompt: str) -> dict:
+def generate(model: str, prompt: str, num_gpu: int | None = None) -> dict:
+    options = {"temperature": 0.1, "num_predict": 256}
+    if num_gpu is not None:
+        options["num_gpu"] = num_gpu  # layers to offload to GPU (None = Ollama default)
     r = requests.post(
         f"{OLLAMA_HOST}/api/generate",
         json={
@@ -336,12 +344,27 @@ def generate(model: str, prompt: str) -> dict:
             "prompt": prompt,
             "stream": False,
             "keep_alive": "5m",
-            "options": {"temperature": 0.1, "num_predict": 256},
+            "options": options,
         },
         timeout=600,
     )
     r.raise_for_status()
     return r.json()
+
+
+def model_block_count(model: str) -> int | None:
+    """Total transformer layers for a model, from /api/show (<arch>.block_count)."""
+    try:
+        r = requests.post(f"{OLLAMA_HOST}/api/show",
+                          json={"model": model}, timeout=30)
+        r.raise_for_status()
+        info = r.json().get("model_info", {})
+        for k, v in info.items():
+            if k.endswith(".block_count"):
+                return int(v)
+    except Exception:
+        pass
+    return None
 
 
 def ps_size_for(model: str) -> dict:
@@ -357,7 +380,8 @@ def ps_size_for(model: str) -> dict:
 GB = 1024 ** 3
 
 
-def bench_model(model: str, prompts: list[dict], src: MemorySource) -> dict:
+def bench_model(model: str, prompts: list[dict], src: MemorySource,
+                vram_budget_gb: float | None = None) -> dict:
     print(f"\n=== {model} ===", flush=True)
 
     print("  evicting resident models...", flush=True)
@@ -375,13 +399,46 @@ def bench_model(model: str, prompts: list[dict], src: MemorySource) -> dict:
     load_vram = gpu_vram_used_mb()
     sizes = ps_size_for(model)
 
+    # VRAM-budget mode: instead of capping GPU wired memory (which makes Ollama
+    # over-commit and emit empty output), set num_gpu so Ollama proactively offloads
+    # layers to CPU like a real VRAM-limited GPU would. We measured the full GPU
+    # footprint above; map the budget to a layer count and reload constrained.
+    num_gpu = None
+    budget_info = None
+    if vram_budget_gb is not None:
+        L = model_block_count(model)
+        full_vram_b = sizes.get("size_vram_bytes")
+        if L and full_vram_b:
+            per_layer = full_vram_b / L
+            num_gpu = max(0, min(L, round((vram_budget_gb * GB) / per_layer)))
+            print(f"  budget {vram_budget_gb} GB: layers={L} full_vram="
+                  f"{full_vram_b/GB:.2f} GB -> num_gpu={num_gpu}/{L}", flush=True)
+            evict_all()
+            time.sleep(SETTLE_SECONDS)
+            generate(model, "Reply with the single word: ready.", num_gpu=num_gpu)
+            time.sleep(SETTLE_SECONDS)
+            load_used, load_swap = src.sample()
+            load_vram = gpu_vram_used_mb()
+            sizes = ps_size_for(model)  # achieved footprint under the constraint
+            budget_info = {
+                "vram_budget_gb": vram_budget_gb,
+                "block_count": L,
+                "num_gpu": num_gpu,
+                "full_vram_gb": round(full_vram_b / GB, 2),
+                "achieved_vram_gb": (round(sizes["size_vram_bytes"] / GB, 2)
+                                     if sizes.get("size_vram_bytes") else None),
+            }
+        else:
+            print("  budget mode: no block_count/full_vram; running unconstrained",
+                  flush=True)
+
     sampler = PeakSampler(src)
     sampler.start()
 
     tok_per_s: list[float] = []
     prompt_records = []
     for p in prompts:
-        res = generate(model, p["prompt"])
+        res = generate(model, p["prompt"], num_gpu=num_gpu)
         ec = res.get("eval_count")
         ed = res.get("eval_duration")  # nanoseconds
         tps = (ec / (ed / 1e9)) if ec and ed else None
@@ -403,6 +460,7 @@ def bench_model(model: str, prompts: list[dict], src: MemorySource) -> dict:
     return {
         "model": model,
         "memory_source": src.kind,
+        "vram_budget": budget_info,
         "baseline_used_gb": gb(base_used),
         "load_footprint_gb": gb(max(0, load_used - base_used)),
         "peak_used_gb": gb(sampler.peak_used),
@@ -439,6 +497,9 @@ def main() -> None:
                     help="comma-separated model tags (default: the 4 candidates)")
     ap.add_argument("--out", default="results", help="output directory root")
     ap.add_argument("--prompts-dir", default=str(Path(__file__).parent / "prompts"))
+    ap.add_argument("--vram-budget-gb", type=float, default=None,
+                    help="simulate a VRAM budget by setting Ollama num_gpu (proactive "
+                         "layer offload), instead of capping wired memory")
     args = ap.parse_args()
 
     models = [m.strip() for m in args.models.split(",") if m.strip()] or DEFAULT_MODELS
@@ -456,10 +517,14 @@ def main() -> None:
     print(f"runtime={OLLAMA_HOST}  accel={detect_accelerator()}  "
           f"mem_source={src.kind}  {cap_str}", flush=True)
 
+    if args.vram_budget_gb is not None:
+        print(f"VRAM-budget mode: {args.vram_budget_gb} GB (num_gpu offload)", flush=True)
+
     results = []
     for model in models:
         try:
-            results.append(bench_model(model, prompts, src))
+            results.append(bench_model(model, prompts, src,
+                                       vram_budget_gb=args.vram_budget_gb))
         except Exception as e:  # fail loud, keep going
             import traceback
             tb = traceback.format_exc()

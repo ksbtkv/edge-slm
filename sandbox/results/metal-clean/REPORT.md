@@ -11,10 +11,14 @@
 study, combined with the team's earlier base-M3 (Ollama) and Windows RTX 2070 (LM Studio)
 runs, gives three independent Stage 0 evaluations that all converge on qwen2.5:3b.
 
-1. **VRAM headroom is the gating metric, and qwen wins it decisively.** qwen wires only
-   ~2.6 GB and stays fully GPU-resident at full speed down to a simulated **4 GB** ceiling;
-   it is the *only* 3–4B candidate that does. phi3.5 already needs CPU help at 8 GB
-   (~8.5 GB footprint), gemma and llama sit in between.
+1. **VRAM headroom is the gating metric, and qwen wins it.** qwen wires only ~2.6 GB and
+   stays fully GPU-resident at full speed down to a simulated **4 GB** budget. Under the
+   *faithful* `num_gpu`-offload method (see "Faithful VRAM-budget sweep"), all four models
+   still *run* at every budget down to 2 GB — a real GPU offloads gracefully rather than
+   failing — but qwen degrades the least: at 2 GB it keeps 28/36 layers on GPU and leads on
+   throughput (61 vs 33–37 tok/s), because it is the smallest. phi3.5 is the first to need
+   offload (it is the largest, ~8.5 GB). NOTE: the earlier wired-limit "collapse/empty"
+   results (e.g. phi@8 GB) were a method artifact — corrected by the faithful sweep.
 
 2. **Raw speed is hardware-specific and must not drive the choice.** Uncapped, the M3 Max
    ranks phi3.5 (108) ≳ llama (101) > qwen (92) > gemma (73) tok/s — the *reverse* of the
@@ -36,11 +40,12 @@ runs, gives three independent Stage 0 evaluations that all converge on qwen2.5:3
    sweet spot that clears both bars.
 
 **Caveats (don't over-read the numbers):**
-- The simulated VRAM cap (`iogpu.wired_limit_mb`) bounds GPU *wired memory* but doesn't tell
-  Ollama's offload planner to use fewer layers, so under a constrained partial GPU/CPU split it
-  over-commits and emits empty output (gemma@4 GB; qwen/llama/phi@2 GB; llama-1b@2 GB). This
-  **overstates** non-qwen failures; a real GPU of that size would offload-and-run slowly. The
-  capacity *ranking* and qwen's clean fit are unaffected.
+- Two VRAM-constraint methods are in this report. The **`iogpu.wired_limit_mb` caps**
+  (8/4/2 GB sections) over-commit and emit empty output under constraint — a method
+  artifact. The **`num_gpu`-offload "Faithful VRAM-budget sweep"** is the trustworthy one
+  and supersedes it for "would it run / how fast": there, every model runs at every budget
+  and qwen degrades the least. Prefer the faithful numbers; the wired-limit sections are
+  retained for transparency.
 - Apple-GPU *speed* does not transfer to a discrete GPU; only the VRAM *capacity* picture does.
 - **Still outstanding:** no run yet on the true deployment target (16 GB RAM + discrete NVIDIA
   GPU on Windows). The sandbox's Docker CUDA mode is built to capture it on real hardware.
@@ -183,6 +188,40 @@ returned no `eval_count`/`eval_duration` under extreme spill — a **harness mea
 gap**, not a model failure, so the 2 GB tok/s are not trustworthy. The reliable takeaway:
 **4 GB is the practical lower bound for GPU-resident operation, and only qwen clears it.**
 Below 4 GB everything is CPU-bound regardless of model.
+
+## Faithful VRAM-budget sweep (num_gpu offload) — PREFERRED over the wired-limit caps
+
+The cap passes above used `iogpu.wired_limit_mb`, which (as their footnote warns) makes
+Ollama over-commit and emit empty output under constraint. This sweep instead sets
+Ollama's `num_gpu` per model — the *supported* mechanism a real VRAM-limited GPU triggers,
+offloading surplus layers to CPU. For each model we measured its full GPU footprint and
+layer count, mapped each budget to a layer count, and reran. Labels: `metal-budget{8,4,2}`.
+All runs produced 5/5 non-empty responses.
+
+**Tokens/sec — and (layers kept on GPU):**
+
+| Model | 8 GB | 4 GB | 2 GB |
+| ----------- | :------------: | :------------: | :------------: |
+| qwen2.5:3b  | 86.9 (36/36)   | 87.8 (36/36)   | **61.3 (28/36)** |
+| gemma3:4b   | 69.7 (34/34)   | 71.4 (34/34)   | 33.0 (19/34)   |
+| llama3.2:3b | 93.8 (28/28)   | 93.1 (28/28)   | 37.2 (14/28)   |
+| phi3.5      | 91.8 (30/32)   | 49.6 (15/32)   | 33.5 (8/32)    |
+
+**This corrects three artifacts of the wired-limit method:**
+- **phi3.5 @ 8 GB does NOT collapse.** Faithful: ~92 tok/s (only 2 of 32 layers offloaded).
+  The wired-limit "9.2 tok/s collapse" was a method artifact, not real behaviour.
+- **llama3.2 @ 4 GB is fine** (~93 tok/s, fully resident — its 3.8 GB fits 4 GB). The
+  wired-limit "9.9" was an artifact.
+- **Every "EMPTY" cell runs** (gemma@4 GB, qwen/llama/phi@2 GB) at 33–61 tok/s.
+
+**The honest, corrected reading:** down to a 2 GB budget, *all four models run* — a real
+GPU offloads gracefully rather than failing. The differentiator is **how gracefully each
+degrades**, and qwen still wins it: at the tight 2 GB budget qwen keeps the most layers on
+GPU (28/36 ≈ 78%) and the highest throughput (61 tok/s vs 33–37 for the rest), because it
+is the smallest. phi3.5 is the first to need offload (already at 8 GB). So the selection
+conclusion holds, but on "degrades most gracefully / stays fastest under constraint"
+rather than "others catastrophically fail." (Speed remains M3-Max-specific; the relative
+ordering is the transferable signal.)
 
 ## Appendix — Small-tier sweep (sub-1B / smallest-of-family)
 

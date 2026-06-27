@@ -68,6 +68,11 @@ bench-metal:         ## Run the harness NATIVELY on Apple GPU (Metal, no Docker)
 bench-metal-capped:  ## Metal bench under a simulated VRAM cap (CAP_GB=8; needs sudo)
 	bash native/bench_metal_capped.sh $(CAP_GB)
 
+.PHONY: bench-metal-budget
+bench-metal-budget:  ## Metal bench at a faithful VRAM budget via num_gpu (CAP_GB=4; no sudo)
+	cd harness && ../native/.venv/bin/python stage0_bench.py --label metal-budget$(CAP_GB) --vram-budget-gb $(CAP_GB) --out ../results 2>/dev/null || \
+	  python3 harness/stage0_bench.py --label metal-budget$(CAP_GB) --vram-budget-gb $(CAP_GB) --out results
+
 .PHONY: ps
 ps:                  ## Show resident models + container stats
 	-docker exec edge-slm-ollama ollama ps
