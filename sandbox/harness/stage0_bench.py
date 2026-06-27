@@ -27,12 +27,17 @@ VRAM-budget mode (faithful, preferred over the iogpu.wired_limit_mb cap): simula
 GPU VRAM budget by setting Ollama num_gpu so surplus layers offload to CPU like a real
 VRAM-limited card -- yields slow-but-working output instead of empty failures:
     python stage0_bench.py --label budget4 --vram-budget-gb 4
+
+Quality-audit mode stores full responses and deterministic parser-oriented quality
+metrics for each fixed prompt:
+    python stage0_bench.py --label quality-clean --save-responses
 """
 from __future__ import annotations
 
 import argparse
 import json
 import os
+import re
 import shutil
 import statistics
 import subprocess
@@ -352,6 +357,108 @@ def generate(model: str, prompt: str, num_gpu: int | None = None) -> dict:
     return r.json()
 
 
+def score_response(prompt_id: str, response: str) -> dict:
+    """Deterministic quality checks for the fixed Stage 0 prompt set.
+
+    These are intentionally narrow parser/format checks, not subjective grading.
+    They let the report distinguish "model ran" from "model obeyed the output
+    contract needed downstream", especially for strict JSON generation.
+    """
+    stripped = response.strip()
+    lower = stripped.lower()
+    starts_fence = stripped.startswith("```")
+    contains_cjk = bool(re.search(r"[\u4e00-\u9fff]", stripped))
+    metrics = {
+        "nonempty": bool(stripped),
+        "response_chars": len(response),
+        "starts_markdown_fence": starts_fence,
+        "contains_cjk": contains_cjk,
+    }
+
+    if prompt_id == "bullet_count_compliance":
+        lines = [ln.strip() for ln in stripped.splitlines() if ln.strip()]
+        bullet_lines = [ln for ln in lines if ln.startswith("- ")]
+        metrics.update({
+            "nonempty_line_count": len(lines),
+            "bullet_line_count": len(bullet_lines),
+            "exactly_five_dash_bullets": len(lines) == 5 and len(bullet_lines) == 5,
+        })
+        metrics["pass"] = metrics["exactly_five_dash_bullets"]
+
+    elif prompt_id == "grounded_answering":
+        has_quant = "gguf" in lower and "q4_k_m" in lower
+        denies_interactive = any(s in lower for s in [
+            "no interactive", "no one", "does not run", "do not run",
+            "no interactive access", "not interactively", "no access",
+        ])
+        metrics.update({
+            "mentions_gguf_q4km": has_quant,
+            "denies_interactive_access": denies_interactive,
+        })
+        metrics["pass"] = has_quant and denies_interactive
+
+    elif prompt_id == "strict_json_pairs":
+        json_ok = False
+        item_count = None
+        exact_schema = False
+        parse_error = None
+        try:
+            parsed = json.loads(stripped)
+            if isinstance(parsed, list):
+                item_count = len(parsed)
+                exact_schema = (
+                    item_count == 2
+                    and all(isinstance(x, dict) for x in parsed)
+                    and all(set(x.keys()) == {"instruction", "response"} for x in parsed)
+                    and all(isinstance(x["instruction"], str)
+                            and isinstance(x["response"], str) for x in parsed)
+                )
+                json_ok = exact_schema
+        except Exception as e:
+            parse_error = f"{type(e).__name__}: {e}"
+        metrics.update({
+            "strict_json_parse_ok": json_ok,
+            "strict_json_item_count": item_count,
+            "strict_json_exact_schema": exact_schema,
+            "strict_json_parse_error": parse_error,
+        })
+        metrics["pass"] = json_ok and not starts_fence and not contains_cjk
+
+    elif prompt_id == "policy_vs_procedure":
+        sentences = [s for s in re.split(r"[.!?]+", stripped) if s.strip()]
+        has_policy = "policy" in lower or "policies" in lower
+        has_procedure = "procedure" in lower or "procedures" in lower
+        metrics.update({
+            "sentence_count": len(sentences),
+            "mentions_policy": has_policy,
+            "mentions_procedure": has_procedure,
+            "within_3_4_sentences": 3 <= len(sentences) <= 4,
+        })
+        metrics["pass"] = has_policy and has_procedure and metrics["within_3_4_sentences"]
+
+    elif prompt_id == "honest_unknown":
+        unknown_phrases = [
+            "do not have", "don't have", "not have", "do not know", "don't know",
+            "unknown", "not available", "not publicly", "not stated",
+            "cannot provide", "no access", "unable to",
+        ]
+        has_unknown = any(s in lower for s in unknown_phrases)
+        has_dollar_figure = bool(re.search(
+            r"(\$\s*\d|usd\s*\d|\b\d[\d,]*(?:\.\d+)?\s*(?:dollars|aud|usd)\b)",
+            lower,
+        ))
+        metrics.update({
+            "admits_unknown": has_unknown,
+            "contains_dollar_figure": has_dollar_figure,
+        })
+        metrics["pass"] = has_unknown and not has_dollar_figure
+
+    else:
+        metrics["pass"] = bool(stripped)
+
+    return metrics
+
+
 def model_block_count(model: str) -> int | None:
     """Total transformer layers for a model, from /api/show (<arch>.block_count)."""
     try:
@@ -381,7 +488,8 @@ GB = 1024 ** 3
 
 
 def bench_model(model: str, prompts: list[dict], src: MemorySource,
-                vram_budget_gb: float | None = None) -> dict:
+                vram_budget_gb: float | None = None,
+                save_responses: bool = False) -> dict:
     print(f"\n=== {model} ===", flush=True)
 
     print("  evicting resident models...", flush=True)
@@ -439,20 +547,32 @@ def bench_model(model: str, prompts: list[dict], src: MemorySource,
     prompt_records = []
     for p in prompts:
         res = generate(model, p["prompt"], num_gpu=num_gpu)
+        response = res.get("response", "")
         ec = res.get("eval_count")
         ed = res.get("eval_duration")  # nanoseconds
         tps = (ec / (ed / 1e9)) if ec and ed else None
         if tps:
             tok_per_s.append(tps)
-        prompt_records.append({
+        record = {
             "id": p["id"],
             "eval_count": ec,
             "tokens_per_sec": round(tps, 1) if tps else None,
-            "response_preview": (res.get("response", "")[:200]),
-        })
+            "response_preview": response[:200],
+            "quality": score_response(p["id"], response),
+        }
+        if save_responses:
+            record["response"] = response
+        prompt_records.append(record)
         print(f"  prompt {p['id']}: {round(tps,1) if tps else 'n/a'} tok/s", flush=True)
 
     sampler.stop()
+
+    quality_passes = sum(1 for p in prompt_records if p["quality"].get("pass"))
+    nonempty = sum(1 for p in prompt_records if p["quality"].get("nonempty"))
+    strict = next((p["quality"] for p in prompt_records
+                   if p["id"] == "strict_json_pairs"), {})
+    bullets = next((p["quality"] for p in prompt_records
+                    if p["id"] == "bullet_count_compliance"), {})
 
     def gb(x: int) -> float:
         return round(x / GB, 2)
@@ -474,6 +594,16 @@ def bench_model(model: str, prompts: list[dict], src: MemorySource,
         "load_vram_used_mb": load_vram,
         "peak_vram_used_mb": sampler.peak_vram_mb or None,
         "mean_tokens_per_sec": round(statistics.mean(tok_per_s), 1) if tok_per_s else None,
+        "quality_summary": {
+            "passes": quality_passes,
+            "total": len(prompt_records),
+            "nonempty": nonempty,
+            "strict_json_pass": bool(strict.get("pass")),
+            "strict_json_parse_ok": bool(strict.get("strict_json_parse_ok")),
+            "strict_json_fence": bool(strict.get("starts_markdown_fence")),
+            "strict_json_contains_cjk": bool(strict.get("contains_cjk")),
+            "exactly_five_bullets": bool(bullets.get("exactly_five_dash_bullets")),
+        },
         "prompts": prompt_records,
         "warmup_response": warm.get("response", "")[:120],
     }
@@ -500,6 +630,8 @@ def main() -> None:
     ap.add_argument("--vram-budget-gb", type=float, default=None,
                     help="simulate a VRAM budget by setting Ollama num_gpu (proactive "
                          "layer offload), instead of capping wired memory")
+    ap.add_argument("--save-responses", action="store_true",
+                    help="store full model responses in results.json for quality audit")
     args = ap.parse_args()
 
     models = [m.strip() for m in args.models.split(",") if m.strip()] or DEFAULT_MODELS
@@ -524,7 +656,8 @@ def main() -> None:
     for model in models:
         try:
             results.append(bench_model(model, prompts, src,
-                                       vram_budget_gb=args.vram_budget_gb))
+                                       vram_budget_gb=args.vram_budget_gb,
+                                       save_responses=args.save_responses))
         except Exception as e:  # fail loud, keep going
             import traceback
             tb = traceback.format_exc()
@@ -542,6 +675,7 @@ def main() -> None:
         "accelerator": detect_accelerator(),
         "gpu_present": gpu_vram_used_mb() is not None,
         "apple_gpu_wired_limit_mb": apple_gpu_wired_limit_mb(),
+        "full_responses_saved": args.save_responses,
         "models": results,
     }
     out_file = out_dir / "results.json"

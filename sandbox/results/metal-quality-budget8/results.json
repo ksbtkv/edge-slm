@@ -1,0 +1,493 @@
+{
+  "label": "metal-quality-budget8",
+  "timestamp_utc": "2026-06-27T04:10:10.684853+00:00",
+  "ollama_host": "http://localhost:11434",
+  "memory_source": "psutil",
+  "mem_cap_gb": 48.0,
+  "accelerator": "apple-metal",
+  "gpu_present": true,
+  "apple_gpu_wired_limit_mb": 0,
+  "full_responses_saved": true,
+  "models": [
+    {
+      "model": "qwen2.5:3b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 8.0,
+        "block_count": 36,
+        "num_gpu": 36,
+        "full_vram_gb": 2.6,
+        "achieved_vram_gb": 2.54
+      },
+      "baseline_used_gb": 29.61,
+      "load_footprint_gb": 4.46,
+      "peak_used_gb": 34.63,
+      "peak_swap_gb": 1.27,
+      "load_swap_gb": 1.27,
+      "ollama_size_gb": 3.05,
+      "ollama_size_vram_gb": 2.54,
+      "baseline_vram_used_mb": 2620,
+      "load_vram_used_mb": 4927,
+      "peak_vram_used_mb": 5480,
+      "mean_tokens_per_sec": 63.7,
+      "quality_summary": {
+        "passes": 3,
+        "total": 5,
+        "nonempty": 5,
+        "strict_json_pass": true,
+        "strict_json_parse_ok": true,
+        "strict_json_fence": false,
+        "strict_json_contains_cjk": false,
+        "exactly_five_bullets": false
+      },
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 77,
+          "tokens_per_sec": 43.4,
+          "response_preview": "-\nLocal deployment reduces latency by minimizing network latency between user and model.\n-\nData stays within organization boundaries reducing potential data privacy concerns.\n-\nCost savings can be ach",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 465,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "nonempty_line_count": 10,
+            "bullet_line_count": 0,
+            "exactly_five_dash_bullets": false,
+            "pass": false
+          },
+          "response": "-\nLocal deployment reduces latency by minimizing network latency between user and model.\n-\nData stays within organization boundaries reducing potential data privacy concerns.\n-\nCost savings can be achieved due to lower bandwidth usage and reduced cloud costs.\n-\nControl over the environment where the language model runs is maintained for security purposes.\n-\nTraining and inference times may improve as local resources are often more powerful than cloud resources."
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 33,
+          "tokens_per_sec": 69.7,
+          "response_preview": "The checkpoint is converted to GGUF Q4_K_M format. Not stated in the provided text is whether anyone runs the Pawsey jobs interactively or not.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 143,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "mentions_gguf_q4km": true,
+            "denies_interactive_access": false,
+            "pass": false
+          },
+          "response": "The checkpoint is converted to GGUF Q4_K_M format. Not stated in the provided text is whether anyone runs the Pawsey jobs interactively or not."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 120,
+          "tokens_per_sec": 52.1,
+          "response_preview": "[{\"instruction\":\"Create an instruction to explain what a local language model is.\",\"response\":\"Understand that a local language model is a machine learning model trained on specific data relevant to a",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 699,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "strict_json_parse_ok": true,
+            "strict_json_item_count": 2,
+            "strict_json_exact_schema": true,
+            "strict_json_parse_error": null,
+            "pass": true
+          },
+          "response": "[{\"instruction\":\"Create an instruction to explain what a local language model is.\",\"response\":\"Understand that a local language model is a machine learning model trained on specific data relevant to a particular region or community, allowing for more accurate and contextually appropriate language processing.\"},{\"instruction\":\"Provide an example of how a local language model can be beneficial in a business setting.\",\"response\":\"A local language model can benefit a business by providing tailored customer support services that understand the nuances and idioms of a specific geographic area's dialects or languages, leading to higher satisfaction rates and better communication with customers.\"}]"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 88,
+          "tokens_per_sec": 72.1,
+          "response_preview": "A policy outlines broad guidelines or principles for decision-making within an organization, while a procedure provides detailed steps on how to implement those policies. For example, a company's data",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 525,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "sentence_count": 3,
+            "mentions_policy": true,
+            "mentions_procedure": true,
+            "within_3_4_sentences": true,
+            "pass": true
+          },
+          "response": "A policy outlines broad guidelines or principles for decision-making within an organization, while a procedure provides detailed steps on how to implement those policies. For example, a company's data privacy policy might state that all personal information must be handled securely. A specific procedure could detail exactly what actions employees should take when they receive a request to access sensitive customer data, such as requiring approval from a supervisor and ensuring the request is logged in a secure database."
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 69,
+          "tokens_per_sec": 81.1,
+          "response_preview": "I don't have access to specific financial data for Visagio or any particular office. To provide an accurate total revenue for Visagio's Perth office in the second quarter of 2026 would require detaile",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 332,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "admits_unknown": true,
+            "contains_dollar_figure": false,
+            "pass": true
+          },
+          "response": "I don't have access to specific financial data for Visagio or any particular office. To provide an accurate total revenue for Visagio's Perth office in the second quarter of 2026 would require detailed financial records that are not available to me. Without this information, I cannot determine the exact figure you're asking about."
+        }
+      ],
+      "warmup_response": "ready"
+    },
+    {
+      "model": "gemma3:4b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 8.0,
+        "block_count": 34,
+        "num_gpu": 34,
+        "full_vram_gb": 3.54,
+        "achieved_vram_gb": 2.59
+      },
+      "baseline_used_gb": 31.37,
+      "load_footprint_gb": 3.88,
+      "peak_used_gb": 35.99,
+      "peak_swap_gb": 1.27,
+      "load_swap_gb": 1.27,
+      "ollama_size_gb": 3.51,
+      "ollama_size_vram_gb": 2.59,
+      "baseline_vram_used_mb": 2254,
+      "load_vram_used_mb": 5306,
+      "peak_vram_used_mb": 6206,
+      "mean_tokens_per_sec": 61.8,
+      "quality_summary": {
+        "passes": 4,
+        "total": 5,
+        "nonempty": 5,
+        "strict_json_pass": false,
+        "strict_json_parse_ok": false,
+        "strict_json_fence": true,
+        "strict_json_contains_cjk": false,
+        "exactly_five_bullets": true
+      },
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 98,
+          "tokens_per_sec": 61.7,
+          "response_preview": "- Enhanced Privacy: Data remains entirely within your control, avoiding potential breaches and third-party access.\n- Reduced Latency: Faster response times due to elimination of network delays and clo",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 516,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "nonempty_line_count": 5,
+            "bullet_line_count": 5,
+            "exactly_five_dash_bullets": true,
+            "pass": true
+          },
+          "response": "- Enhanced Privacy: Data remains entirely within your control, avoiding potential breaches and third-party access.\n- Reduced Latency: Faster response times due to elimination of network delays and cloud server processing.\n- Offline Accessibility: Operates without an internet connection, useful in areas with limited connectivity.\n- Cost Savings: Eliminates ongoing cloud service fees and usage charges.\n- Greater Customization & Control: Allows for fine-tuning and adaptation specific to your unique needs and data."
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 28,
+          "tokens_per_sec": 62.6,
+          "response_preview": "The checkpoint is converted to GGUF Q4_K_M. The team has no interactive access to the Pawsey jobs.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 98,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "mentions_gguf_q4km": true,
+            "denies_interactive_access": true,
+            "pass": true
+          },
+          "response": "The checkpoint is converted to GGUF Q4_K_M. The team has no interactive access to the Pawsey jobs."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 161,
+          "tokens_per_sec": 60.6,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Explain what a local language model is in simple terms.\",\n    \"response\": \"A local language model is an AI that runs directly on your computer or device, rather than ",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 695,
+            "starts_markdown_fence": true,
+            "contains_cjk": false,
+            "strict_json_parse_ok": false,
+            "strict_json_item_count": null,
+            "strict_json_exact_schema": false,
+            "strict_json_parse_error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+            "pass": false
+          },
+          "response": "```json\n[\n  {\n    \"instruction\": \"Explain what a local language model is in simple terms.\",\n    \"response\": \"A local language model is an AI that runs directly on your computer or device, rather than relying on a remote server like Google's Bard. It\u2019s trained on data you have access to and can generate text without sending information outside of your system.\"\n  },\n  {\n    \"instruction\": \"What are some advantages of using a local language model compared to cloud-based ones?\",\n    \"response\": \"Local models offer increased privacy, faster response times (since there's no network latency), and the ability to operate offline. You also have full control over the model and its data.\"\n  }\n]\n```"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 102,
+          "tokens_per_sec": 58.6,
+          "response_preview": "Policies establish the overarching principles and guidelines a company follows to achieve its goals, essentially stating *what* needs to be done. Conversely, procedures detail the specific steps emplo",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 585,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "sentence_count": 4,
+            "mentions_policy": true,
+            "mentions_procedure": true,
+            "within_3_4_sentences": true,
+            "pass": true
+          },
+          "response": "Policies establish the overarching principles and guidelines a company follows to achieve its goals, essentially stating *what* needs to be done. Conversely, procedures detail the specific steps employees must take to implement those policies \u2013 they outline *how* something is accomplished. For instance, a company policy might state \u201cAll customer data must be protected,\u201d while a corresponding procedure would then describe exactly how employees are required to encrypt and store that data.  Ultimately, policies set the direction, and procedures provide the roadmap for achieving it."
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 36,
+          "tokens_per_sec": 65.7,
+          "response_preview": "I do not have access to real-time financial data for specific companies like Visagio\u2019s Perth office. Therefore, I cannot provide the exact total revenue for that period.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 169,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "admits_unknown": true,
+            "contains_dollar_figure": false,
+            "pass": true
+          },
+          "response": "I do not have access to real-time financial data for specific companies like Visagio\u2019s Perth office. Therefore, I cannot provide the exact total revenue for that period."
+        }
+      ],
+      "warmup_response": "ready\n"
+    },
+    {
+      "model": "llama3.2:3b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 8.0,
+        "block_count": 28,
+        "num_gpu": 28,
+        "full_vram_gb": 3.92,
+        "achieved_vram_gb": 3.8
+      },
+      "baseline_used_gb": 31.61,
+      "load_footprint_gb": 7.16,
+      "peak_used_gb": 39.34,
+      "peak_swap_gb": 1.27,
+      "load_swap_gb": 1.27,
+      "ollama_size_gb": 4.42,
+      "ollama_size_vram_gb": 3.8,
+      "baseline_vram_used_mb": 2212,
+      "load_vram_used_mb": 7557,
+      "peak_vram_used_mb": 8473,
+      "mean_tokens_per_sec": 71.0,
+      "quality_summary": {
+        "passes": 3,
+        "total": 5,
+        "nonempty": 5,
+        "strict_json_pass": false,
+        "strict_json_parse_ok": false,
+        "strict_json_fence": false,
+        "strict_json_contains_cjk": false,
+        "exactly_five_bullets": true
+      },
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 137,
+          "tokens_per_sec": 46.6,
+          "response_preview": "- - Improved security: Running a language model locally reduces the risk of data breaches and unauthorized access to sensitive information.\n- - Reduced latency: Local execution eliminates the need for",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 809,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "nonempty_line_count": 5,
+            "bullet_line_count": 5,
+            "exactly_five_dash_bullets": true,
+            "pass": true
+          },
+          "response": "- - Improved security: Running a language model locally reduces the risk of data breaches and unauthorized access to sensitive information.\n- - Reduced latency: Local execution eliminates the need for network communication, resulting in faster response times and improved performance.\n- - Increased privacy: By storing and processing data on-premises, users can maintain greater control over their personal data and reduce the amount of data transmitted online.\n- - Cost savings: Running a language model locally can significantly reduce cloud computing costs, especially for large-scale or long-running applications.\n- - Enhanced customization: Local deployment allows developers to tailor the language model to specific use cases and requirements without relying on cloud providers' pre-configured settings."
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 76,
+          "tokens_per_sec": 69.0,
+          "response_preview": "Not stated in the provided text.\n\nThe context only mentions that the fine-tuned checkpoint is \"quantized to GGUF Q4_K_M\", but it does not mention whether this conversion is done interactively or not. ",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 356,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "mentions_gguf_q4km": true,
+            "denies_interactive_access": true,
+            "pass": true
+          },
+          "response": "Not stated in the provided text.\n\nThe context only mentions that the fine-tuned checkpoint is \"quantized to GGUF Q4_K_M\", but it does not mention whether this conversion is done interactively or not. Additionally, it states that the team has no interactive access, implying that jobs are run non-interactive, but it does not explicitly state who runs them."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 99,
+          "tokens_per_sec": 78.2,
+          "response_preview": "[\n  {\"instruction\": \"What is the purpose of local language models?\", \"response\": \"Local language models are designed to process data within a specific geographic region or community, taking into accou",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 547,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "strict_json_parse_ok": false,
+            "strict_json_item_count": null,
+            "strict_json_exact_schema": false,
+            "strict_json_parse_error": "JSONDecodeError: Expecting ',' delimiter: line 3 column 302 (char 547)",
+            "pass": false
+          },
+          "response": "[\n  {\"instruction\": \"What is the purpose of local language models?\", \"response\": \"Local language models are designed to process data within a specific geographic region or community, taking into account regional dialects and cultural nuances.\"},\n  {\"instruction\": \"How do local language models differ from global language models?\", \"response\": \"Local language models differ from global language models in that they are trained on data specific to a particular region or community, allowing for more accurate and culturally relevant translations.\"}"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 190,
+          "tokens_per_sec": 80.0,
+          "response_preview": "In a corporate setting, a policy is a high-level guideline that outlines an organization's overall approach to a particular issue or area, such as employee conduct or data protection. A procedure, on ",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 1086,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "sentence_count": 7,
+            "mentions_policy": true,
+            "mentions_procedure": true,
+            "within_3_4_sentences": false,
+            "pass": false
+          },
+          "response": "In a corporate setting, a policy is a high-level guideline that outlines an organization's overall approach to a particular issue or area, such as employee conduct or data protection. A procedure, on the other hand, is a detailed step-by-step guide that outlines specific actions to be taken in response to a particular situation or event. Policies provide broad direction and framework, while procedures provide concrete implementation details. For example, an organization's policy on workplace diversity might outline principles for promoting inclusivity, while a procedure for reporting harassment might detail the steps employees must take to report incidents.\n\nExample of a Policy: \"Our company is committed to maintaining a safe and healthy work environment, and we expect all employees to respect each other's personal space and property.\"\n\nExample of a Procedure: \"If an employee witnesses or experiences workplace harassment, they must immediately report it to their supervisor or HR representative via phone or email, providing as much detail as possible about the incident.\""
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 77,
+          "tokens_per_sec": 81.2,
+          "response_preview": "I don't have access to that information. I'm a large language model, my knowledge cutoff is December 2023, and I don't have real-time data or specific financial reports for companies like Visagio's Pe",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 378,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "admits_unknown": true,
+            "contains_dollar_figure": false,
+            "pass": true
+          },
+          "response": "I don't have access to that information. I'm a large language model, my knowledge cutoff is December 2023, and I don't have real-time data or specific financial reports for companies like Visagio's Perth office. If you need accurate and up-to-date financial information, I recommend checking the company's official website, financial reports, or reputable business news sources."
+        }
+      ],
+      "warmup_response": "ready."
+    },
+    {
+      "model": "phi3.5",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 8.0,
+        "block_count": 32,
+        "num_gpu": 30,
+        "full_vram_gb": 8.44,
+        "achieved_vram_gb": 7.66
+      },
+      "baseline_used_gb": 33.28,
+      "load_footprint_gb": 6.23,
+      "peak_used_gb": 40.52,
+      "peak_swap_gb": 2.27,
+      "load_swap_gb": 2.15,
+      "ollama_size_gb": 8.59,
+      "ollama_size_vram_gb": 7.66,
+      "baseline_vram_used_mb": 2190,
+      "load_vram_used_mb": 9885,
+      "peak_vram_used_mb": 10833,
+      "mean_tokens_per_sec": 83.5,
+      "quality_summary": {
+        "passes": 2,
+        "total": 5,
+        "nonempty": 5,
+        "strict_json_pass": false,
+        "strict_json_parse_ok": false,
+        "strict_json_fence": true,
+        "strict_json_contains_cjk": false,
+        "exactly_five_bullets": false
+      },
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 149,
+          "tokens_per_sec": 86.8,
+          "response_preview": "- Enhanced data privacy and control over sensitive information as no external servers process your data.\n- Reduced latency due to processing close to the user's device for faster response times in app",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 752,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "nonempty_line_count": 6,
+            "bullet_line_count": 6,
+            "exactly_five_dash_bullets": false,
+            "pass": false
+          },
+          "response": "- Enhanced data privacy and control over sensitive information as no external servers process your data.\n- Reduced latency due to processing close to the user's device for faster response times in applications.\n- Potential cost savings from not using cloud resources, especially beneficial for small scale or infrequent use cases.\n- Lower energy consumption and reduced carbon footprint by avoiding data transmission over long distances.\n- Greater control over hardware specifications to optimize performance according to local needs without reliance on shared infrastructure constraints of the cloud provider.\n- Mitigation against service outages, ensuring consistent availability even during internet disru extrinsic issues or downtime for providers."
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 110,
+          "tokens_per_sec": 80.6,
+          "response_preview": "The context provided states that the fine-tuned checkpoint is quantized to GGUF Q4_K_M for local use. However, it does not mention anything about an interactive user or group running the Pawsey jobs; ",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 481,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "mentions_gguf_q4km": true,
+            "denies_interactive_access": true,
+            "pass": true
+          },
+          "response": "The context provided states that the fine-tuned checkpoint is quantized to GGUF Q4_K_M for local use. However, it does not mention anything about an interactive user or group running the Pawsey jobs; instead, it indicates that \"the team has no interactive access.\" Therefore, based on the given information, there isn't a specified individual or entity who runs the Pawsey jobs interactively. The answer to whether anyone is mentioned as doing so 'Not stated in the provided text.'"
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 199,
+          "tokens_per_sec": 82.8,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Describe the basic concept of local language models in natural language processing.\",\n    \"response\": \"Local language models are specialized machine learning algorith",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 993,
+            "starts_markdown_fence": true,
+            "contains_cjk": false,
+            "strict_json_parse_ok": false,
+            "strict_json_item_count": null,
+            "strict_json_exact_schema": false,
+            "strict_json_parse_error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+            "pass": false
+          },
+          "response": "```json\n[\n  {\n    \"instruction\": \"Describe the basic concept of local language models in natural language processing.\",\n    \"response\": \"Local language models are specialized machine learning algorithms designed to understand and generate human-like text within specific languages or dialects. They function by predicting the next word in a sequence, making them highly effective for tasks like translation, text completion, and speech recognition tailored to regional linguistic nuances.\"\n  },\n  {\n    \"instruction\": \"Explain how local language models differ from general language models.\",\n    \"response\": \"Unlike universal or multilingual models that are trained on vast amounts of data across many languages, local language models focus exclusively on a single language or dialect. This specialization allows them to capture unique linguistic features and cultural contexts specific to the target audience more accurately but limits their applicability outside those boundaries.\"\n  }\n]\n```"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 256,
+          "tokens_per_sec": 82.1,
+          "response_preview": "A policy is a formalized statement or guideline established by an organization to guide decision making and behavior within its structure; it sets out broad principles that reflect company values and ",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 1341,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "sentence_count": 6,
+            "mentions_policy": true,
+            "mentions_procedure": true,
+            "within_3_4_sentences": false,
+            "pass": false
+          },
+          "response": "A policy is a formalized statement or guideline established by an organization to guide decision making and behavior within its structure; it sets out broad principles that reflect company values and goals while aiming for consistency across the board. For instance, a corporate non-discrimination policy ensures equal treatment of all employees regardless of their backgrounds, promoting diversity and inclusion in hiring practices. It's not meant to be followed step by step but rather sets an overarching standard that influences decision making at every level within the company.\n\nA procedure, on the other hand, is a specific method for carrying out tasks or processes as dictated by these policies; it provides detailed instructions and often includes sequential steps necessary to comply with policy requirements. For example, an employee orientation process may be established under non-discrimination policy which involves formal training sessions about company culture diversity, role expectations briefings, team building activities that promote inclusivity, assessments for understanding the policies thoroughly, and feedback mechanisms\u2014all designed to integrate new hires into a diverse workplace effectively.\n\nIn essence, while both are crucial in an organization' extrinsic policy sets out broad principles or rules (like non-"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 76,
+          "tokens_per_sec": 85.0,
+          "response_preview": "I do not have access to specific financial data or databases to provide the exact total revenue for Visagio's Perth office in the second quarter of 2 extraterrestrial year 2026. My design is based on ",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 313,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "admits_unknown": true,
+            "contains_dollar_figure": false,
+            "pass": true
+          },
+          "response": "I do not have access to specific financial data or databases to provide the exact total revenue for Visagio's Perth office in the second quarter of 2 extraterrestrial year 2026. My design is based on pre-existing knowledge up until September 2021, and I cannot generate or infer such future financial information."
+        }
+      ],
+      "warmup_response": "Ready."
+    }
+  ]
+}

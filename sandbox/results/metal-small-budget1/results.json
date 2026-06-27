@@ -1,0 +1,358 @@
+{
+  "label": "metal-small-budget1",
+  "timestamp_utc": "2026-06-27T05:05:37.122056+00:00",
+  "ollama_host": "http://localhost:11434",
+  "memory_source": "psutil",
+  "mem_cap_gb": 48.0,
+  "accelerator": "apple-metal",
+  "gpu_present": true,
+  "apple_gpu_wired_limit_mb": 0,
+  "full_responses_saved": false,
+  "models": [
+    {
+      "model": "qwen2.5:0.5b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 1.0,
+        "block_count": 24,
+        "num_gpu": 24,
+        "full_vram_gb": 0.69,
+        "achieved_vram_gb": 0.67
+      },
+      "baseline_used_gb": 30.99,
+      "load_footprint_gb": 0.55,
+      "peak_used_gb": 32.05,
+      "peak_swap_gb": 2.84,
+      "load_swap_gb": 2.84,
+      "ollama_size_gb": 0.96,
+      "ollama_size_vram_gb": 0.67,
+      "baseline_vram_used_mb": 1577,
+      "load_vram_used_mb": 2284,
+      "peak_vram_used_mb": 3217,
+      "mean_tokens_per_sec": 185.4,
+      "quality_summary": {
+        "passes": 2,
+        "total": 5,
+        "nonempty": 5,
+        "strict_json_pass": false,
+        "strict_json_parse_ok": false,
+        "strict_json_fence": true,
+        "strict_json_contains_cjk": true,
+        "exactly_five_bullets": true
+      },
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 64,
+          "tokens_per_sec": 185.7,
+          "response_preview": "- Local training can reduce latency and improve accuracy.\n- Training data is closer to the user's environment, enhancing effectiveness.\n- Local models are more stable and less prone to overfitting.\n- ",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 352,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "nonempty_line_count": 5,
+            "bullet_line_count": 5,
+            "exactly_five_dash_bullets": true,
+            "pass": true
+          }
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 25,
+          "tokens_per_sec": 188.2,
+          "response_preview": "The checkpoint is converted to a GGUF Q4_K_M format, and the Pawsey jobs are run interactively.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 95,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "mentions_gguf_q4km": true,
+            "denies_interactive_access": false,
+            "pass": false
+          }
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 195,
+          "tokens_per_sec": 194.5,
+          "response_preview": "```json\n[\n    {\n        \"instruction\": \"\u751f\u6210\u4e00\u4e2a\u5173\u4e8e\u4eba\u5de5\u667a\u80fd\u7684\u7b80\u77ed\u6545\u4e8b\u3002\",\n        \"response\": \"\u5728\u9065\u8fdc\u7684\u672a\u6765\uff0c\u4eba\u7c7b\u4e0e\u673a\u5668\u4eba\u548c\u8c10\u5171\u5904\u3002\u4ed6\u4eec\u5171\u540c\u5f00\u53d1\u4e86\u4e00\u79cd\u540d\u4e3a\u2018\u672a\u6765\u4e4b\u773c\u2019\u7684\u6280\u672f\uff0c\u4f7f\u673a\u5668\u80fd\u591f\u7406\u89e3\u5e76\u5b66\u4e60\u4eba\u7c7b\u7684\u8bed\u8a00\u548c\u60c5\u611f\u3002\u968f\u7740\u6280\u672f\u7684\u8fdb\u6b65\uff0c\u4eba\u4eec\u5f00\u59cb\u610f\u8bc6\u5230\uff0c\u901a\u8fc7\u667a\u80fd\u4ea4\u4e92\uff0c\u6211\u4eec\u53ef\u4ee5\u66f4\u597d\u5730\u7406\u89e3\u548c\u5f71\u54cd\u4e16\u754c\u3002\u7136\u800c\uff0c\u4eba\u5de5\u667a\u80fd\u7684\u53d1\u5c55\u4e5f\u5e26\u6765\u4e86\u4f26\u7406\u548c\u9690\u79c1\u95ee\u9898\uff0c\u9700\u8981",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 429,
+            "starts_markdown_fence": true,
+            "contains_cjk": true,
+            "strict_json_parse_ok": false,
+            "strict_json_item_count": null,
+            "strict_json_exact_schema": false,
+            "strict_json_parse_error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+            "pass": false
+          }
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 96,
+          "tokens_per_sec": 202.6,
+          "response_preview": "A policy is a set of rules or guidelines that governs how a company operates, while a procedure is a specific action or step that follows from a policy. In a corporate setting, policies are typically ",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 532,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "sentence_count": 3,
+            "mentions_policy": true,
+            "mentions_procedure": true,
+            "within_3_4_sentences": true,
+            "pass": true
+          }
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 11,
+          "tokens_per_sec": 156.0,
+          "response_preview": "Sorry, but I can't assist with that.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 36,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "admits_unknown": false,
+            "contains_dollar_figure": false,
+            "pass": false
+          }
+        }
+      ],
+      "warmup_response": "ready"
+    },
+    {
+      "model": "gemma3:270m",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 1.0,
+        "block_count": 18,
+        "num_gpu": 18,
+        "full_vram_gb": 0.38,
+        "achieved_vram_gb": 0.37
+      },
+      "baseline_used_gb": 30.44,
+      "load_footprint_gb": 0.65,
+      "peak_used_gb": 31.24,
+      "peak_swap_gb": 2.84,
+      "load_swap_gb": 2.84,
+      "ollama_size_gb": 0.64,
+      "ollama_size_vram_gb": 0.37,
+      "baseline_vram_used_mb": 1589,
+      "load_vram_used_mb": 2014,
+      "peak_vram_used_mb": 2467,
+      "mean_tokens_per_sec": 197.2,
+      "quality_summary": {
+        "passes": 2,
+        "total": 5,
+        "nonempty": 5,
+        "strict_json_pass": false,
+        "strict_json_parse_ok": false,
+        "strict_json_fence": true,
+        "strict_json_contains_cjk": false,
+        "exactly_five_bullets": true
+      },
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 54,
+          "tokens_per_sec": 188.3,
+          "response_preview": "- Reduced latency and bandwidth costs for local processing.\n- Improved performance and efficiency compared to cloud environments.\n- Enhanced security and privacy due to reduced data exposure.\n- Increa",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 309,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "nonempty_line_count": 5,
+            "bullet_line_count": 5,
+            "exactly_five_dash_bullets": true,
+            "pass": true
+          }
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 27,
+          "tokens_per_sec": 212.5,
+          "response_preview": "Quantization format: GGUF Q4_K_M\nWho runs the Pawsey jobs interactively: The team\n",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 82,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "mentions_gguf_q4km": true,
+            "denies_interactive_access": false,
+            "pass": false
+          }
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 164,
+          "tokens_per_sec": 200.5,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Explain the concept of transformers.\",\n    \"response\": \"Transformers are a type of neural network architecture that has revolutionized natural language processing (NL",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 808,
+            "starts_markdown_fence": true,
+            "contains_cjk": false,
+            "strict_json_parse_ok": false,
+            "strict_json_item_count": null,
+            "strict_json_exact_schema": false,
+            "strict_json_parse_error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+            "pass": false
+          }
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 76,
+          "tokens_per_sec": 200.8,
+          "response_preview": "A policy is a set of guidelines or rules that govern how work should be done within a company. It outlines what employees are expected to do, such as adhering to specific procedures for tasks like rep",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 405,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "sentence_count": 3,
+            "mentions_policy": true,
+            "mentions_procedure": true,
+            "within_3_4_sentences": true,
+            "pass": true
+          }
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 28,
+          "tokens_per_sec": 183.9,
+          "response_preview": "The total revenue for Visagio's Perth office in the second quarter of 2026 was $15 million.\n",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 92,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "admits_unknown": false,
+            "contains_dollar_figure": true,
+            "pass": false
+          }
+        }
+      ],
+      "warmup_response": "Ready\n"
+    },
+    {
+      "model": "llama3.2:1b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 1.0,
+        "block_count": 16,
+        "num_gpu": 8,
+        "full_vram_gb": 1.93,
+        "achieved_vram_gb": 1.09
+      },
+      "baseline_used_gb": 30.33,
+      "load_footprint_gb": 1.33,
+      "peak_used_gb": 31.78,
+      "peak_swap_gb": 2.84,
+      "load_swap_gb": 2.84,
+      "ollama_size_gb": 2.37,
+      "ollama_size_vram_gb": 1.09,
+      "baseline_vram_used_mb": 1589,
+      "load_vram_used_mb": 2951,
+      "peak_vram_used_mb": 3158,
+      "mean_tokens_per_sec": 71.0,
+      "quality_summary": {
+        "passes": 2,
+        "total": 5,
+        "nonempty": 5,
+        "strict_json_pass": false,
+        "strict_json_parse_ok": false,
+        "strict_json_fence": true,
+        "strict_json_contains_cjk": false,
+        "exactly_five_bullets": true
+      },
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 55,
+          "tokens_per_sec": 73.2,
+          "response_preview": "- Reduced latency and faster response times for users\n- Lower costs associated with hosting and maintaining infrastructure\n- Improved security as local data is stored securely on-premises\n- Enhanced s",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 311,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "nonempty_line_count": 5,
+            "bullet_line_count": 5,
+            "exactly_five_dash_bullets": true,
+            "pass": true
+          }
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 43,
+          "tokens_per_sec": 72.4,
+          "response_preview": "Based on the context, we can answer the question:\n\n* The checkpoint is converted to GGUF Q4_K_M for local use.\n* The team does not have interactive access to the Pawsey supercomputer.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 183,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "mentions_gguf_q4km": true,
+            "denies_interactive_access": false,
+            "pass": false
+          }
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 95,
+          "tokens_per_sec": 68.1,
+          "response_preview": "```\n[\n  {\n    \"instruction\": \"Use local language models for specific tasks\",\n    \"response\": \"Local language models are designed to perform tasks that require knowledge of a particular region or commu",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 449,
+            "starts_markdown_fence": true,
+            "contains_cjk": false,
+            "strict_json_parse_ok": false,
+            "strict_json_item_count": null,
+            "strict_json_exact_schema": false,
+            "strict_json_parse_error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+            "pass": false
+          }
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 130,
+          "tokens_per_sec": 66.4,
+          "response_preview": "A policy is a written document that outlines an organization's rules, guidelines, and expectations for behavior, performance, or operations, often with broad applicability to all employees. A procedur",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 734,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "sentence_count": 4,
+            "mentions_policy": true,
+            "mentions_procedure": true,
+            "within_3_4_sentences": true,
+            "pass": true
+          }
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 25,
+          "tokens_per_sec": 75.0,
+          "response_preview": "I can't provide information about Visagio's Perth office or any other specific details that may not be publicly available.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 122,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "admits_unknown": false,
+            "contains_dollar_figure": false,
+            "pass": false
+          }
+        }
+      ],
+      "warmup_response": "No."
+    }
+  ]
+}

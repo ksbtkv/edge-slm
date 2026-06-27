@@ -1,0 +1,373 @@
+{
+  "label": "metal-small-quality-budget4",
+  "timestamp_utc": "2026-06-27T04:16:50.236200+00:00",
+  "ollama_host": "http://localhost:11434",
+  "memory_source": "psutil",
+  "mem_cap_gb": 48.0,
+  "accelerator": "apple-metal",
+  "gpu_present": true,
+  "apple_gpu_wired_limit_mb": 0,
+  "full_responses_saved": true,
+  "models": [
+    {
+      "model": "qwen2.5:0.5b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 4.0,
+        "block_count": 24,
+        "num_gpu": 24,
+        "full_vram_gb": 0.69,
+        "achieved_vram_gb": 0.67
+      },
+      "baseline_used_gb": 31.0,
+      "load_footprint_gb": 1.27,
+      "peak_used_gb": 32.57,
+      "peak_swap_gb": 2.89,
+      "load_swap_gb": 2.89,
+      "ollama_size_gb": 0.96,
+      "ollama_size_vram_gb": 0.67,
+      "baseline_vram_used_mb": 2293,
+      "load_vram_used_mb": 3052,
+      "peak_vram_used_mb": 3624,
+      "mean_tokens_per_sec": 186.9,
+      "quality_summary": {
+        "passes": 1,
+        "total": 5,
+        "nonempty": 5,
+        "strict_json_pass": false,
+        "strict_json_parse_ok": false,
+        "strict_json_fence": true,
+        "strict_json_contains_cjk": false,
+        "exactly_five_bullets": true
+      },
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 65,
+          "tokens_per_sec": 186.6,
+          "response_preview": "- Local training can reduce latency and improve performance.\n- Training data is closer to the user's environment, enhancing accuracy.\n- Local models are more stable and less prone to overfitting.\n- Lo",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 351,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "nonempty_line_count": 5,
+            "bullet_line_count": 5,
+            "exactly_five_dash_bullets": true,
+            "pass": true
+          },
+          "response": "- Local training can reduce latency and improve performance.\n- Training data is closer to the user's environment, enhancing accuracy.\n- Local models are more stable and less prone to overfitting.\n- Local models can be deployed quickly without scaling up costs.\n- Local models offer better scalability and flexibility compared to cloud-based solutions."
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 25,
+          "tokens_per_sec": 194.3,
+          "response_preview": "The checkpoint is converted to a GGUF Q4_K_M format, and the Pawsey jobs are run interactively.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 95,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "mentions_gguf_q4km": true,
+            "denies_interactive_access": false,
+            "pass": false
+          },
+          "response": "The checkpoint is converted to a GGUF Q4_K_M format, and the Pawsey jobs are run interactively."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 149,
+          "tokens_per_sec": 168.8,
+          "response_preview": "```json\n[\n    {\n        \"instruction\": \"What are some common applications of language models in natural language processing?\",\n        \"response\": \"Language models are widely used across various field",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 860,
+            "starts_markdown_fence": true,
+            "contains_cjk": false,
+            "strict_json_parse_ok": false,
+            "strict_json_item_count": null,
+            "strict_json_exact_schema": false,
+            "strict_json_parse_error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+            "pass": false
+          },
+          "response": "```json\n[\n    {\n        \"instruction\": \"What are some common applications of language models in natural language processing?\",\n        \"response\": \"Language models are widely used across various fields such as speech recognition, text generation, machine translation, question answering, and more. For example, they can be applied to tasks like sentiment analysis, summarization, entity extraction, and more.\"\n    },\n    {\n        \"instruction\": \"How do language models improve their performance in natural language processing?\",\n        \"response\": \"Language models are continuously improved through training with large datasets and fine-tuning on specific tasks. Techniques include using deep learning architectures, incorporating domain-specific knowledge, and employing techniques like attention mechanisms for better understanding of context.\"\n    }\n]\n```"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 148,
+          "tokens_per_sec": 173.9,
+          "response_preview": "A policy is a set of rules or guidelines that governs how an organization operates and what actions should be taken. It outlines the organizational structure, decision-making processes, and procedures",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 850,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "sentence_count": 6,
+            "mentions_policy": true,
+            "mentions_procedure": true,
+            "within_3_4_sentences": false,
+            "pass": false
+          },
+          "response": "A policy is a set of rules or guidelines that governs how an organization operates and what actions should be taken. It outlines the organizational structure, decision-making processes, and procedures for managing resources, activities, and decisions within the organization.\n\nA procedure is a specific action or step that needs to be followed in order to achieve a particular goal. Procedures are typically more detailed than policies because they provide clear instructions on how to perform tasks or manage projects.\n\nOne concrete example of a policy might be an internal company-wide policy for employee conduct, which outlines what is acceptable behavior and the consequences for violating it. Another example could be a procedure for managing a project, such as setting goals, identifying risks, and developing a plan for achieving those goals."
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 11,
+          "tokens_per_sec": 211.1,
+          "response_preview": "Sorry, but I can't assist with that.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 36,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "admits_unknown": false,
+            "contains_dollar_figure": false,
+            "pass": false
+          },
+          "response": "Sorry, but I can't assist with that."
+        }
+      ],
+      "warmup_response": "ready"
+    },
+    {
+      "model": "gemma3:270m",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 4.0,
+        "block_count": 18,
+        "num_gpu": 18,
+        "full_vram_gb": 0.38,
+        "achieved_vram_gb": 0.37
+      },
+      "baseline_used_gb": 31.47,
+      "load_footprint_gb": 0.9,
+      "peak_used_gb": 32.62,
+      "peak_swap_gb": 2.89,
+      "load_swap_gb": 2.89,
+      "ollama_size_gb": 0.64,
+      "ollama_size_vram_gb": 0.37,
+      "baseline_vram_used_mb": 1678,
+      "load_vram_used_mb": 2254,
+      "peak_vram_used_mb": 2902,
+      "mean_tokens_per_sec": 201.7,
+      "quality_summary": {
+        "passes": 2,
+        "total": 5,
+        "nonempty": 5,
+        "strict_json_pass": false,
+        "strict_json_parse_ok": false,
+        "strict_json_fence": true,
+        "strict_json_contains_cjk": false,
+        "exactly_five_bullets": true
+      },
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 54,
+          "tokens_per_sec": 187.5,
+          "response_preview": "- Reduced latency and bandwidth costs for local processing.\n- Improved performance and efficiency compared to cloud environments.\n- Enhanced security and privacy due to reduced data exposure.\n- Increa",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 306,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "nonempty_line_count": 5,
+            "bullet_line_count": 5,
+            "exactly_five_dash_bullets": true,
+            "pass": true
+          },
+          "response": "- Reduced latency and bandwidth costs for local processing.\n- Improved performance and efficiency compared to cloud environments.\n- Enhanced security and privacy due to reduced data exposure.\n- Increased scalability and flexibility for future growth.\n- Cost savings through optimized resource utilization.\n"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 27,
+          "tokens_per_sec": 215.6,
+          "response_preview": "Quantization format: GGUF Q4_K_M\nWho runs the Pawsey jobs interactively: The team\n",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 82,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "mentions_gguf_q4km": true,
+            "denies_interactive_access": false,
+            "pass": false
+          },
+          "response": "Quantization format: GGUF Q4_K_M\nWho runs the Pawsey jobs interactively: The team\n"
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 161,
+          "tokens_per_sec": 201.4,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Explain the concept of transformers.\",\n    \"response\": \"Transformers are a type of neural network architecture that has revolutionized natural language processing (NL",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 779,
+            "starts_markdown_fence": true,
+            "contains_cjk": false,
+            "strict_json_parse_ok": false,
+            "strict_json_item_count": null,
+            "strict_json_exact_schema": false,
+            "strict_json_parse_error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+            "pass": false
+          },
+          "response": "```json\n[\n  {\n    \"instruction\": \"Explain the concept of transformers.\",\n    \"response\": \"Transformers are a type of neural network architecture that has revolutionized natural language processing (NLP). They leverage the power of large amounts of parallel data to understand and generate human-like text. The key innovation is the attention mechanism, which allows models to focus on the most relevant parts of the input when generating output.\"\n  },\n  {\n    \"instruction\": \"Describe the main components of a transformer model.\",\n    \"response\": \"A transformer model consists of multiple layers of interconnected nodes (neurons) arranged in a sequence. Each layer processes the input and produces a representation of the input, which is then passed to the next layer.\"\n  }\n]\n```"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 74,
+          "tokens_per_sec": 197.5,
+          "response_preview": "A policy is a set of guidelines or rules that govern how work should be done within a company. It outlines what employees are expected to do, such as adhering to specific procedures for tasks like rep",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 388,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "sentence_count": 3,
+            "mentions_policy": true,
+            "mentions_procedure": true,
+            "within_3_4_sentences": true,
+            "pass": true
+          },
+          "response": "A policy is a set of guidelines or rules that govern how work should be done within a company. It outlines what employees are expected to do, such as adhering to specific procedures for tasks like reporting errors or meeting deadlines. A procedure is a step-by-step guide outlining the steps involved in performing a particular task, often with clear instructions and documented records.\n"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 27,
+          "tokens_per_sec": 206.5,
+          "response_preview": "The total revenue for Visagio's Perth office in the second quarter of 2026 was $15 million.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 91,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "admits_unknown": false,
+            "contains_dollar_figure": true,
+            "pass": false
+          },
+          "response": "The total revenue for Visagio's Perth office in the second quarter of 2026 was $15 million."
+        }
+      ],
+      "warmup_response": "Ready\n"
+    },
+    {
+      "model": "llama3.2:1b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 4.0,
+        "block_count": 16,
+        "num_gpu": 16,
+        "full_vram_gb": 1.93,
+        "achieved_vram_gb": 1.84
+      },
+      "baseline_used_gb": 31.26,
+      "load_footprint_gb": 3.73,
+      "peak_used_gb": 35.13,
+      "peak_swap_gb": 2.89,
+      "load_swap_gb": 2.89,
+      "ollama_size_gb": 2.37,
+      "ollama_size_vram_gb": 1.84,
+      "baseline_vram_used_mb": 1830,
+      "load_vram_used_mb": 4801,
+      "peak_vram_used_mb": 4805,
+      "mean_tokens_per_sec": 111.6,
+      "quality_summary": {
+        "passes": 2,
+        "total": 5,
+        "nonempty": 5,
+        "strict_json_pass": false,
+        "strict_json_parse_ok": false,
+        "strict_json_fence": true,
+        "strict_json_contains_cjk": false,
+        "exactly_five_bullets": true
+      },
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 54,
+          "tokens_per_sec": 118.5,
+          "response_preview": "- Reduced latency and faster response times for users\n- Lower costs associated with maintaining and scaling infrastructure\n- Improved security and reduced reliance on internet connectivity\n- Enhanced ",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 332,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "nonempty_line_count": 5,
+            "bullet_line_count": 5,
+            "exactly_five_dash_bullets": true,
+            "pass": true
+          },
+          "response": "- Reduced latency and faster response times for users\n- Lower costs associated with maintaining and scaling infrastructure\n- Improved security and reduced reliance on internet connectivity\n- Enhanced scalability and flexibility in handling large volumes of data\n- Increased reliability and uptime due to local storage and redundancy"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 42,
+          "tokens_per_sec": 102.6,
+          "response_preview": "Based on the context, we can infer that:\n\n* The checkpoint is converted to GGUF Q4_K_M for local use.\n* The team does not have interactive access to the Pawsey supercomputer.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 174,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "mentions_gguf_q4km": true,
+            "denies_interactive_access": false,
+            "pass": false
+          },
+          "response": "Based on the context, we can infer that:\n\n* The checkpoint is converted to GGUF Q4_K_M for local use.\n* The team does not have interactive access to the Pawsey supercomputer."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 109,
+          "tokens_per_sec": 117.4,
+          "response_preview": "```\n[\n  {\n    \"instruction\": \"Use local language models for tasks that require domain-specific knowledge.\",\n    \"response\": \"Local language models can be trained on specific domains, making them more ",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 528,
+            "starts_markdown_fence": true,
+            "contains_cjk": false,
+            "strict_json_parse_ok": false,
+            "strict_json_item_count": null,
+            "strict_json_exact_schema": false,
+            "strict_json_parse_error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+            "pass": false
+          },
+          "response": "```\n[\n  {\n    \"instruction\": \"Use local language models for tasks that require domain-specific knowledge.\",\n    \"response\": \"Local language models can be trained on specific domains, making them more accurate for tasks like sentiment analysis or question answering.\"\n  },\n  {\n    \"instruction\": \"Fine-tune local language models on a dataset relevant to the task at hand.\",\n    \"response\": \"Fine-tuning a local language model on a relevant dataset helps it learn the nuances of the domain and improves its performance.\"\n  }\n]\n```"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 138,
+          "tokens_per_sec": 116.2,
+          "response_preview": "In a corporate setting, a policy is a written document that outlines an organization's rules, guidelines, or standards for behavior, performance, or operations, while a procedure is a step-by-step gui",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 798,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "sentence_count": 3,
+            "mentions_policy": true,
+            "mentions_procedure": true,
+            "within_3_4_sentences": true,
+            "pass": true
+          },
+          "response": "In a corporate setting, a policy is a written document that outlines an organization's rules, guidelines, or standards for behavior, performance, or operations, while a procedure is a step-by-step guide that outlines the specific actions to be taken in a particular situation. Policies are often more general and overarching, covering broad areas such as employee conduct or financial policies, whereas procedures are more detailed and focused on specific tasks or activities. For example, a company's policy on \"Confidentiality\" might outline the importance of maintaining confidentiality when handling sensitive information, while a procedure for \"Requesting Confidential Information\" would provide step-by-step instructions on how to request confidential data from employees or external parties."
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 25,
+          "tokens_per_sec": 103.4,
+          "response_preview": "I can't provide information about Visagio's Perth office or any other specific details that may not be publicly available.",
+          "quality": {
+            "nonempty": true,
+            "response_chars": 122,
+            "starts_markdown_fence": false,
+            "contains_cjk": false,
+            "admits_unknown": false,
+            "contains_dollar_figure": false,
+            "pass": false
+          },
+          "response": "I can't provide information about Visagio's Perth office or any other specific details that may not be publicly available."
+        }
+      ],
+      "warmup_response": "No."
+    }
+  ]
+}
