@@ -1,0 +1,177 @@
+{
+  "label": "metal-small-budget2",
+  "timestamp_utc": "2026-06-27T03:40:59.155547+00:00",
+  "ollama_host": "http://localhost:11434",
+  "memory_source": "psutil",
+  "mem_cap_gb": 48.0,
+  "accelerator": "apple-metal",
+  "gpu_present": true,
+  "apple_gpu_wired_limit_mb": 0,
+  "models": [
+    {
+      "model": "qwen2.5:0.5b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 2.0,
+        "block_count": 24,
+        "num_gpu": 24,
+        "full_vram_gb": 0.69,
+        "achieved_vram_gb": 0.67
+      },
+      "baseline_used_gb": 29.49,
+      "load_footprint_gb": 0.47,
+      "peak_used_gb": 29.99,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 0.96,
+      "ollama_size_vram_gb": 0.67,
+      "baseline_vram_used_mb": 2323,
+      "load_vram_used_mb": 2188,
+      "peak_vram_used_mb": 2396,
+      "mean_tokens_per_sec": 195.2,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 63,
+          "tokens_per_sec": 194.2,
+          "response_preview": "- Local training can reduce latency and improve performance.\n- Training data is closer to the user's environment, enhancing accuracy.\n- Local models are more stable and less prone to overfitting.\n- Lo"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 25,
+          "tokens_per_sec": 204.1,
+          "response_preview": "The checkpoint is converted to a GGUF Q4_K_M format, and the Pawsey jobs are run interactively."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 154,
+          "tokens_per_sec": 192.5,
+          "response_preview": "```json\n[\n    {\n        \"instruction\": \"How can I improve my local language model performance?\",\n        \"response\": \"To enhance your local language model's performance, consider using techniques such"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 152,
+          "tokens_per_sec": 184.8,
+          "response_preview": "A policy is a set of rules or guidelines that governs how a company operates, while a procedure is a specific action or step that follows from a policy. In a corporate setting, policies are typically "
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 11,
+          "tokens_per_sec": 200.3,
+          "response_preview": "Sorry, but I can't assist with that."
+        }
+      ],
+      "warmup_response": "ready"
+    },
+    {
+      "model": "gemma3:270m",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 2.0,
+        "block_count": 18,
+        "num_gpu": 18,
+        "full_vram_gb": 0.38,
+        "achieved_vram_gb": 0.37
+      },
+      "baseline_used_gb": 28.61,
+      "load_footprint_gb": 0.96,
+      "peak_used_gb": 29.67,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 0.64,
+      "ollama_size_vram_gb": 0.37,
+      "baseline_vram_used_mb": 1503,
+      "load_vram_used_mb": 2182,
+      "peak_vram_used_mb": 2417,
+      "mean_tokens_per_sec": 206.8,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 133,
+          "tokens_per_sec": 195.0,
+          "response_preview": "- **Reduced Latency:** Running your language model locally significantly reduces network latency, crucial for real-time applications like chatbots and remote assistance.\n- **Lower Cost:** Cloud infras"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 27,
+          "tokens_per_sec": 222.3,
+          "response_preview": "Quantization format: GGUF Q4_K_M\nWho runs the Pawsey jobs interactively: The team\n"
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 163,
+          "tokens_per_sec": 223.3,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Explain the concept of transformers.\",\n    \"response\": \"Transformers are a type of neural network architecture that has revolutionized natural language processing (NL"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 74,
+          "tokens_per_sec": 188.6,
+          "response_preview": "A policy is a set of guidelines or rules that govern how work should be done within a company. It outlines what employees are expected to do, such as adhering to specific procedures for tasks like rep"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 29,
+          "tokens_per_sec": 204.7,
+          "response_preview": "The exact total revenue for Visagio's Perth office in the second quarter of 2026 was $1.5 billion."
+        }
+      ],
+      "warmup_response": "Ready\n"
+    },
+    {
+      "model": "llama3.2:1b",
+      "memory_source": "psutil",
+      "vram_budget": {
+        "vram_budget_gb": 2.0,
+        "block_count": 16,
+        "num_gpu": 16,
+        "full_vram_gb": 1.93,
+        "achieved_vram_gb": 1.84
+      },
+      "baseline_used_gb": 28.58,
+      "load_footprint_gb": 2.7,
+      "peak_used_gb": 31.4,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 2.37,
+      "ollama_size_vram_gb": 1.84,
+      "baseline_vram_used_mb": 1503,
+      "load_vram_used_mb": 3376,
+      "peak_vram_used_mb": 3600,
+      "mean_tokens_per_sec": 140.0,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 64,
+          "tokens_per_sec": 138.5,
+          "response_preview": "- Reduced latency and improved responsiveness due to local processing\n- Lower costs associated with infrastructure and maintenance\n- Increased security as data is stored locally and less vulnerable to"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 43,
+          "tokens_per_sec": 142.2,
+          "response_preview": "Based on the context, we can answer the question:\n\n* The checkpoint is converted to GGUF Q4_K_M for local use.\n* The team does not have interactive access to the Pawsey supercomputer."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 91,
+          "tokens_per_sec": 136.5,
+          "response_preview": "```\n[\n  {\n    \"instruction\": \"Use local language models for specific tasks\",\n    \"response\": \"Local language models are designed to perform tasks that require knowledge of a particular region or commu"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 133,
+          "tokens_per_sec": 133.9,
+          "response_preview": "A policy is a written document that outlines an organization's rules, guidelines, or standards for behavior, decision-making, or operations, often with the goal of promoting consistency and efficiency"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 25,
+          "tokens_per_sec": 148.7,
+          "response_preview": "I can't provide information about Visagio's Perth office or any other specific details that may not be publicly available."
+        }
+      ],
+      "warmup_response": "No."
+    }
+  ]
+}

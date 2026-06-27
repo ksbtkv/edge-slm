@@ -239,6 +239,19 @@ is 1b, and phi3.5 has no variant below 3.8B (excluded). Labels: `metal-small-*`.
 
 **Model VRAM (GB):** qwen2.5:0.5b 0.69 · gemma3:270m 0.38 · llama3.2:1b 1.93.
 
+**Faithful `num_gpu` budget check:** the small-tier models are fully GPU-resident even
+under a 2 GB `num_gpu` budget. Labels: `metal-small-budget{8,4,2}`.
+
+| Model | 8 GB | 4 GB | 2 GB |
+| --------------- | :------------: | :------------: | :------------: |
+| qwen2.5:0.5b | 195 (24/24) | 192 (24/24) | 195 (24/24) |
+| gemma3:270m | 208 (18/18) | 197 (18/18) | 207 (18/18) |
+| llama3.2:1b | 135 (16/16) | 140 (16/16) | 140 (16/16) |
+
+All three produced 5/5 non-empty responses under the faithful budget method, confirming
+that the wired-limit `llama3.2:1b @ 2 GB` failure was also a cap artifact. The conclusion
+does not change: memory is solved at this tier, but output quality is not.
+
 **Findings:**
 - At sub-1B, **VRAM headroom is no longer the constraint** — qwen2.5:0.5b and gemma3:270m
   run at full speed across *every* ceiling including 2 GB (they're <0.7 GB). Only
