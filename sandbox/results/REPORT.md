@@ -29,7 +29,9 @@ three independent Stage 0 evaluations that all converge on `qwen2.5:3b`.
 
 2. **Raw speed is hardware-specific and must not drive the choice.** Uncapped, the M3 Max
    ranks phi3.5 (108) ≳ llama (101) > qwen (92) > gemma (73) tok/s — the *reverse* of the
-   base-M3 ranking. tokens/sec does not transfer between GPUs; the VRAM-capacity ranking does.
+   base-M3 ranking (there qwen 43 > llama 42 > phi 38 > gemma 33; the M3 Max's 40-core GPU
+   is ~2–2.7× faster overall *and* reorders the field). tokens/sec does not transfer between
+   GPUs; the VRAM-capacity ranking does.
 
 3. **Strict-JSON reliability separates qwen — though imperfectly.** In the full-response
    quality audit (§3), `qwen2.5:3b` is the only 3–4B model to pass strict JSON at all
