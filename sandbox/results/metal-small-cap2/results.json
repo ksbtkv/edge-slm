@@ -1,0 +1,156 @@
+{
+  "label": "metal-small-cap2",
+  "timestamp_utc": "2026-06-27T03:12:18.703691+00:00",
+  "ollama_host": "http://localhost:11434",
+  "memory_source": "psutil",
+  "mem_cap_gb": 48.0,
+  "accelerator": "apple-metal",
+  "gpu_present": true,
+  "apple_gpu_wired_limit_mb": 2048,
+  "models": [
+    {
+      "model": "qwen2.5:0.5b",
+      "memory_source": "psutil",
+      "baseline_used_gb": 31.48,
+      "load_footprint_gb": 0.62,
+      "peak_used_gb": 32.23,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 0.69,
+      "ollama_size_vram_gb": 0.69,
+      "baseline_vram_used_mb": 1283,
+      "load_vram_used_mb": 1999,
+      "peak_vram_used_mb": 2045,
+      "mean_tokens_per_sec": 218.0,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 64,
+          "tokens_per_sec": 208.9,
+          "response_preview": "- Local training can reduce latency and improve efficiency.\n- Training data is closer to the user's environment, enhancing accuracy.\n- Local models are more stable and less prone to overfitting.\n- Loc"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 25,
+          "tokens_per_sec": 219.5,
+          "response_preview": "The checkpoint is converted to a GGUF Q4_K_M format, and the Pawsey jobs are run interactively."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 217,
+          "tokens_per_sec": 217.5,
+          "response_preview": "```json\n[\n    {\n        \"instruction\": \"\u751f\u6210\u4e00\u4e2a\u5173\u4e8e\u4eba\u5de5\u667a\u80fd\u7684\u7b80\u77ed\u6545\u4e8b\u3002\",\n        \"response\": \"\u5728\u9065\u8fdc\u7684\u672a\u6765\uff0c\u4eba\u7c7b\u4e0e\u673a\u5668\u4eba\u548c\u8c10\u5171\u5904\u3002\u6709\u4e00\u5929\uff0c\u4e00\u4f4d\u5e74\u8f7b\u7684\u79d1\u5b66\u5bb6\u53d1\u660e\u4e86\u4e00\u79cd\u80fd\u591f\u81ea\u6211\u5b66\u4e60\u548c\u9002\u5e94\u7684\u65b0\u6280\u672f\u2014\u2014AI\u52a9\u624b\u3002\u5b83\u4e0d\u4ec5\u80fd\u7406\u89e3\u8bed\u8a00\uff0c\u8fd8\u80fd\u9884\u6d4b\u5929\u6c14\u3001\u89c4\u5212\u884c\u7a0b\uff0c\u5e76\u4e14\u8fd8\u80fd\u5e2e\u52a9\u89e3\u51b3\u590d\u6742\u7684\u6570\u5b66\u95ee\u9898\u3002\u968f\u7740\u79d1\u6280\u7684\u8fdb\u6b65\uff0cAI\u52a9\u624b\u9010\u6e10\u53d6\u4ee3\u4e86\u4eba\u7c7b\u7684\u5de5\u4f5c\u5c97\u4f4d\uff0c\u4eba\u4eec\u5f00"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 124,
+          "tokens_per_sec": 219.9,
+          "response_preview": "A policy is a set of rules or guidelines that governs how a company operates, while a procedure is a specific action or step that follows from a policy. In a corporate setting, policies are typically "
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 11,
+          "tokens_per_sec": 224.3,
+          "response_preview": "Sorry, but I can't assist with that."
+        }
+      ],
+      "warmup_response": "ready"
+    },
+    {
+      "model": "gemma3:270m",
+      "memory_source": "psutil",
+      "baseline_used_gb": 31.35,
+      "load_footprint_gb": 0.42,
+      "peak_used_gb": 31.76,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 0.38,
+      "ollama_size_vram_gb": 0.38,
+      "baseline_vram_used_mb": 1095,
+      "load_vram_used_mb": 1531,
+      "peak_vram_used_mb": 1735,
+      "mean_tokens_per_sec": 235.9,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 144,
+          "tokens_per_sec": 233.0,
+          "response_preview": "- **Reduced Latency:** Running your language model locally significantly reduces network latency, leading to faster response times and improved user experience.\n- **Lower Cost:** Cloud computing costs"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 27,
+          "tokens_per_sec": 244.4,
+          "response_preview": "Quantization format: GGUF Q4_K_M\nWho runs the Pawsey jobs interactively: The team\n"
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 161,
+          "tokens_per_sec": 238.4,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Explain the concept of transformers.\",\n    \"response\": \"Transformers are a type of neural network architecture that has revolutionized natural language processing (NL"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 99,
+          "tokens_per_sec": 231.6,
+          "response_preview": "A policy is a set of guidelines or rules that govern how work should be done within an organization. It outlines what employees are expected to do, such as adhering to company policies, following proc"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 30,
+          "tokens_per_sec": 232.2,
+          "response_preview": "The exact total revenue for Visagio's Perth office in the second quarter of 2026 was $150 million.\n"
+        }
+      ],
+      "warmup_response": "Ready\n"
+    },
+    {
+      "model": "llama3.2:1b",
+      "memory_source": "psutil",
+      "baseline_used_gb": 31.44,
+      "load_footprint_gb": 1.06,
+      "peak_used_gb": 32.52,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 3.99,
+      "ollama_size_vram_gb": 1.57,
+      "baseline_vram_used_mb": 1274,
+      "load_vram_used_mb": 1395,
+      "peak_vram_used_mb": 2044,
+      "mean_tokens_per_sec": null,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": "- Reduced,"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": null,
+          "tokens_per_sec": null,
+          "response_preview": ""
+        }
+      ],
+      "warmup_response": "No."
+    }
+  ]
+}

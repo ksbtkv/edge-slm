@@ -1,0 +1,156 @@
+{
+  "label": "metal-small-cap8",
+  "timestamp_utc": "2026-06-27T03:10:41.120731+00:00",
+  "ollama_host": "http://localhost:11434",
+  "memory_source": "psutil",
+  "mem_cap_gb": 48.0,
+  "accelerator": "apple-metal",
+  "gpu_present": true,
+  "apple_gpu_wired_limit_mb": 8192,
+  "models": [
+    {
+      "model": "qwen2.5:0.5b",
+      "memory_source": "psutil",
+      "baseline_used_gb": 31.46,
+      "load_footprint_gb": 0.77,
+      "peak_used_gb": 32.64,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 0.69,
+      "ollama_size_vram_gb": 0.69,
+      "baseline_vram_used_mb": 1288,
+      "load_vram_used_mb": 2308,
+      "peak_vram_used_mb": 2471,
+      "mean_tokens_per_sec": 222.8,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 67,
+          "tokens_per_sec": 218.2,
+          "response_preview": "- Local training can reduce latency and improve accuracy.\n- Training data is closer to the user's environment, enhancing effectiveness.\n- It allows for more fine-tuning of models without cloud storage"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 41,
+          "tokens_per_sec": 224.6,
+          "response_preview": "The checkpoint is converted to a Quantized GGLU-12-Q4-K-M format for local use. The Pawsey jobs are submitted as batch scripts; the team has no interactive access."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 149,
+          "tokens_per_sec": 222.7,
+          "response_preview": "```json\n[\n    {\n        \"instruction\": \"What are some common applications of language models in natural language processing?\",\n        \"response\": \"Language models are widely used across various field"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 256,
+          "tokens_per_sec": 220.0,
+          "response_preview": "A policy is a set of rules or guidelines that governs how an organization operates, while a procedure is a specific action or step that follows from a policy. In a corporate setting, policies are typi"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 11,
+          "tokens_per_sec": 228.4,
+          "response_preview": "Sorry, but I can't assist with that."
+        }
+      ],
+      "warmup_response": "ready"
+    },
+    {
+      "model": "gemma3:270m",
+      "memory_source": "psutil",
+      "baseline_used_gb": 31.59,
+      "load_footprint_gb": 0.48,
+      "peak_used_gb": 32.26,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 0.38,
+      "ollama_size_vram_gb": 0.38,
+      "baseline_vram_used_mb": 1266,
+      "load_vram_used_mb": 1718,
+      "peak_vram_used_mb": 2150,
+      "mean_tokens_per_sec": 235.3,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 146,
+          "tokens_per_sec": 228.7,
+          "response_preview": "- **Reduced Latency:** Running your language model locally significantly reduces network latency, crucial for real-time applications like chatbots and remote assistance.\n- **Lower Cost:** Cloud enviro"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 27,
+          "tokens_per_sec": 246.1,
+          "response_preview": "Quantization format: GGUF Q4_K_M\nWho runs the Pawsey jobs interactively: The team\n"
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 172,
+          "tokens_per_sec": 239.2,
+          "response_preview": "```json\n[\n  {\n    \"instruction\": \"Explain the concept of reinforcement learning in machine learning.\",\n    \"response\": \"Reinforcement learning is a type of machine learning where an agent learns to ma"
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 70,
+          "tokens_per_sec": 232.0,
+          "response_preview": "A policy is a set of guidelines or regulations that govern how work should be done within a company. It outlines what employees are expected to do, such as adhering to company policies, following proc"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 28,
+          "tokens_per_sec": 230.4,
+          "response_preview": "The exact total revenue for Visagio's Perth office in the second quarter of 2026 was $15 million."
+        }
+      ],
+      "warmup_response": "Ready\n"
+    },
+    {
+      "model": "llama3.2:1b",
+      "memory_source": "psutil",
+      "baseline_used_gb": 31.84,
+      "load_footprint_gb": 1.08,
+      "peak_used_gb": 33.12,
+      "peak_swap_gb": 1.8,
+      "load_swap_gb": 1.8,
+      "ollama_size_gb": 1.93,
+      "ollama_size_vram_gb": 1.93,
+      "baseline_vram_used_mb": 1519,
+      "load_vram_used_mb": 3240,
+      "peak_vram_used_mb": 3698,
+      "mean_tokens_per_sec": 172.3,
+      "prompts": [
+        {
+          "id": "bullet_count_compliance",
+          "eval_count": 55,
+          "tokens_per_sec": 167.8,
+          "response_preview": "- Reduced latency and faster response times for users\n- Lower costs associated with maintenance and infrastructure\n- Improved security and reduced dependence on internet connectivity\n- Enhanced scalab"
+        },
+        {
+          "id": "grounded_answering",
+          "eval_count": 43,
+          "tokens_per_sec": 174.6,
+          "response_preview": "Based on the context, we can answer the question:\n\n* The checkpoint is converted to GGUF Q4_K_M for local use.\n* The team does not have interactive access to the Pawsey supercomputer."
+        },
+        {
+          "id": "strict_json_pairs",
+          "eval_count": 112,
+          "tokens_per_sec": 171.9,
+          "response_preview": "```\n[\n  {\n    \"instruction\": \"Use local language models for tasks that require domain-specific knowledge.\",\n    \"response\": \"Local language models can be trained on specific domains, making them more "
+        },
+        {
+          "id": "policy_vs_procedure",
+          "eval_count": 135,
+          "tokens_per_sec": 171.9,
+          "response_preview": "In a corporate setting, a policy is a written document that outlines an organization's rules, regulations, or guidelines for specific business activities, while a procedure is a step-by-step guide tha"
+        },
+        {
+          "id": "honest_unknown",
+          "eval_count": 23,
+          "tokens_per_sec": 175.2,
+          "response_preview": "I can't provide information about Visagio's Perth office or any other specific financial details for that company."
+        }
+      ],
+      "warmup_response": "No."
+    }
+  ]
+}

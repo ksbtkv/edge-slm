@@ -5,6 +5,46 @@
 **Condition:** clean (background apps present — machine was under load, ~4.5 GB swap at baseline)
 **Harness:** `sandbox/harness/stage0_bench.py`, label `metal-clean`, uncapped (`iogpu.wired_limit_mb=0`)
 
+## Summary of findings
+
+**Recommendation: qwen2.5:3b (Q4_K_M) as the primary model — confirmed.** This M3 Max
+study, combined with the team's earlier base-M3 (Ollama) and Windows RTX 2070 (LM Studio)
+runs, gives three independent Stage 0 evaluations that all converge on qwen2.5:3b.
+
+1. **VRAM headroom is the gating metric, and qwen wins it decisively.** qwen wires only
+   ~2.6 GB and stays fully GPU-resident at full speed down to a simulated **4 GB** ceiling;
+   it is the *only* 3–4B candidate that does. phi3.5 already needs CPU help at 8 GB
+   (~8.5 GB footprint), gemma and llama sit in between.
+
+2. **Raw speed is hardware-specific and must not drive the choice.** Uncapped, the M3 Max
+   ranks phi3.5 (108) ≳ llama (101) > qwen (92) > gemma (73) tok/s — the *reverse* of the
+   base-M3 ranking. tokens/sec does not transfer between GPUs; the VRAM-capacity ranking does.
+
+3. **Strict-JSON reliability separates qwen from the pack.** qwen emits clean JSON arrays;
+   gemma and phi wrap them in markdown fences and llama is messy — and strict JSON is central
+   to the Stage 2 instruction-pair stage.
+
+4. **The size spectrum brackets the decision** (see Appendix for the sub-1B sweep):
+
+   | Tier | VRAM problem? | Quality problem? |
+   | ---- | ------------- | ---------------- |
+   | sub-1B (qwen 0.5b / gemma 270m / llama 1b) | ✅ solved — fits any GPU, 2–3× faster | ❌ all fail strict-JSON; qwen-0.5b drifts to Chinese |
+   | **qwen2.5:3b (chosen)** | ✅ fits to 4 GB | ✅ clean strict-JSON |
+   | 4B+ (gemma 4b / phi 3.8b) | ❌ phi needs >8 GB | mixed |
+
+   Going smaller solves the hardware constraint but breaks the quality requirement; 3B is the
+   sweet spot that clears both bars.
+
+**Caveats (don't over-read the numbers):**
+- The simulated VRAM cap (`iogpu.wired_limit_mb`) bounds GPU *wired memory* but doesn't tell
+  Ollama's offload planner to use fewer layers, so under a constrained partial GPU/CPU split it
+  over-commits and emits empty output (gemma@4 GB; qwen/llama/phi@2 GB; llama-1b@2 GB). This
+  **overstates** non-qwen failures; a real GPU of that size would offload-and-run slowly. The
+  capacity *ranking* and qwen's clean fit are unaffected.
+- Apple-GPU *speed* does not transfer to a discrete GPU; only the VRAM *capacity* picture does.
+- **Still outstanding:** no run yet on the true deployment target (16 GB RAM + discrete NVIDIA
+  GPU on Windows). The sandbox's Docker CUDA mode is built to capture it on real hardware.
+
 ## Consolidated comparison — all models × all VRAM ceilings
 
 The single side-by-side view. Detail and methodology for each condition follow below.
@@ -143,3 +183,33 @@ returned no `eval_count`/`eval_duration` under extreme spill — a **harness mea
 gap**, not a model failure, so the 2 GB tok/s are not trustworthy. The reliable takeaway:
 **4 GB is the practical lower bound for GPU-resident operation, and only qwen clears it.**
 Below 4 GB everything is CPU-bound regardless of model.
+
+## Appendix — Small-tier sweep (sub-1B / smallest-of-family)
+
+Tested the smallest available model in each family under the same uncapped + 8/4/2 GB
+conditions. Only qwen2.5 ships a true 0.5B; gemma's smallest is 270m (0.27B), llama's
+is 1b, and phi3.5 has no variant below 3.8B (excluded). Labels: `metal-small-*`.
+
+**Tokens/sec by VRAM ceiling:**
+
+| Model | Uncapped | 8 GB | 4 GB | 2 GB |
+| --------------- | :------: | :--: | :--: | :--: |
+| qwen2.5:0.5b | 219 | 223 | 217 | 218 |
+| gemma3:270m | 234 | 235 | 230 | 236 |
+| llama3.2:1b | 174 | 172 | 167 | — (1/5 resp) |
+
+**Model VRAM (GB):** qwen2.5:0.5b 0.69 · gemma3:270m 0.38 · llama3.2:1b 1.93.
+
+**Findings:**
+- At sub-1B, **VRAM headroom is no longer the constraint** — qwen2.5:0.5b and gemma3:270m
+  run at full speed across *every* ceiling including 2 GB (they're <0.7 GB). Only
+  llama3.2:1b broke at 2 GB, and that's the same wired-limit partial-offload artifact
+  (1.93 GB model + ~1.5 GB display baseline > 2 GB), not a real "won't fit 2 GB".
+- **Speed is 2–3× the 3–4B tier** (174–235 vs 73–108 tok/s).
+- **Quality regresses to disqualifying:** all three fail strict-JSON (markdown fences),
+  and qwen2.5:0.5b answered the strict-JSON prompt **in Chinese** (language-consistency
+  failure). For a Stage-2 pipeline that depends on clean strict-JSON, sub-1B is too weak.
+
+**Conclusion:** going smaller solves the hardware constraint but breaks the quality
+requirement. qwen2.5:**3b** remains the sweet spot — fits a 4 GB GPU *and* emits clean
+strict-JSON. 0.5B/sub-1B is not viable for this use case.
