@@ -6,7 +6,7 @@ Reproducible: rerun after new benchmark runs to refresh the figures.
     pip install -r charts/requirements.txt
     python charts/make_charts.py            # writes charts/*.svg
 
-Outputs (referenced from results/metal-clean/REPORT.md):
+Outputs (referenced from results/REPORT.md):
     charts/degradation_3to4b.svg   - faithful num_gpu degradation, 3-4B models
     charts/degradation_small.svg   - faithful num_gpu degradation, sub-1B tier
     charts/strict_json_passes.svg  - strict-JSON pass count across conditions

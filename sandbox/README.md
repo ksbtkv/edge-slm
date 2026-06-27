@@ -138,7 +138,8 @@ sandbox/
 │   ├── requirements.txt      # matplotlib
 │   └── *.svg                 # generated figures (tracked)
 └── results/                  # benchmark outputs (tracked — Stage 0 findings)
-    └── metal-clean/REPORT.md # M3 Max writeup + VRAM sweep + charts
+    ├── REPORT.md             # study-wide writeup: VRAM sweep, quality, charts
+    └── <label>/results.json  # raw data per run (metal-clean, metal-budget*, ...)
 ```
 
 Regenerate the report figures after new runs: `python charts/make_charts.py`.
