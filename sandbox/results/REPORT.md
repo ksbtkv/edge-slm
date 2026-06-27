@@ -57,8 +57,9 @@ three independent Stage 0 evaluations that all converge on `qwen2.5:3b`.
 **Caveats — don't over-read the numbers:**
 - **Speed is M3-Max-specific** and does not transfer to a discrete GPU (different cores /
   bandwidth). Only the VRAM *capacity / headroom ranking* transfers.
-- **Absolute system RAM/swap was inflated** by other running apps; trust Model VRAM
-  (Ollama `size_vram`) and tok/s as the clean signals.
+- **Absolute system RAM/swap was inflated** by other running apps (~4.5 GB swap at
+  baseline during these runs); trust Model VRAM (Ollama `size_vram`) and tok/s as the
+  clean signals.
 - **Method:** the canonical numbers are the `num_gpu` sweep (§2). The `iogpu.wired_limit_mb`
   cap ([Appendix B](#appendix-b--superseded-wired-limit-cap-method)) over-reports failures —
   ignore its numbers for decisions.
@@ -245,3 +246,38 @@ Conclusions that were drawn from these numbers (e.g. "only qwen runs at 4 GB", "
 lower bound") are **withdrawn** and replaced by §2. (The cap knob remains genuinely useful for
 *capacity* checks — "does the model's footprint fit in N GB?" — just not for throughput or
 pass/fail of generation.)
+
+### Archived raw detail (artifact method — for completeness only)
+
+The remaining wired-limit measurements, retained so the record is complete. Labels:
+`metal-cap{8,4,2}` and `metal-small-cap{8,4,2}`. **Do not use for conclusions.**
+
+GPU memory the model kept resident under each wired cap (`size_vram`, GB) — note it shrinks as
+the cap tightens, which is the over-commit/spill that produced the empty output above:
+
+| Model | Uncapped | 8 GB | 4 GB | 2 GB |
+| ----------- | :------: | :--: | :--: | :--: |
+| qwen2.5:3b | 2.60 | 2.60 | 2.60 | 2.14 |
+| gemma3:4b | 3.54 | 3.54 | 3.49 | 0.12 |
+| llama3.2:3b | 3.92 | 3.92 | 3.39 | 2.33 |
+| phi3.5 | 8.53 | 7.22 | 2.90 | 1.30 |
+
+Per-cap notes from the original passes:
+- **8 GB:** qwen/gemma/llama unaffected; the +8% vs uncapped is run-to-run/environmental noise.
+  phi3.5 read 9.2 tok/s (the artifact).
+- **4 GB:** gemma3 spilled (~3.5 GB GPU + ~3 GB CPU) and returned generations *without* eval
+  stats, so its throughput logged as null. phi3.5's total footprint reached ~10.8 GB
+  (weights + KV cache spread across GPU and CPU) at the ~20 tok/s reading.
+- **2 GB:** after the ~1.5 GB the display compositor holds, almost no GPU budget remained;
+  gemma ran ~all-CPU (0.12 GB on GPU) and was the one clean reading at ~22.7 tok/s — i.e. the
+  CPU-only floor is ~20 tok/s. The other three returned no eval stats (the "empty" cells).
+
+Small-tier under the same wired-limit caps (`metal-small-cap{8,4,2}`), tok/s — superseded by the
+faithful curve in §4. Only `llama3.2:1b @ 2 GB` "failed" here, and that too was the partial-offload
+artifact (its 1.93 GB model + ~1.5 GB display baseline exceeded the 2 GB wired cap):
+
+| Model | Uncapped | 8 GB | 4 GB | 2 GB |
+| --------------- | :------: | :--: | :--: | :--: |
+| qwen2.5:0.5b | 219 | 223 | 217 | 218 |
+| gemma3:270m | 234 | 235 | 230 | 236 |
+| llama3.2:1b | 174 | 172 | 167 | — (1/5 resp) |
