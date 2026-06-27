@@ -133,9 +133,15 @@ sandbox/
 ├── vm/
 │   ├── parallels-setup.md    # create a 16 GB-capped Linux / Windows-ARM VM
 │   └── provision.sh          # run inside a Linux guest to install runtime + harness
+├── charts/
+│   ├── make_charts.py        # regenerate report SVGs from results JSON
+│   ├── requirements.txt      # matplotlib
+│   └── *.svg                 # generated figures (tracked)
 └── results/                  # benchmark outputs (tracked — Stage 0 findings)
-    └── metal-clean/REPORT.md # M3 Max writeup + VRAM-cap sweep
+    └── metal-clean/REPORT.md # M3 Max writeup + VRAM sweep + charts
 ```
+
+Regenerate the report figures after new runs: `python charts/make_charts.py`.
 
 ## Quick start
 

@@ -214,6 +214,8 @@ All runs produced 5/5 non-empty responses.
 | llama3.2:3b | 93.8 (28/28)   | 93.1 (28/28)   | 37.2 (14/28)   |
 | phi3.5      | 91.8 (30/32)   | 49.6 (15/32)   | 33.5 (8/32)    |
 
+![Faithful VRAM-budget degradation for the 3-4B models: phi3.5 and llama3.2 start fastest but fall steeply as the budget tightens, while qwen2.5:3b declines least and is highest at the 2 GB budget.](../../charts/degradation_3to4b.svg)
+
 **This corrects three artifacts of the wired-limit method:**
 - **phi3.5 @ 8 GB does NOT collapse.** Faithful: ~92 tok/s (only 2 of 32 layers offloaded).
   The wired-limit "9.2 tok/s collapse" was a method artifact, not real behaviour.
@@ -273,6 +275,8 @@ read as structured-output fragility/run variation, not proof that 4 GB VRAM dire
 semantics. The practical conclusion is still clear: qwen is the only strong candidate that
 passes strict JSON at all, but Stage 2 must include JSON validation plus retry/repair.
 
+![Strict-JSON pass rate across the four VRAM conditions: qwen2.5:3b passes 2 of 4, while gemma3:4b, llama3.2:3b and phi3.5 each pass 0 of 4.](../../charts/strict_json_passes.svg)
+
 ### B. Decreasing parameter size: structured output gets worse despite easy fit
 
 The small-tier models fit easily in memory and remain fast, but the full-response audit shows
@@ -324,6 +328,8 @@ models stay fully GPU-resident through 2 GB, so the sweep was extended to **1 GB
 | qwen2.5:0.5b | 195 (24/24) | 192 (24/24) | 195 (24/24) | 185 (24/24) | 181 (17/24) |
 | gemma3:270m | 208 (18/18) | 197 (18/18) | 207 (18/18) | 197 (18/18) | 193 (18/18) |
 | llama3.2:1b | 135 (16/16) | 140 (16/16) | 140 (16/16) | **71 (8/16)** | **53 (4/16)** |
+
+![Faithful VRAM-budget degradation for the sub-1B tier from 8 GB down to 0.5 GB: gemma3:270m stays flat (never offloads), qwen2.5:0.5b barely dips at 0.5 GB, and llama3.2:1b halves at 1 GB and drops further at 0.5 GB while still producing output.](../../charts/degradation_small.svg)
 
 All runs produced 5/5 non-empty responses at every budget — including 0.5 GB — confirming
 the faithful method shows **no failures anywhere** (the wired-limit `llama3.2:1b @ 2 GB`
