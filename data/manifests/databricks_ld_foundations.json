@@ -1,0 +1,286 @@
+{
+  "manifest_version": "1.0",
+  "pack_id": "databricks_ld_foundations",
+  "title": "Databricks Data Engineering Foundations",
+  "description": "Curated sources for creating summarization training/evaluation data for an offline edge SLM focused on Databricks Data Engineering Foundations.",
+  "domain": "Databricks Data Engineering Foundations",
+  "topic_buckets": [
+    {
+      "id": "databricks_basics",
+      "label": "Databricks basics",
+      "description": "workspace, notebooks, compute, clusters/serverless, jobs, workflows"
+    },
+    {
+      "id": "lakehouse_delta",
+      "label": "Lakehouse and Delta Lake",
+      "description": "managed/external tables, Delta table operations, ACID/transaction log basics, time travel, optimisation concepts"
+    },
+    {
+      "id": "spark_sql_pyspark",
+      "label": "Spark SQL and PySpark",
+      "description": "DataFrames, reading/writing files, transformations, tables/views, common SQL commands"
+    },
+    {
+      "id": "ingestion_incremental",
+      "label": "Data ingestion and incremental processing",
+      "description": "Structured Streaming, Auto Loader, checkpoints, triggers, streaming reads/writes"
+    },
+    {
+      "id": "production_pipelines",
+      "label": "Production pipelines",
+      "description": "Lakeflow / Delta Live Tables concepts, jobs monitoring, scheduling, orchestration"
+    },
+    {
+      "id": "governance_security",
+      "label": "Governance and security",
+      "description": "Unity Catalog, catalogs/schemas/tables/volumes, access control, permissions, lineage concepts"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "video_cert_course",
+      "title": "Databricks Data Engineer Associate Certification Course – Pass the Exam!",
+      "resource_type": "video_transcript",
+      "original_url": "https://www.youtube.com/watch?v=0Hd5vYqin7w",
+      "local_path": "data/raw/databricks/videos/cert_course_transcript.txt",
+      "topic_bucket_ids": [
+        "databricks_basics",
+        "lakehouse_delta",
+        "spark_sql_pyspark",
+        "ingestion_incremental",
+        "production_pipelines",
+        "governance_security"
+      ],
+      "description": "Best anchor video: long-form certification course covering Databricks platform, clusters, Delta Lake, Spark APIs, tables/views, structured streaming, Auto Loader, DLT/Lakeflow-style pipelines, jobs, Unity Catalog, and access control.",
+      "priority": 1,
+      "split": "train",
+      "notes": "Primary anchor source for the first dataset slice.",
+      "enabled": true
+    },
+    {
+      "source_id": "video_cert_roadmap",
+      "title": "Everything you need to Pass the Databricks Data Engineer Certifications (Associate & Professional)",
+      "resource_type": "video_transcript",
+      "original_url": "https://www.youtube.com/watch?v=4mG__Lh2aCM",
+      "local_path": "data/raw/databricks/videos/cert_roadmap_transcript.txt",
+      "topic_bucket_ids": [
+        "databricks_basics",
+        "production_pipelines"
+      ],
+      "description": "Short roadmap-style overview for certification prep and curriculum framing.",
+      "priority": 10,
+      "split": "eval",
+      "enabled": true
+    },
+    {
+      "source_id": "video_associate_playlist",
+      "title": "Databricks Certified Data Engineer Associate playlist",
+      "resource_type": "playlist",
+      "original_url": "https://www.youtube.com/playlist?list=PLh8AUGVsYsxxOiOzS2HnVS5Ja8JEpUQAv",
+      "local_path": "data/raw/databricks/videos/associate_playlist_index.md",
+      "topic_bucket_ids": [
+        "databricks_basics",
+        "lakehouse_delta",
+        "spark_sql_pyspark",
+        "ingestion_incremental",
+        "production_pipelines",
+        "governance_security"
+      ],
+      "description": "Playlist split by exam areas: Lakehouse Platform, Spark SQL/Python ELT, Incremental Data Processing, Production Pipelines, and Data Governance.",
+      "priority": 15,
+      "split": "unassigned",
+      "enabled": true
+    },
+    {
+      "source_id": "video_beginner_lakeflow",
+      "title": "Databricks Full Course for Beginners – Declarative Pipelines & Lakeflow Designer",
+      "resource_type": "video_transcript",
+      "original_url": "https://www.youtube.com/watch?v=nrfP2_frM5k",
+      "local_path": "data/raw/databricks/videos/beginner_lakeflow_transcript.txt",
+      "topic_bucket_ids": [
+        "production_pipelines",
+        "lakehouse_delta"
+      ],
+      "description": "Practical beginner course focused on building pipelines and medallion architecture using Databricks/Lakeflow concepts.",
+      "priority": 20,
+      "split": "train",
+      "enabled": true
+    },
+    {
+      "source_id": "video_delta_unity_tutorial",
+      "title": "Databricks Tutorial: Read & Write Delta Tables with Unity Catalog | Free Edition",
+      "resource_type": "video_transcript",
+      "original_url": "https://www.youtube.com/watch?v=0WmxVhl7q2Y",
+      "local_path": "data/raw/databricks/videos/delta_unity_tutorial_transcript.txt",
+      "topic_bucket_ids": [
+        "lakehouse_delta",
+        "governance_security",
+        "spark_sql_pyspark"
+      ],
+      "description": "Short hands-on tutorial for Delta tables, Unity Catalog, reading/writing data, basic data quality, and querying tables.",
+      "priority": 5,
+      "split": "train",
+      "enabled": true
+    },
+    {
+      "source_id": "video_spark_de_playlist",
+      "title": "Databricks Spark Data Engineering playlist",
+      "resource_type": "playlist",
+      "original_url": "https://www.youtube.com/playlist?list=PLWq-m1Tje0cu-Z8S4oGUpc5N1VBC3lmOi",
+      "local_path": "data/raw/databricks/videos/spark_de_playlist_index.md",
+      "topic_bucket_ids": [
+        "lakehouse_delta",
+        "spark_sql_pyspark",
+        "ingestion_incremental",
+        "production_pipelines",
+        "governance_security"
+      ],
+      "description": "Videos on Delta Lake internals, Unity Catalog, permissions, lineage, Delta Live Tables, and related Spark/Databricks topics.",
+      "priority": 25,
+      "split": "unassigned",
+      "enabled": true
+    },
+    {
+      "source_id": "doc_azure_databricks",
+      "title": "Azure Databricks documentation",
+      "resource_type": "documentation",
+      "original_url": "https://learn.microsoft.com/en-us/azure/databricks/",
+      "local_path": "data/raw/databricks/docs/azure_databricks_overview.md",
+      "topic_bucket_ids": [
+        "databricks_basics",
+        "governance_security"
+      ],
+      "description": "Official Azure Databricks documentation for workspace, data engineering, governance, security, compute, notebooks, tables, and Spark integrations.",
+      "priority": 30,
+      "split": "train",
+      "enabled": true
+    },
+    {
+      "source_id": "doc_aws_databricks",
+      "title": "Databricks documentation | Databricks on AWS",
+      "resource_type": "documentation",
+      "original_url": "https://docs.databricks.com/aws/en/",
+      "local_path": "data/raw/databricks/docs/aws_databricks_overview.md",
+      "topic_bucket_ids": [
+        "databricks_basics",
+        "lakehouse_delta"
+      ],
+      "description": "Official Databricks docs organised by cloud provider, with tutorials and reference documentation for data teams.",
+      "priority": 31,
+      "split": "train",
+      "enabled": true
+    },
+    {
+      "source_id": "doc_free_training",
+      "title": "Get free Databricks training",
+      "resource_type": "training_portal",
+      "original_url": "https://learn.microsoft.com/en-us/azure/databricks/getting-started/free-training",
+      "local_path": "data/raw/databricks/docs/free_training_overview.md",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "description": "Microsoft page explaining free Databricks training options, tutorials, and resources for getting up to speed.",
+      "priority": 40,
+      "split": "unassigned",
+      "enabled": true
+    },
+    {
+      "source_id": "doc_training_cert_portal",
+      "title": "Databricks Training & Certification Programs",
+      "resource_type": "training_portal",
+      "original_url": "https://www.databricks.com/learn/training/home",
+      "local_path": "data/raw/databricks/docs/training_cert_portal.md",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "description": "Official Databricks training portal with free on-demand foundational courses and role-based training pathways.",
+      "priority": 41,
+      "split": "unassigned",
+      "enabled": true
+    },
+    {
+      "source_id": "doc_cert_associate_page",
+      "title": "Databricks Certified Data Engineer Associate certification page",
+      "resource_type": "certification_page",
+      "original_url": "https://www.databricks.com/learn/certification/data-engineer-associate",
+      "local_path": "data/raw/databricks/docs/cert_associate_page.md",
+      "topic_bucket_ids": [
+        "databricks_basics",
+        "lakehouse_delta",
+        "spark_sql_pyspark",
+        "ingestion_incremental",
+        "production_pipelines",
+        "governance_security"
+      ],
+      "description": "Official certification page describing what the exam assesses, including platform, ETL, PySpark, Lakeflow Jobs, CI/CD, troubleshooting, monitoring, optimisation, governance, and security.",
+      "priority": 8,
+      "split": "eval",
+      "enabled": true
+    },
+    {
+      "source_id": "doc_delta_tables_tutorial",
+      "title": "Tutorial: Create and manage Delta Lake tables",
+      "resource_type": "tutorial",
+      "original_url": "https://docs.databricks.com/aws/en/delta/tutorial",
+      "local_path": "data/raw/databricks/docs/delta_tables_tutorial.md",
+      "topic_bucket_ids": [
+        "lakehouse_delta",
+        "spark_sql_pyspark",
+        "governance_security"
+      ],
+      "description": "Official hands-on tutorial for Delta Lake table operations, Unity Catalog volume usage, table creation, read/write operations, and sample data.",
+      "priority": 6,
+      "split": "eval",
+      "enabled": true
+    },
+    {
+      "source_id": "doc_delta_streaming",
+      "title": "Delta Lake table streaming reads and writes",
+      "resource_type": "documentation",
+      "original_url": "https://learn.microsoft.com/en-us/azure/databricks/structured-streaming/delta-lake",
+      "local_path": "data/raw/databricks/docs/delta_streaming.md",
+      "topic_bucket_ids": [
+        "ingestion_incremental",
+        "lakehouse_delta"
+      ],
+      "description": "Official documentation for using Delta tables as sources and sinks for Structured Streaming, including options and common patterns.",
+      "priority": 7,
+      "split": "train",
+      "enabled": true
+    },
+    {
+      "source_id": "article_freecodecamp",
+      "title": "Prepare for the Databricks Data Engineer Associate Certification Exam – And Pass!",
+      "resource_type": "article",
+      "original_url": "https://www.freecodecamp.org/news/prepare-for-the-databricks-data-engineer-associate-certification-exam-and-pass/",
+      "local_path": "data/raw/databricks/articles/freecodecamp_cert_prep.md",
+      "topic_bucket_ids": [
+        "databricks_basics",
+        "lakehouse_delta",
+        "spark_sql_pyspark",
+        "ingestion_incremental",
+        "production_pipelines",
+        "governance_security"
+      ],
+      "description": "Article describing the freeCodeCamp course and the major topics it covers.",
+      "priority": 50,
+      "split": "eval",
+      "enabled": true
+    },
+    {
+      "source_id": "outline_class_central",
+      "title": "Class Central listing: Databricks Data Engineer Associate Certification Course",
+      "resource_type": "course_outline",
+      "original_url": "https://www.classcentral.com/course/freecodecamp-databricks-data-engineer-associate-certification-course-pass-the-exam-484310",
+      "local_path": "data/raw/databricks/articles/class_central_outline.md",
+      "topic_bucket_ids": [
+        "databricks_basics",
+        "production_pipelines"
+      ],
+      "description": "Provides an outline and syllabus timestamps for the freeCodeCamp video.",
+      "priority": 55,
+      "split": "unassigned",
+      "enabled": true
+    }
+  ]
+}

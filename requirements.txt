@@ -1,0 +1,5 @@
+# Core ingestion runtime.
+#
+# The section schema, serializer, dispatch layer, text ingestor, and Markdown
+# ingestor use only the Python standard library. Install optional requirement
+# files below for PDF, PPTX, and media ingestion.

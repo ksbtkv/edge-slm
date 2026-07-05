@@ -1,0 +1,7 @@
+-r requirements.txt
+
+faster-whisper
+yt-dlp
+
+# Local video and YouTube ASR fallback also require the system ffmpeg binary.
+# On macOS: brew install ffmpeg

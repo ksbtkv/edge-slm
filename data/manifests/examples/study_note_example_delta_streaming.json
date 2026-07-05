@@ -1,0 +1,145 @@
+{
+  "title": "Delta Lake Streaming Reads and Writes in Databricks",
+  "summary": "Delta Lake tables can be used as both sources and sinks for Spark Structured Streaming in Databricks. Delta Lake helps streaming workloads by improving reliability, supporting exactly-once processing, and making it easier to process new files incrementally. For simple streaming writes, use append mode with a checkpoint location and write to a table using toTable. For more complex scenarios like updates, deletes, upserts, or multiple sinks, understand options such as skipChangeCommits, change data feed, foreachBatch, txnAppId, and txnVersion.",
+  "key_concepts": [
+    {
+      "concept": "Delta Lake as a streaming sink",
+      "simple_explanation": "A Delta Lake table can receive data from a Structured Streaming query. The stream continuously writes new records into the Delta table.",
+      "why_it_matters": "This is useful when building data pipelines where new data keeps arriving and needs to be stored reliably in Databricks."
+    },
+    {
+      "concept": "Delta Lake as a streaming source",
+      "simple_explanation": "A Structured Streaming query can read new records from a Delta Lake table as new table versions are committed.",
+      "why_it_matters": "This lets one Delta table feed downstream streaming pipelines or summary tables."
+    },
+    {
+      "concept": "Checkpoint location",
+      "simple_explanation": "A checkpoint stores the streaming query's progress so the stream knows what it has already processed.",
+      "why_it_matters": "Without a checkpoint, a streaming job cannot reliably resume after a failure or restart."
+    },
+    {
+      "concept": "Handling upstream changes",
+      "simple_explanation": "Streaming from a Delta table expects append-only input by default. If the source table is updated, deleted, merged, or overwritten, the stream can fail unless a strategy is chosen.",
+      "why_it_matters": "Real projects often have source tables that change, so the pipeline must choose how to handle updates and deletes."
+    }
+  ],
+  "important_features_or_tools": [
+    {
+      "name": "readStream",
+      "type": "API",
+      "what_it_does": "Creates a streaming read from a source such as a Delta Lake table.",
+      "when_to_use_it": "Use it when you want a Databricks pipeline to continuously process new data from a Delta table.",
+      "important_parameters": []
+    },
+    {
+      "name": "writeStream",
+      "type": "API",
+      "what_it_does": "Creates a streaming write to a sink such as a Delta Lake table.",
+      "when_to_use_it": "Use it when you want a streaming DataFrame to continuously write output data.",
+      "important_parameters": []
+    },
+    {
+      "name": "checkpointLocation",
+      "type": "option",
+      "what_it_does": "Stores streaming progress and metadata for recovery.",
+      "when_to_use_it": "Use it on streaming writes so a query can restart safely after failure.",
+      "important_parameters": [
+        {
+          "parameter": "checkpointLocation",
+          "meaning": "Path where checkpoint data is stored.",
+          "example_value": "/tmp/delta/events/_checkpoints/"
+        }
+      ]
+    },
+    {
+      "name": "skipChangeCommits",
+      "type": "option",
+      "what_it_does": "Ignores transactions that modify or delete existing records and processes only appends.",
+      "when_to_use_it": "Use it when upstream changes do not need to be propagated through the stream or are handled separately.",
+      "important_parameters": [
+        {
+          "parameter": "skipChangeCommits",
+          "meaning": "When true, file-changing operations such as UPDATE, MERGE INTO, DELETE, and OVERWRITE are ignored by the stream.",
+          "example_value": "true"
+        }
+      ]
+    },
+    {
+      "name": "foreachBatch",
+      "type": "function",
+      "what_it_does": "Runs custom logic for each micro-batch in a streaming query.",
+      "when_to_use_it": "Use it for idempotent writes, writing to multiple tables, MERGE operations, upserts, and custom sink logic.",
+      "important_parameters": [
+        {
+          "parameter": "batch_df",
+          "meaning": "The DataFrame containing the current micro-batch output.",
+          "example_value": null
+        },
+        {
+          "parameter": "batch_id",
+          "meaning": "The unique ID of the current micro-batch.",
+          "example_value": null
+        }
+      ]
+    },
+    {
+      "name": "txnAppId and txnVersion",
+      "type": "option",
+      "what_it_does": "Together they allow Delta Lake to identify and ignore duplicate writes.",
+      "when_to_use_it": "Use them for idempotent writes inside foreachBatch, especially when writing to multiple Delta tables.",
+      "important_parameters": [
+        {
+          "parameter": "txnAppId",
+          "meaning": "A unique string identifying the application or streaming write.",
+          "example_value": "app_id"
+        },
+        {
+          "parameter": "txnVersion",
+          "meaning": "A monotonically increasing number, often the batch ID.",
+          "example_value": "batch_id"
+        }
+      ]
+    }
+  ],
+  "practical_workflow": [
+    {
+      "step": 1,
+      "action": "Use readStream to read from a Delta Lake table when you want to process new records incrementally.",
+      "reason": "Structured Streaming can process new Delta table versions as they are committed."
+    },
+    {
+      "step": 2,
+      "action": "Use writeStream with outputMode and checkpointLocation when writing streaming results to a Delta table.",
+      "reason": "The output mode controls how records are written, and the checkpoint lets the stream recover safely."
+    },
+    {
+      "step": 3,
+      "action": "Use append mode for simple streams that only add new records.",
+      "reason": "Append mode is the default and simplest pattern for ingesting new data."
+    },
+    {
+      "step": 4,
+      "action": "Use foreachBatch when you need custom write logic such as MERGE, upserts, deduplication, or writes to multiple sinks.",
+      "reason": "foreachBatch gives control over each micro-batch, but the logic must be idempotent."
+    }
+  ],
+  "common_mistakes_or_confusions": [
+    {
+      "mistake": "Thinking a Delta streaming source automatically handles updates and deletes like a normal table query.",
+      "correction": "Structured Streaming expects append inputs by default. Updates, deletes, merges, or overwrites require a strategy such as skipChangeCommits, change data feed, full refresh, or materialized views."
+    },
+    {
+      "mistake": "Using skipChangeCommits and expecting updates or deletes to appear downstream.",
+      "correction": "skipChangeCommits ignores file-changing operations and only processes appends. It does not propagate source changes."
+    },
+    {
+      "mistake": "Using foreachBatch without making the logic idempotent.",
+      "correction": "If the stream restarts, the same batch can be processed again. The foreachBatch logic must avoid duplicate writes."
+    }
+  ],
+  "project_usage_notes": [
+    "For a simple Databricks project that ingests new events into a Delta table, start with writeStream in append mode, set checkpointLocation, and write using toTable.",
+    "For a downstream streaming job reading from a Delta table, check whether the source table is append-only. If it is not append-only, choose a change-handling strategy before building the pipeline.",
+    "For upserts from streaming data, use foreachBatch with MERGE INTO and make sure the merge logic is idempotent."
+  ]
+}
