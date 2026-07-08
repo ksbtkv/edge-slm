@@ -1,0 +1,17 @@
+# Stage 3 fine-tuning deps — install on Ohm via `ohm submit --install requirements.txt`.
+#
+# The Ohm `pytorch-llm` image already provides torch 2.5.1 (CUDA 12.4) plus
+# transformers/datasets/accelerate/huggingface_hub. These add/pin the LoRA+QLoRA
+# stack. Versions chosen for torch 2.5.1 / CUDA 12.4 compatibility.
+#
+# NOTE: do NOT add torch here — reinstalling it risks a CUDA mismatch with the
+# image. If ohm's --install venv turns out to be fully isolated (no system
+# site-packages) so torch is missing, install it separately from the cu124 index:
+#     pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu124
+
+peft==0.13.2
+bitsandbytes==0.44.1
+transformers==4.46.3
+accelerate==1.1.1
+datasets==3.1.0
+pyyaml==6.0.2

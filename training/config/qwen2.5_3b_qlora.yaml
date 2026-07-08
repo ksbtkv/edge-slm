@@ -1,0 +1,43 @@
+# Stage 3 QLoRA fine-tuning config — Qwen2.5-3B-Instruct on 1x A100 (Ohm).
+# Every value here is overridable on the CLI (see `python train.py --help`);
+# nothing about a run requires editing train.py.
+
+# --- model + data ---
+base_model: Qwen/Qwen2.5-3B-Instruct
+dataset: data/sample_alpaca.jsonl        # swap for the real study-note pairs
+dataset_format: alpaca                    # alpaca | chat
+output_dir: outputs/qwen2.5-3b-lora
+
+# Redirect the HuggingFace cache off the 50 GiB home quota if it fills up.
+# hf_home: /home/jovyan/scratch/hf_cache
+
+# --- LoRA ---
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+# --- quantization ---
+load_in_4bit: true                        # QLoRA; fits easily on 1x A100
+
+# --- optimisation ---
+learning_rate: 0.0002
+epochs: 3
+max_steps: -1                             # >0 overrides epochs (debug/smoke)
+per_device_batch_size: 2
+grad_accum: 8                             # effective batch = 2 * 8 = 16
+max_seq_len: 2048
+warmup_ratio: 0.03
+weight_decay: 0.0
+lr_scheduler: cosine
+seed: 42
+
+# --- checkpointing / logging ---
+logging_steps: 10
+save_steps: 200
+save_total_limit: 3
+resume: false
+
+# --- output ---
+merge_adapter: false                      # set true to also emit merged fp16 (Stage 4 GGUF)
+report_to: none

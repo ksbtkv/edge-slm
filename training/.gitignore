@@ -1,0 +1,7 @@
+# Training artifacts — never commit (large; regenerable)
+outputs/
+*.safetensors
+*.bin
+*.gguf
+__pycache__/
+*.pyc
