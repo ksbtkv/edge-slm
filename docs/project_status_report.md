@@ -305,23 +305,27 @@ Behaviour:
 
 ## 9. Databricks source pack — current state
 
-A starter manifest is committed with **15 curated sources** from the client's dataset source pack document (`databricks_ld_dataset_source_pack.docx`):
+The pack started from **15 curated sources** in the client's dataset source pack document (`databricks_ld_dataset_source_pack.docx`) and has been expanded with official docs discovery and playlist video expansion:
 
-- 6 video / playlist entries
-- 9 documentation, tutorial, article, and certification pages
-- 6 topic buckets (basics, Delta Lake, Spark, ingestion, pipelines, governance)
+- Original curated mix: videos/playlists + documentation, tutorial, article, and certification pages
+- **6 topic buckets** (basics, Delta Lake, Spark, ingestion, pipelines, governance)
+- Auto-discovered `docs.databricks.com` pages (via `llms.txt` + capped sitemap seeding)
+- Playlist parents expanded into per-video `video_transcript` children (`--expand-playlists`)
 
-Every `original_url` in the manifest has been verified against the actual hyperlink targets embedded in the source pack document, so the provenance URLs are the exact resources the client curated.
+Every original curated `original_url` was verified against the source pack document. Discovered docs use cloud-agnostic `docs.databricks.com` URLs.
 
 The client's worked example (Delta Lake streaming study notes, section 7 of the source pack document) is captured as a gold reference fixture at `data/manifests/examples/study_note_example_delta_streaming.json`. A test asserts it conforms to the study-note output schema for use by the HPC enrichment pipeline.
 
-Content acquisition is now scripted and executed:
+Content acquisition scripts:
 
-- `scripts/fetch_transcripts.py` — yt-dlp audio download + faster-whisper transcription for video sources; playlist sources get index `.md` files
+- `scripts/discover_databricks_docs.py` — seed/merge official doc URLs from `llms.txt` (+ optional sitemap)
 - `scripts/fetch_docs.py` — trafilatura Markdown export for documentation/article sources
-- All manifest sources are `"enabled": true`; `doc_delta_tables_tutorial` was reassigned to the `eval` split so evaluation includes real technical content
+- `scripts/fetch_transcripts.py` — yt-dlp + faster-whisper; `--expand-playlists` creates per-video transcript sources
+- `scripts/audit_chunk_quality.py` — flag undersized study-note tasks after a pack build
 
-Current pack build (local, gitignored): **14 of 15 sources ingested**, 309 sections, ~28,800 words, **65 study-note tasks** (47 train / 12 eval / 6 unassigned). The anchor certification video (`video_cert_course`) is the one outstanding source — run `scripts/fetch_transcripts.py --only video_cert_course`, then rebuild the pack.
+Current pack build (local, gitignored): **792 study-note tasks** from **~361,218 source words** across **303 enabled/ingested sources** (manifest has 428 sources; missing/deferred videos, thin pages, and Lakeflow Connect vendor deep-dives are disabled) — well above the 500-chunk target. Chunk-quality audit flags **0** tasks below 120 words. Optional remaining coverage (deferred, not blocking): `video_cert_course` transcription (~7.5h) and remaining Spark DE playlist video transcripts.
+
+Handoff snapshot: `data/processed/handoffs/databricks_ld_foundations_20260709/` (gitignored).
 
 **Out of scope for this repo:** LLM enrichment, instruction-pair export, LoRA training (HPC pipeline).
 
@@ -398,14 +402,14 @@ build_source_pack(
 
 ## 13. Next steps
 
-**This repo:**
+**This repo (optional, not blocking):**
 
-1. **Curate Databricks sources** — add local transcripts/docs, enable manifest entries, rebuild pack
-2. **Fetch anchor certification video** — `fetch_transcripts.py --only video_cert_course`
+1. Deferred long transcripts — `video_cert_course` (~7.5h whisper) and remaining Spark DE playlist videos via `fetch_transcripts.py`, then rebuild
+2. Further docs discovery / curation if more coverage is desired
 
 **HPC pipeline (separate):**
 
-1. LLM enrichment of `study_note_tasks.jsonl`
+1. LLM enrichment of **792** tasks in `study_note_tasks.jsonl`
 2. Instruction-pair export for LoRA fine-tuning
 3. LoRA proof-of-concept on Pawsey
 
@@ -416,10 +420,10 @@ build_source_pack(
 
 | Question                        | Answer                                                                                         |
 | ------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Where are we?                   | Ingestion, source-pack curation, and chunking are implemented and tested                       |
+| Where are we?                   | Ingestion, source-pack curation, and chunking are implemented; **792** tasks ready for HPC     |
 | What can the pipeline do today? | Turn local PDFs/docs/slides/audio/video into chunk-level study-note tasks with full provenance |
 | What is the main output?        | `study_note_tasks.jsonl` — final deliverable; handoff to HPC pipeline                          |
-| What is blocked on content?     | One manifest source (`video_cert_course`) awaiting transcript acquisition                      |
-| What comes next?                | HPC pipeline: LLM enrichment, training pairs, LoRA on Pawsey                                   |
+| What is blocked on content?     | Nothing blocking — 500+ chunk target met; long cert/Spark DE transcripts deferred as optional  |
+| What comes next?                | HPC pipeline: LLM enrichment of 792 tasks, training pairs, LoRA on Pawsey                      |
 
 

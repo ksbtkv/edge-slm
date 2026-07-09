@@ -257,20 +257,52 @@ build_source_pack(
 ### Acquiring the source content
 
 One-time acquisition scripts populate `data/raw/databricks/` from the manifest's
-`original_url`s (`pip install -r requirements-acquisition.txt` first):
+`original_url`s (`pip install -r requirements-acquisition.txt` first).
+
+**Recommended expansion workflow** (official docs + video gaps → 500+ chunks):
+
+```bash
+# 1. Discover in-scope docs.databricks.com pages (llms.txt + optional sitemap)
+#    Review data/manifests/generated/databricks_docs_candidates.json, then apply.
+python scripts/discover_databricks_docs.py --no-sitemap          # candidates only
+python scripts/discover_databricks_docs.py --apply --limit 250   # merge into manifest
+
+# 2. Export documentation/article pages -> Markdown via trafilatura
+python scripts/fetch_docs.py
+
+# 3. Expand playlist sources into per-video transcript entries (updates manifest,
+#    disables thin parent indexes). Then download + transcribe videos.
+PYTHONPATH=pipeline python scripts/fetch_transcripts.py --expand-playlists --expand-only
+PYTHONPATH=pipeline python scripts/fetch_transcripts.py
+
+# 4. Rebuild pack and audit undersized chunks
+PYTHONPATH=pipeline python -c "
+from ingestion.source_pack import build_source_pack
+build_source_pack(
+    'data/manifests/databricks_ld_foundations.json',
+    'data/processed/source_packs/databricks_ld_foundations',
+    skip_missing_files=True,
+)
+"
+PYTHONPATH=pipeline python scripts/audit_chunk_quality.py \
+    data/processed/source_packs/databricks_ld_foundations
+```
+
+Shorter one-shot acquisition (existing manifest URLs only):
 
 ```bash
 # Video transcripts: yt-dlp audio download + faster-whisper transcription.
-# Playlist sources get an index .md instead of full transcription.
+# Without --expand-playlists, playlist sources get an index .md only.
 PYTHONPATH=pipeline python scripts/fetch_transcripts.py
 
 # Documentation/article pages -> Markdown via trafilatura
 python scripts/fetch_docs.py
 ```
 
-Both scripts skip sources whose `local_path` already exists (`--force` to
-re-fetch, `--only SOURCE_ID` to restrict). The anchor certification video is
-~7.5 hours, so its download + transcription takes a while.
+Scripts skip sources whose `local_path` already exists (`--force` to re-fetch,
+`--only SOURCE_ID` to restrict, `--skip-download` to transcribe existing audio).
+The anchor certification video is ~7.5 hours, so its download + transcription
+takes a while.
 
 ## Folder batch (no manifest)
 
@@ -335,6 +367,24 @@ shows the expected output quality and schema.
 
 Downstream (separate HPC pipeline): LLM enrichment → validated study-note JSON
 → instruction pairs → LoRA fine-tuning on Pawsey.
+
+### Packaging a dated handoff snapshot
+
+After a successful pack build, copy the deliverables into a dated folder under
+`data/processed/handoffs/` (gitignored with the rest of `data/processed/`):
+
+```bash
+DATE=$(date +%Y%m%d)
+HANDOFF=data/processed/handoffs/databricks_ld_foundations_$DATE
+mkdir -p "$HANDOFF"
+cp data/processed/source_packs/databricks_ld_foundations/study_note_tasks.jsonl "$HANDOFF/"
+cp data/processed/source_packs/databricks_ld_foundations/source_pack.json "$HANDOFF/"
+cp data/processed/source_packs/databricks_ld_foundations/manifest.normalized.json "$HANDOFF/"
+# Add HANDOFF.md with task counts, splits, and the gold-example path, then
+# copy the folder to the Pawsey HPC workspace.
+```
+
+Current local snapshot (example): `data/processed/handoffs/databricks_ld_foundations_20260709/`.
 
 ## Test
 

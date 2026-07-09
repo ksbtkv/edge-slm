@@ -69,7 +69,7 @@ source file → Document (sections) → TextChunk → study_note_tasks.jsonl
 |---|---|---|
 | **0 — Acquisition** | Done | Download video audio + transcribe; export doc pages to Markdown |
 | **1 — Ingestion** | Done | PDF, PPTX, Markdown, text, audio/video → shared schema |
-| **1.5 — Source pack** | Done | Manifest → documents + **65 tasks** (`study_note_tasks.jsonl`) |
+| **1.5 — Source pack** | Done | Manifest → documents + **792 tasks** (`study_note_tasks.jsonl`) |
 
 | Downstream (HPC pipeline) | Owner |
 |---|---|
@@ -84,24 +84,24 @@ Built from [`data/manifests/databricks_ld_foundations.json`](../data/manifests/d
 
 | Metric | Value |
 |---|---|
-| Curated sources (manifest) | 15 |
-| Successfully ingested | 14 |
-| Total sections | 309 |
-| Total source words | ~28,800 |
-| Study-note tasks (chunks) | **65** |
-| Train / eval / unassigned | 47 / 12 / 6 |
+| Manifest sources | 428 total (**303** enabled after quality pass) |
+| Successfully ingested | 303 |
+| Disabled (deferred / thin / vendor deep-dives) | 125 |
+| Total sections | 3,382 |
+| Total source words | ~361,218 |
+| Study-note tasks (chunks) | **792** |
+| Train / eval / holdout | 678 / 86 / 28 |
 
 **Resource mix (tasks by type):**
 
 | Type | Tasks |
 |---|---|
-| Video transcript | 38 |
-| Documentation | 13 |
-| Tutorial | 6 |
-| Playlist | 3 |
-| Training portal | 2 |
-| Article | 1 |
+| Documentation | 696 |
+| Video transcript | 87 |
+| Tutorial | 5 |
+| Training portal | 1 |
 | Certification page | 1 |
+| Article | 1 |
 | Course outline | 1 |
 
 **Output folder:**  
@@ -222,10 +222,10 @@ Sources are tagged against six thematic buckets for filtering and reporting:
 
 | Step | Owner |
 |---|---|
-| HPC: LLM enrichment of 65 tasks | HPC pipeline |
+| HPC: LLM enrichment of **792** tasks | HPC pipeline |
 | HPC: export training pairs + LoRA on Pawsey | HPC pipeline |
-| Expand manifest with additional sources | Re-run `build_source_pack()` in this repo |
-| Fetch anchor certification video transcript | `fetch_transcripts.py --only video_cert_course` |
+| Optional: deferred long transcripts (`video_cert_course` ~7.5h, Spark DE playlist) — not blocking | `fetch_transcripts.py` (local, when convenient) |
+| Optional: re-discover / widen official docs if needed | `discover_databricks_docs.py` + rebuild |
 
 **Rebuild the source pack** (after adding sources or changing chunk settings):
 
@@ -244,7 +244,7 @@ build_source_pack(
 
 ## 13. Summary
 
-We have a **working, reproducible pipeline** from curated Databricks sources to **65 handoff-ready tasks** in `study_note_tasks.jsonl`, with output shape defined by the **Delta streaming gold example**.
+We have a **working, reproducible pipeline** from curated Databricks sources (plus official docs discovery and playlist expansion) to **792 handoff-ready tasks** in `study_note_tasks.jsonl`, with output shape defined by the **Delta streaming gold example**.
 
 | Done (this repo) | Next (HPC pipeline) |
 |---|---|

@@ -151,9 +151,10 @@ def test_starter_manifest_loads() -> None:
     assert isinstance(manifest, SourceManifest)
     assert manifest.pack_id == "databricks_ld_foundations"
     assert len(manifest.topic_buckets) == 6
-    assert len(manifest.sources) == 15
-    # All sources are enabled now that content acquisition has run.
-    assert len(manifest.enabled_sources()) == 15
+    # Expanded pack: curated originals + discovered docs + playlist children.
+    assert len(manifest.sources) == 428
+    # Quality pass keeps ~303 enabled; deferred/thin/vendor deep-dives disabled.
+    assert len(manifest.enabled_sources()) == 303
     assert all(s.original_url for s in manifest.sources)
 
 
