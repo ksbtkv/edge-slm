@@ -47,10 +47,20 @@ def test_scan_ingestible_files_requires_directory(tmp_path: Path) -> None:
 
 
 def test_manifest_from_folder_stable_ids_and_defaults(tmp_path: Path) -> None:
-    (tmp_path / "Delta Streaming.md").write_text("# Delta", encoding="utf-8")
+    (tmp_path / "Delta Streaming.md").write_text(
+        "# Delta\n\n"
+        "Delta Lake provides ACID transactions and time travel for data lakes "
+        "used in analytics pipelines across production and development workspaces.",
+        encoding="utf-8",
+    )
     nested = tmp_path / "guides"
     nested.mkdir()
-    (nested / "Delta Streaming.md").write_text("# Duplicate name", encoding="utf-8")
+    (nested / "Delta Streaming.md").write_text(
+        "# Duplicate name\n\n"
+        "A second document with the same filename stem in a nested folder "
+        "to exercise source_id collision handling during folder pack builds.",
+        encoding="utf-8",
+    )
 
     manifest = manifest_from_folder(
         tmp_path,
@@ -94,13 +104,16 @@ def test_manifest_from_folder_resource_type_inference(tmp_path: Path) -> None:
 
 def test_build_source_pack_from_folder_end_to_end(tmp_path: Path) -> None:
     (tmp_path / "intro.md").write_text(
-        "# Intro\n\nBasics of the lakehouse platform.",
+        "# Intro\n\n"
+        "Basics of the lakehouse platform covering workspaces, notebooks, "
+        "compute clusters, and common onboarding workflows for new users.",
         encoding="utf-8",
     )
     nested = tmp_path / "more"
     nested.mkdir()
     (nested / "delta.txt").write_text(
-        "Delta Lake supports ACID transactions and time travel.",
+        "Delta Lake supports ACID transactions and time travel for analytics "
+        "tables used across production data pipelines and streaming jobs.",
         encoding="utf-8",
     )
 

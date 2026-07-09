@@ -79,7 +79,12 @@ def test_text_ingestion_uses_generated_fixture(tmp_path: Path) -> None:
 def test_markdown_ingestion_uses_generated_fixture(tmp_path: Path) -> None:
     markdown_path = tmp_path / "sample.md"
     markdown_path.write_text(
-        "# Main Title\n\nIntro text.\n\n## Section Two\n\nMore content.",
+        "# Main Title\n\n"
+        "Intro text covering lakehouse basics and workspace setup for new users "
+        "who are learning Databricks for the first time on this project.\n\n"
+        "## Section Two\n\n"
+        "More content about Delta Lake tables, ACID transactions, and time travel "
+        "features used across analytics and streaming pipelines in production.",
         encoding="utf-8",
     )
 
@@ -90,4 +95,33 @@ def test_markdown_ingestion_uses_generated_fixture(tmp_path: Path) -> None:
     assert document.section_count == 2
     assert document.sections[0].heading == "Main Title"
     assert document.sections[1].heading == "Section Two"
+    # Body text must not include the markdown heading line.
+    assert not document.sections[0].text.startswith("#")
+    assert "Intro text covering" in document.sections[0].text
     assert_roundtrip(document, "markdown")
+
+
+def test_markdown_skips_header_only_sections(tmp_path: Path) -> None:
+    markdown_path = tmp_path / "headers_only.md"
+    markdown_path.write_text("# Title only\n\n## Also empty\n", encoding="utf-8")
+
+    with pytest.raises(RuntimeError, match="No text content found"):
+        ingest(markdown_path)
+
+
+def test_markdown_carries_orphan_heading_to_next_body(tmp_path: Path) -> None:
+    markdown_path = tmp_path / "orphan.md"
+    markdown_path.write_text(
+        "## A\n\n"
+        "## B\n\n"
+        "Body text with enough words to pass the ingest body-word threshold "
+        "for markdown section quality filtering in the pipeline.",
+        encoding="utf-8",
+    )
+
+    document = ingest(markdown_path)
+
+    assert document.section_count == 1
+    assert document.sections[0].heading == "B"
+    assert "Body text with enough words" in document.sections[0].text
+    assert "##" not in document.sections[0].text

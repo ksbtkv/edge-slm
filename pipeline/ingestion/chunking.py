@@ -8,10 +8,13 @@ word counting later without changing source-pack call sites.
 
 from __future__ import annotations
 
+import logging
 import re
 from dataclasses import dataclass, field
 
 from ingestion.schema import Document, Section
+
+logger = logging.getLogger(__name__)
 
 
 def _word_count(text: str) -> int:
@@ -106,6 +109,34 @@ class _ChunkAccumulator:
     def word_count(self) -> int:
         return _word_count(self.text)
 
+    def merge_from(self, other: _ChunkAccumulator) -> None:
+        """Append another accumulator's content and provenance."""
+        for part in other.text_parts:
+            if part.strip():
+                self.text_parts.append(part.strip())
+        for index in other.section_indexes:
+            if index not in self.section_indexes:
+                self.section_indexes.append(index)
+        self.headings.update(other.headings)
+        self.pages.update(other.pages)
+        self.slides.update(other.slides)
+        if other.start_time_s is not None:
+            self.start_time_s = (
+                other.start_time_s
+                if self.start_time_s is None
+                else min(self.start_time_s, other.start_time_s)
+            )
+        if other.end_time_s is not None:
+            self.end_time_s = (
+                other.end_time_s
+                if self.end_time_s is None
+                else max(self.end_time_s, other.end_time_s)
+            )
+        if len(self.section_indexes) > 1:
+            self.split_reason = "merged_small_sections"
+        elif other.split_reason == "split_oversized_section":
+            self.split_reason = "split_oversized_section"
+
     def to_text_chunk(self, *, document_id: str, chunk_index: int) -> TextChunk:
         time_range: tuple[float, float] | None = None
         if self.start_time_s is not None and self.end_time_s is not None:
@@ -163,11 +194,109 @@ def chunk_document(document: Document, config: ChunkingConfig | None = None) -> 
     if current.word_count > 0:
         chunks.append(current)
 
+    chunks = _enforce_min_words(chunks, config=config, document_id=document.document_id)
     chunks = _apply_overlap(chunks, config=config)
     return [
         chunk.to_text_chunk(document_id=document.document_id, chunk_index=index)
         for index, chunk in enumerate(chunks)
     ]
+
+
+def _enforce_min_words(
+    chunks: list[_ChunkAccumulator],
+    *,
+    config: ChunkingConfig,
+    document_id: str,
+) -> list[_ChunkAccumulator]:
+    """
+    Merge or keep chunks that fall below ``config.min_words``.
+
+    Preference order for undersized chunks:
+    1. Merge forward into the next chunk when combined size <= max_words
+    2. Else merge backward into the previous chunk when combined size <= max_words
+    3. Else keep (single-chunk documents) or drop with a log when a neighbor
+       exists but merging would exceed max_words
+    """
+    if config.min_words <= 0 or not chunks:
+        return chunks
+
+    if len(chunks) == 1:
+        if chunks[0].word_count < config.min_words:
+            logger.warning(
+                "Document %s: sole chunk has %d words (< min_words=%d); keeping it",
+                document_id,
+                chunks[0].word_count,
+                config.min_words,
+            )
+        return chunks
+
+    result: list[_ChunkAccumulator] = []
+    index = 0
+    while index < len(chunks):
+        chunk = chunks[index]
+        if chunk.word_count >= config.min_words:
+            result.append(chunk)
+            index += 1
+            continue
+
+        # Prefer merging forward into the next chunk.
+        if index + 1 < len(chunks):
+            nxt = chunks[index + 1]
+            if chunk.word_count + nxt.word_count <= config.max_words:
+                nxt_merged = _ChunkAccumulator(
+                    text_parts=list(nxt.text_parts),
+                    section_indexes=list(nxt.section_indexes),
+                    headings=set(nxt.headings),
+                    pages=set(nxt.pages),
+                    slides=set(nxt.slides),
+                    start_time_s=nxt.start_time_s,
+                    end_time_s=nxt.end_time_s,
+                    split_reason=nxt.split_reason,
+                )
+                # Prepend undersized chunk into next.
+                prepended = _ChunkAccumulator(
+                    text_parts=list(chunk.text_parts),
+                    section_indexes=list(chunk.section_indexes),
+                    headings=set(chunk.headings),
+                    pages=set(chunk.pages),
+                    slides=set(chunk.slides),
+                    start_time_s=chunk.start_time_s,
+                    end_time_s=chunk.end_time_s,
+                    split_reason=chunk.split_reason,
+                )
+                prepended.merge_from(nxt_merged)
+                chunks[index + 1] = prepended
+                index += 1
+                continue
+
+        # Else merge backward into the previous result chunk.
+        if result and result[-1].word_count + chunk.word_count <= config.max_words:
+            result[-1].merge_from(chunk)
+            index += 1
+            continue
+
+        # Cannot merge without exceeding max_words — drop undersized chunk.
+        logger.info(
+            "Document %s: dropping undersized chunk (%d words < min_words=%d) "
+            "that cannot merge within max_words=%d",
+            document_id,
+            chunk.word_count,
+            config.min_words,
+            config.max_words,
+        )
+        index += 1
+
+    if not result and chunks:
+        # All chunks were undersized and dropped; keep the largest one.
+        largest = max(chunks, key=lambda c: c.word_count)
+        logger.warning(
+            "Document %s: all chunks below min_words; keeping largest (%d words)",
+            document_id,
+            largest.word_count,
+        )
+        return [largest]
+
+    return result
 
 
 def _split_section(section: Section, *, config: ChunkingConfig) -> list[str]:

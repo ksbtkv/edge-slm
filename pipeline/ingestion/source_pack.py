@@ -115,11 +115,13 @@ def build_source_pack_from_manifest(
     normalized_manifest_path = output_root / "manifest.normalized.json"
     _write_json(normalized_manifest_path, manifest.to_dict())
 
-    study_note_tasks, source_chunk_counts = _build_study_note_tasks(
-        manifest=manifest,
-        ingested=ingested,
-        output_root=output_root,
-        chunking_config=chunking_config,
+    study_note_tasks, source_chunk_counts, source_low_quality_counts = (
+        _build_study_note_tasks(
+            manifest=manifest,
+            ingested=ingested,
+            output_root=output_root,
+            chunking_config=chunking_config,
+        )
     )
     tasks_path = output_root / "study_note_tasks.jsonl"
     _write_jsonl(tasks_path, study_note_tasks)
@@ -131,6 +133,7 @@ def build_source_pack_from_manifest(
         normalized_manifest_path=normalized_manifest_path,
         tasks_path=tasks_path,
         source_chunk_counts=source_chunk_counts,
+        source_low_quality_counts=source_low_quality_counts,
     )
     pack_index_path = output_root / "source_pack.json"
     _write_json(pack_index_path, pack_index)
@@ -267,13 +270,16 @@ def _build_study_note_tasks(
     ingested: list[IngestedSource],
     output_root: Path,
     chunking_config: ChunkingConfig | None = None,
-) -> tuple[list[dict[str, Any]], dict[str, int]]:
+) -> tuple[list[dict[str, Any]], dict[str, int], dict[str, int]]:
     tasks: list[dict[str, Any]] = []
     source_chunk_counts: dict[str, int] = {}
+    source_low_quality_counts: dict[str, int] = {}
+    effective_config = chunking_config or ChunkingConfig()
 
     for item in ingested:
         if item.skipped or item.document.section_count == 0:
             source_chunk_counts[item.source.source_id] = 0
+            source_low_quality_counts[item.source.source_id] = 0
             continue
 
         rel_document_path = str(
@@ -283,7 +289,20 @@ def _build_study_note_tasks(
         )
 
         chunks = chunk_document(item.document, config=chunking_config)
+        below_min = sum(
+            1 for chunk in chunks if chunk.word_count < effective_config.min_words
+        )
         source_chunk_counts[item.source.source_id] = len(chunks)
+        source_low_quality_counts[item.source.source_id] = below_min
+        if below_min:
+            logger.info(
+                "Source %s: %d chunks, %d below min_words=%d (kept)",
+                item.source.source_id,
+                len(chunks),
+                below_min,
+                effective_config.min_words,
+            )
+
         for chunk in chunks:
             task_id = f"{manifest.pack_id}__{item.source.source_id}__c{chunk.chunk_index:04d}"
             section_index = (
@@ -319,7 +338,7 @@ def _build_study_note_tasks(
                 )
             )
 
-    return tasks, source_chunk_counts
+    return tasks, source_chunk_counts, source_low_quality_counts
 
 
 def _build_pack_index(
@@ -330,9 +349,11 @@ def _build_pack_index(
     normalized_manifest_path: Path,
     tasks_path: Path,
     source_chunk_counts: dict[str, int],
+    source_low_quality_counts: dict[str, int] | None = None,
 ) -> dict[str, Any]:
     source_entries: list[dict[str, Any]] = []
     topic_bucket_counts: dict[str, int] = {bucket.id: 0 for bucket in manifest.topic_buckets}
+    low_quality_counts = source_low_quality_counts or {}
 
     for item in ingested:
         section_count = item.document.section_count
@@ -368,6 +389,9 @@ def _build_pack_index(
                 "document_path": rel_doc_path,
                 "section_count": section_count,
                 "chunk_count": source_chunk_counts.get(item.source.source_id, 0),
+                "low_quality_chunk_count": low_quality_counts.get(
+                    item.source.source_id, 0
+                ),
                 "word_count": word_count,
             }
         )

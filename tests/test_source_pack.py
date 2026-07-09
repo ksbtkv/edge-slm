@@ -162,7 +162,10 @@ def test_build_source_pack_with_generated_fixtures(tmp_path: Path) -> None:
     raw_dir.mkdir()
     doc_path = raw_dir / "delta_streaming.md"
     doc_path.write_text(
-        "# Delta Streaming\n\nUse readStream and writeStream with checkpointLocation.",
+        "# Delta Streaming\n\n"
+        "Use readStream and writeStream with checkpointLocation when building "
+        "incremental pipelines over Delta Lake tables in production workloads "
+        "that require reliable exactly-once processing semantics.",
         encoding="utf-8",
     )
 
@@ -395,3 +398,98 @@ def test_chunk_document_preserves_provenance() -> None:
     assert chunk.source_section_indexes == [0, 1]
     assert chunk.source_headings == ["Intro", "Key Points"]
     assert chunk.source_time_range_s == (0.0, 15.0)
+
+
+def test_chunk_document_merges_tiny_trailing_chunk() -> None:
+    """Undersized trailing chunk merges backward into the previous chunk."""
+    body = " ".join(f"word{i}" for i in range(50))
+    trailing = "tiny trailing leftover"
+    document = Document(
+        document_id="doc_trail",
+        source_type="manual_text",
+        source_path=None,
+        modality="text",
+        content_type="plain_text",
+        ingestor="test",
+        method="manual",
+        sections=[
+            Section(index=0, text=body),
+            Section(index=1, text=trailing),
+        ],
+    )
+
+    # target_words=50 flushes the first section; trailing is below min_words=20.
+    chunks = chunk_document(
+        document,
+        config=ChunkingConfig(
+            target_words=50,
+            max_words=120,
+            min_words=20,
+            overlap_words=0,
+        ),
+    )
+
+    assert len(chunks) == 1
+    assert chunks[0].source_section_indexes == [0, 1]
+    assert "tiny trailing leftover" in chunks[0].text
+    assert chunks[0].word_count >= 20
+
+
+def test_chunk_document_keeps_sole_undersized_chunk() -> None:
+    """A document whose only chunk is below min_words is kept, not dropped."""
+    document = Document(
+        document_id="doc_tiny",
+        source_type="manual_text",
+        source_path=None,
+        modality="text",
+        content_type="plain_text",
+        ingestor="test",
+        method="manual",
+        sections=[Section(index=0, text="only five short words here")],
+    )
+
+    chunks = chunk_document(
+        document,
+        config=ChunkingConfig(
+            target_words=40,
+            max_words=80,
+            min_words=20,
+            overlap_words=0,
+        ),
+    )
+
+    assert len(chunks) == 1
+    assert chunks[0].word_count == 5
+    assert "only five short words here" in chunks[0].text
+
+
+def test_chunk_document_enforces_min_words_across_short_sections() -> None:
+    """Short sections that would flush early still merge up to min_words."""
+    sections = [
+        Section(index=0, text=" ".join(f"a{i}" for i in range(30))),
+        Section(index=1, text=" ".join(f"b{i}" for i in range(30))),
+        Section(index=2, text="short tail words only"),
+    ]
+    document = Document(
+        document_id="doc_min",
+        source_type="manual_text",
+        source_path=None,
+        modality="text",
+        content_type="plain_text",
+        ingestor="test",
+        method="manual",
+        sections=sections,
+    )
+
+    chunks = chunk_document(
+        document,
+        config=ChunkingConfig(
+            target_words=30,
+            max_words=100,
+            min_words=25,
+            overlap_words=0,
+        ),
+    )
+
+    assert all(chunk.word_count >= 25 for chunk in chunks)
+    assert sum(len(c.source_section_indexes) for c in chunks) >= 3

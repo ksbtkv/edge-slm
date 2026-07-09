@@ -283,12 +283,12 @@ Optional dependencies load lazily — the pipeline does not require all backends
 Default configuration (`ChunkingConfig`):
 
 
-| Parameter       | Default | Purpose                           |
-| --------------- | ------- | --------------------------------- |
-| `target_words`  | 450     | Preferred chunk size              |
-| `max_words`     | 700     | Hard upper bound before split     |
-| `min_words`     | 120     | Minimum before merge              |
-| `overlap_words` | 60      | Overlap between split chunks only |
+| Parameter       | Default | Purpose                                                                 |
+| --------------- | ------- | ----------------------------------------------------------------------- |
+| `target_words`  | 450     | Preferred chunk size                                                    |
+| `max_words`     | 700     | Hard upper bound before split                                           |
+| `min_words`     | 120     | Minimum chunk size (undersized chunks merge or are dropped; sole short chunk kept) |
+| `overlap_words` | 60      | Overlap between split chunks only                                       |
 
 
 Behaviour:
@@ -296,6 +296,7 @@ Behaviour:
 - Normal sections → kept as one chunk
 - Short adjacent sections → merged up to `target_words`
 - Oversized sections → split at paragraph/sentence boundaries
+- After merge/split, `_enforce_min_words` runs before overlap
 - Provenance preserved: section indexes, headings, page/slide/time range
 
 **Example (validated locally):** Edge SLM project PDF — 10 sections → 3 chunks (~490, 503, 275 words).

@@ -13,6 +13,11 @@ import re
 from pathlib import Path
 from typing import Any
 
+from ingestion.quality import (
+    MIN_BODY_WORDS,
+    is_below_body_word_threshold,
+    is_effectively_empty,
+)
 from ingestion.schema import (
     SOURCE_TYPE_LOCAL_FILE,
     Document,
@@ -124,7 +129,12 @@ def count_code_blocks(text: str) -> int:
 
 
 def split_markdown_into_sections(text: str) -> list[dict[str, Any]]:
-    """Split Markdown into heading-delimited sections."""
+    """
+    Split Markdown into heading-delimited sections.
+
+    Section ``text`` is body-only (heading lines are not included). The heading
+    text (without ``#`` markers) is stored in ``section_heading``.
+    """
     sections: list[dict[str, Any]] = []
     current_lines: list[str] = []
     current_heading: str | None = None
@@ -133,7 +143,7 @@ def split_markdown_into_sections(text: str) -> list[dict[str, Any]]:
         heading = get_markdown_heading(line)
 
         if heading:
-            if current_lines:
+            if current_lines or current_heading is not None:
                 sections.append(
                     {
                         "section_heading": current_heading,
@@ -141,12 +151,12 @@ def split_markdown_into_sections(text: str) -> list[dict[str, Any]]:
                     }
                 )
             current_heading = heading[1]
-            current_lines = [line]
+            current_lines = []
             continue
 
         current_lines.append(line)
 
-    if current_lines:
+    if current_lines or current_heading is not None:
         sections.append(
             {
                 "section_heading": current_heading,
@@ -155,6 +165,13 @@ def split_markdown_into_sections(text: str) -> list[dict[str, Any]]:
         )
 
     return sections
+
+
+def _is_header_only_section(text: str) -> bool:
+    """True when the section has no usable body (empty or below word threshold)."""
+    if is_effectively_empty(text):
+        return True
+    return is_below_body_word_threshold(text, min_words=MIN_BODY_WORDS)
 
 
 def ingest_markdown(
@@ -180,26 +197,33 @@ def ingest_markdown(
 
     raw_text, encoding_used = read_markdown_file(markdown_path)
     cleaned_text = clean_markdown_text(raw_text)
-    raw_sections = split_markdown_into_sections(raw_text)
+    # Split cleaned text once; raw_text is retained on Document for provenance.
+    # Pairing cleaned sections to raw by index is fragile after filtering, so
+    # store the cleaned body as both text and raw_text for kept sections.
     cleaned_sections = split_markdown_into_sections(cleaned_text)
 
     sections: list[Section] = []
+    pending_heading: str | None = None
 
-    for index, section in enumerate(cleaned_sections):
+    for section in cleaned_sections:
         section_text = section["text"]
-        if not section_text.strip():
+        section_heading = section["section_heading"]
+
+        if _is_header_only_section(section_text):
+            # Carry orphan heading forward so the next body section inherits it.
+            if section_heading:
+                pending_heading = section_heading
             continue
 
-        raw_section_text = (
-            raw_sections[index]["text"] if index < len(raw_sections) else None
-        )
+        heading = section_heading or pending_heading
+        pending_heading = None
 
         sections.append(
             Section(
                 index=len(sections),
                 text=section_text,
-                raw_text=raw_section_text,
-                heading=section["section_heading"],
+                raw_text=section_text,
+                heading=heading,
                 extraction_method="markdown_file",
             )
         )

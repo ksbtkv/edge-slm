@@ -42,6 +42,7 @@ Key modules:
 - `schema.py` / `serialize.py` — `Document` contract and JSON round-trip
 - `dispatch.py` — `ingest(path)` routes by file extension
 - `*_ingestor.py` — format-specific extractors (PDF, PPTX, text, Markdown, audio/video)
+- `quality.py` — shared ingest filters (e.g. `MIN_BODY_WORDS` for thin markdown sections)
 - `chunking.py` — model-sized chunking over `Document.sections`
 - `source_manifest.py` / `source_pack.py` — manifest validation and pack builder
 - `study_notes_schema.py` — structured study-note prompt and output schema for tasks
@@ -163,6 +164,8 @@ more sections:
 - `TextChunk` records are sizing-aware task inputs with merged/split provenance
 - Each study-note task references chunk metadata (`chunk_id`,
   `source_section_indexes`, headings, page/slide/time range)
+- Markdown ingestion skips header-only / thin bodies via `quality.py`
+  (`MIN_BODY_WORDS`); chunking then enforces `min_words` before tasks are written
 
 Inspect chunks for a file:
 
@@ -181,7 +184,7 @@ Default chunk sizing (`ChunkingConfig`):
 
 - `target_words=450`
 - `max_words=700`
-- `min_words=120`
+- `min_words=120` — enforced minimum chunk size (undersized chunks merge with neighbours or are dropped; a document's sole short chunk is kept)
 - `overlap_words=60`
 
 ## Databricks source pack
@@ -221,6 +224,13 @@ Outputs land in `data/processed/source_packs/databricks_ld_foundations/`:
 - `documents/<source_id>.json` — one ingested `Document` per source
 - `source_pack.json` — pack index with provenance and counts
 - `study_note_tasks.jsonl` — **final pipeline output** — one task per chunk
+
+Audit undersized tasks in an existing pack:
+
+```bash
+PYTHONPATH=pipeline python scripts/audit_chunk_quality.py \
+  data/processed/source_packs/databricks_ld_foundations --threshold 120
+```
 
 Tune chunking when building a pack:
 
