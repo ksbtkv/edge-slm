@@ -19,9 +19,10 @@ from pathlib import Path
 from typing import Any
 
 from ingestion.chunking import ChunkingConfig, chunk_document
-from ingestion.dispatch import ingest
+from ingestion.dispatch import ingest, supported_extensions
 from ingestion.schema import Document
 from ingestion.serialize import save_document
+from ingestion.folder_manifest import count_unsupported_files, manifest_from_folder
 from ingestion.source_manifest import (
     SourceManifest,
     SourceRecord,
@@ -74,6 +75,28 @@ def build_source_pack(
         require_local_files=require_local_files and not skip_missing_files,
     )
 
+    return build_source_pack_from_manifest(
+        manifest,
+        output_dir,
+        project_root=root,
+        skip_missing_files=skip_missing_files,
+        chunking_config=chunking_config,
+    )
+
+
+def build_source_pack_from_manifest(
+    manifest: SourceManifest,
+    output_dir: str | Path,
+    *,
+    project_root: Path | None = None,
+    skip_missing_files: bool = False,
+    chunking_config: ChunkingConfig | None = None,
+) -> dict[str, Any]:
+    """
+    Build a source pack from an in-memory manifest.
+
+    Returns the pack index dict (also written to source_pack.json).
+    """
     output_root = Path(output_dir)
     documents_dir = output_root / "documents"
     documents_dir.mkdir(parents=True, exist_ok=True)
@@ -85,7 +108,7 @@ def build_source_pack(
                 source,
                 documents_dir=documents_dir,
                 skip_missing_files=skip_missing_files,
-                project_root=root,
+                project_root=project_root,
             )
         )
 
@@ -121,6 +144,56 @@ def build_source_pack(
     )
 
     return pack_index
+
+
+def build_source_pack_from_folder(
+    input_dir: str | Path,
+    output_dir: str | Path,
+    *,
+    recursive: bool = True,
+    pack_id: str | None = None,
+    title: str | None = None,
+    domain: str | None = None,
+    topic_bucket_ids: list[str] | None = None,
+    chunking_config: ChunkingConfig | None = None,
+) -> dict[str, Any]:
+    """
+    Scan a local folder, build a manifest, and produce a full source pack.
+
+    Unsupported files in the tree are skipped silently; a summary count is
+    logged at info level. Raises ``SourcePackError`` when no ingestible files
+    are found.
+    """
+    folder = Path(input_dir).resolve()
+    skipped_unsupported = count_unsupported_files(folder, recursive=recursive)
+    if skipped_unsupported:
+        logger.info(
+            "Skipped %d unsupported file(s) under %s",
+            skipped_unsupported,
+            folder,
+        )
+
+    manifest = manifest_from_folder(
+        folder,
+        pack_id=pack_id,
+        title=title,
+        domain=domain,
+        topic_bucket_ids=topic_bucket_ids,
+        recursive=recursive,
+    )
+
+    if not manifest.sources:
+        raise SourcePackError(
+            f"No ingestible files found under {folder}. "
+            f"Supported extensions: {supported_extensions()}."
+        )
+
+    return build_source_pack_from_manifest(
+        manifest,
+        output_dir,
+        project_root=None,
+        chunking_config=chunking_config,
+    )
 
 
 def _ingest_source(

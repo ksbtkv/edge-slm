@@ -262,6 +262,50 @@ Both scripts skip sources whose `local_path` already exists (`--force` to
 re-fetch, `--only SOURCE_ID` to restrict). The anchor certification video is
 ~7.5 hours, so its download + transcription takes a while.
 
+## Folder batch (no manifest)
+
+For ad-hoc local folders, skip hand-authoring a manifest and build a pack directly
+from a directory tree. The scanner discovers supported files recursively, assigns
+stable `source_id`s, and writes the same artifacts as the curated manifest
+workflow (`manifest.normalized.json` is included so you can inspect or edit and
+re-run manually later).
+
+Use the **curated manifest workflow** (Databricks L&D pack above) when you need
+`original_url` provenance, topic-bucket curation, train/eval splits, or
+production dataset labels. Folder batch is best for one-off local document dumps.
+
+Python API:
+
+```bash
+PYTHONPATH=pipeline python -c "
+from ingestion.source_pack import build_source_pack_from_folder
+
+build_source_pack_from_folder(
+    '/path/to/folder',
+    'data/processed/source_packs/my_folder_pack',
+    pack_id='my_folder_pack',
+    domain='Local documents',
+)
+"
+```
+
+CLI:
+
+```bash
+PYTHONPATH=pipeline python scripts/build_folder_pack.py /path/to/folder \\
+    -o data/processed/source_packs/my_folder_pack \\
+    --pack-id my_folder_pack \\
+    --domain "Local documents"
+```
+
+Flags: `--no-recursive`, `--pack-id`, `--title`, `--domain`, repeatable
+`--topic-bucket-id`, and optional chunking overrides (`--target-words`,
+`--max-words`, `--min-words`, `--overlap-words`).
+
+Hidden files, `__MACOSX`, `.DS_Store`, and unsupported extensions are skipped.
+An empty folder (no ingestible files) raises an error listing supported
+extensions.
+
 Non-Databricks files work with the same ingestion and chunking layers. Only the
 checked-in Databricks manifest and study-note prompt are domain-specific.
 
