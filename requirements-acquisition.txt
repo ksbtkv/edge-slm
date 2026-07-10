@@ -1,0 +1,5 @@
+# One-time source acquisition (video audio download + documentation export).
+# Transcription additionally requires requirements-ingestion-media.txt
+# (faster-whisper) and the system ffmpeg binary.
+yt-dlp>=2025.1.1
+trafilatura>=1.12

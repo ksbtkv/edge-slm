@@ -1,0 +1,3007 @@
+{
+  "seed": "llms.txt (+ optional sitemap)",
+  "total_discovered": 3302,
+  "new_candidates": 250,
+  "candidates": [
+    {
+      "title": "catalog-explorer / entity-relationship-diagram",
+      "original_url": "https://docs.databricks.com/catalog-explorer/entity-relationship-diagram",
+      "description": "Official Databricks documentation page: /catalog-explorer/entity-relationship-diagram",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_catalog_explorer_entity_relationship_diagram",
+      "local_path": "data/raw/databricks/docs/official/catalog_explorer_entity_relationship_diagram.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "catalogs / create-catalog",
+      "original_url": "https://docs.databricks.com/catalogs/create-catalog",
+      "description": "Official Databricks documentation page: /catalogs/create-catalog",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_catalogs_create_catalog",
+      "local_path": "data/raw/databricks/docs/official/catalogs_create_catalog.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "catalogs / default",
+      "original_url": "https://docs.databricks.com/catalogs/default",
+      "description": "Official Databricks documentation page: /catalogs/default",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_catalogs_default",
+      "local_path": "data/raw/databricks/docs/official/catalogs_default.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "catalogs / manage-catalog",
+      "original_url": "https://docs.databricks.com/catalogs/manage-catalog",
+      "description": "Official Databricks documentation page: /catalogs/manage-catalog",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_catalogs_manage_catalog",
+      "local_path": "data/raw/databricks/docs/official/catalogs_manage_catalog.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / choose-compute",
+      "original_url": "https://docs.databricks.com/compute/choose-compute",
+      "description": "Official Databricks documentation page: /compute/choose-compute",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_choose_compute",
+      "local_path": "data/raw/databricks/docs/official/compute_choose_compute.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / cluster-config-best-practices",
+      "original_url": "https://docs.databricks.com/compute/cluster-config-best-practices",
+      "description": "Official Databricks documentation page: /compute/cluster-config-best-practices",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_cluster_config_best_practices",
+      "local_path": "data/raw/databricks/docs/official/compute_cluster_config_best_practices.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / cluster-metrics",
+      "original_url": "https://docs.databricks.com/compute/cluster-metrics",
+      "description": "Official Databricks documentation page: /compute/cluster-metrics",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_cluster_metrics",
+      "local_path": "data/raw/databricks/docs/official/compute_cluster_metrics.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / clusters-manage",
+      "original_url": "https://docs.databricks.com/compute/clusters-manage",
+      "description": "Official Databricks documentation page: /compute/clusters-manage",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_clusters_manage",
+      "local_path": "data/raw/databricks/docs/official/compute_clusters_manage.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / custom-containers",
+      "original_url": "https://docs.databricks.com/compute/custom-containers",
+      "description": "Official Databricks documentation page: /compute/custom-containers",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_custom_containers",
+      "local_path": "data/raw/databricks/docs/official/compute_custom_containers.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / custom-containers-standard",
+      "original_url": "https://docs.databricks.com/compute/custom-containers-standard",
+      "description": "Official Databricks documentation page: /compute/custom-containers-standard",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_custom_containers_standard",
+      "local_path": "data/raw/databricks/docs/official/compute_custom_containers_standard.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / dedicated-limitations",
+      "original_url": "https://docs.databricks.com/compute/dedicated-limitations",
+      "description": "Official Databricks documentation page: /compute/dedicated-limitations",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_dedicated_limitations",
+      "local_path": "data/raw/databricks/docs/official/compute_dedicated_limitations.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / dedicated-overview",
+      "original_url": "https://docs.databricks.com/compute/dedicated-overview",
+      "description": "Official Databricks documentation page: /compute/dedicated-overview",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_dedicated_overview",
+      "local_path": "data/raw/databricks/docs/official/compute_dedicated_overview.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / events-api-updates",
+      "original_url": "https://docs.databricks.com/compute/events-api-updates",
+      "description": "Official Databricks documentation page: /compute/events-api-updates",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_events_api_updates",
+      "local_path": "data/raw/databricks/docs/official/compute_events_api_updates.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / fleet-instance-types",
+      "original_url": "https://docs.databricks.com/compute/fleet-instance-types",
+      "description": "Official Databricks documentation page: /compute/fleet-instance-types",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_fleet_instance_types",
+      "local_path": "data/raw/databricks/docs/official/compute_fleet_instance_types.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / flexible-node-type-instances",
+      "original_url": "https://docs.databricks.com/compute/flexible-node-type-instances",
+      "description": "Official Databricks documentation page: /compute/flexible-node-type-instances",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_flexible_node_type_instances",
+      "local_path": "data/raw/databricks/docs/official/compute_flexible_node_type_instances.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / flexible-node-types",
+      "original_url": "https://docs.databricks.com/compute/flexible-node-types",
+      "description": "Official Databricks documentation page: /compute/flexible-node-types",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_flexible_node_types",
+      "local_path": "data/raw/databricks/docs/official/compute_flexible_node_types.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / group-access",
+      "original_url": "https://docs.databricks.com/compute/group-access",
+      "description": "Official Databricks documentation page: /compute/group-access",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_group_access",
+      "local_path": "data/raw/databricks/docs/official/compute_group_access.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / lakeguard",
+      "original_url": "https://docs.databricks.com/compute/lakeguard",
+      "description": "Official Databricks documentation page: /compute/lakeguard",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_lakeguard",
+      "local_path": "data/raw/databricks/docs/official/compute_lakeguard.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / pool-best-practices",
+      "original_url": "https://docs.databricks.com/compute/pool-best-practices",
+      "description": "Official Databricks documentation page: /compute/pool-best-practices",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_pool_best_practices",
+      "local_path": "data/raw/databricks/docs/official/compute_pool_best_practices.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / pools",
+      "original_url": "https://docs.databricks.com/compute/pools",
+      "description": "Official Databricks documentation page: /compute/pools",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_pools",
+      "local_path": "data/raw/databricks/docs/official/compute_pools.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / serverless / best-practices",
+      "original_url": "https://docs.databricks.com/compute/serverless/best-practices",
+      "description": "Official Databricks documentation page: /compute/serverless/best-practices",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_serverless_best_practices",
+      "local_path": "data/raw/databricks/docs/official/compute_serverless_best_practices.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / serverless / dependencies",
+      "original_url": "https://docs.databricks.com/compute/serverless/dependencies",
+      "description": "Official Databricks documentation page: /compute/serverless/dependencies",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_serverless_dependencies",
+      "local_path": "data/raw/databricks/docs/official/compute_serverless_dependencies.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / serverless / lakehouse-replay",
+      "original_url": "https://docs.databricks.com/compute/serverless/lakehouse-replay",
+      "description": "Official Databricks documentation page: /compute/serverless/lakehouse-replay",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_serverless_lakehouse_replay",
+      "local_path": "data/raw/databricks/docs/official/compute_serverless_lakehouse_replay.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / serverless / limitations",
+      "original_url": "https://docs.databricks.com/compute/serverless/limitations",
+      "description": "Official Databricks documentation page: /compute/serverless/limitations",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_serverless_limitations",
+      "local_path": "data/raw/databricks/docs/official/compute_serverless_limitations.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / serverless / migration",
+      "original_url": "https://docs.databricks.com/compute/serverless/migration",
+      "description": "Official Databricks documentation page: /compute/serverless/migration",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_serverless_migration",
+      "local_path": "data/raw/databricks/docs/official/compute_serverless_migration.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / serverless / notebooks",
+      "original_url": "https://docs.databricks.com/compute/serverless/notebooks",
+      "description": "Official Databricks documentation page: /compute/serverless/notebooks",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_serverless_notebooks",
+      "local_path": "data/raw/databricks/docs/official/compute_serverless_notebooks.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / serverless / sandbox",
+      "original_url": "https://docs.databricks.com/compute/serverless/sandbox",
+      "description": "Official Databricks documentation page: /compute/serverless/sandbox",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_serverless_sandbox",
+      "local_path": "data/raw/databricks/docs/official/compute_serverless_sandbox.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / serverless / streaming",
+      "original_url": "https://docs.databricks.com/compute/serverless/streaming",
+      "description": "Official Databricks documentation page: /compute/serverless/streaming",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_serverless_streaming",
+      "local_path": "data/raw/databricks/docs/official/compute_serverless_streaming.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / simple-form",
+      "original_url": "https://docs.databricks.com/compute/simple-form",
+      "description": "Official Databricks documentation page: /compute/simple-form",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_simple_form",
+      "local_path": "data/raw/databricks/docs/official/compute_simple_form.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / single-user-fgac",
+      "original_url": "https://docs.databricks.com/compute/single-user-fgac",
+      "description": "Official Databricks documentation page: /compute/single-user-fgac",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_single_user_fgac",
+      "local_path": "data/raw/databricks/docs/official/compute_single_user_fgac.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / sql-warehouse / bi-workload-settings",
+      "original_url": "https://docs.databricks.com/compute/sql-warehouse/bi-workload-settings",
+      "description": "Official Databricks documentation page: /compute/sql-warehouse/bi-workload-settings",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_sql_warehouse_bi_workload_settings",
+      "local_path": "data/raw/databricks/docs/official/compute_sql_warehouse_bi_workload_settings.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / sql-warehouse / create",
+      "original_url": "https://docs.databricks.com/compute/sql-warehouse/create",
+      "description": "Official Databricks documentation page: /compute/sql-warehouse/create",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_sql_warehouse_create",
+      "local_path": "data/raw/databricks/docs/official/compute_sql_warehouse_create.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / sql-warehouse / monitor",
+      "original_url": "https://docs.databricks.com/compute/sql-warehouse/monitor",
+      "description": "Official Databricks documentation page: /compute/sql-warehouse/monitor",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_sql_warehouse_monitor",
+      "local_path": "data/raw/databricks/docs/official/compute_sql_warehouse_monitor.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / sql-warehouse / monitor / queries",
+      "original_url": "https://docs.databricks.com/compute/sql-warehouse/monitor/queries",
+      "description": "Official Databricks documentation page: /compute/sql-warehouse/monitor/queries",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_sql_warehouse_monitor_queries",
+      "local_path": "data/raw/databricks/docs/official/compute_sql_warehouse_monitor_queries.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / sql-warehouse / real-time",
+      "original_url": "https://docs.databricks.com/compute/sql-warehouse/real-time",
+      "description": "Official Databricks documentation page: /compute/sql-warehouse/real-time",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_sql_warehouse_real_time",
+      "local_path": "data/raw/databricks/docs/official/compute_sql_warehouse_real_time.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / sql-warehouse / real-time-pricing",
+      "original_url": "https://docs.databricks.com/compute/sql-warehouse/real-time-pricing",
+      "description": "Official Databricks documentation page: /compute/sql-warehouse/real-time-pricing",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_sql_warehouse_real_time_pricing",
+      "local_path": "data/raw/databricks/docs/official/compute_sql_warehouse_real_time_pricing.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / sql-warehouse / warehouse-behavior",
+      "original_url": "https://docs.databricks.com/compute/sql-warehouse/warehouse-behavior",
+      "description": "Official Databricks documentation page: /compute/sql-warehouse/warehouse-behavior",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_sql_warehouse_warehouse_behavior",
+      "local_path": "data/raw/databricks/docs/official/compute_sql_warehouse_warehouse_behavior.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / sql-warehouse / warehouse-types",
+      "original_url": "https://docs.databricks.com/compute/sql-warehouse/warehouse-types",
+      "description": "Official Databricks documentation page: /compute/sql-warehouse/warehouse-types",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_sql_warehouse_warehouse_types",
+      "local_path": "data/raw/databricks/docs/official/compute_sql_warehouse_warehouse_types.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / standard-limitations",
+      "original_url": "https://docs.databricks.com/compute/standard-limitations",
+      "description": "Official Databricks documentation page: /compute/standard-limitations",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_standard_limitations",
+      "local_path": "data/raw/databricks/docs/official/compute_standard_limitations.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / standard-overview",
+      "original_url": "https://docs.databricks.com/compute/standard-overview",
+      "description": "Official Databricks documentation page: /compute/standard-overview",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_standard_overview",
+      "local_path": "data/raw/databricks/docs/official/compute_standard_overview.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / troubleshooting",
+      "original_url": "https://docs.databricks.com/compute/troubleshooting",
+      "description": "Official Databricks documentation page: /compute/troubleshooting",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_troubleshooting",
+      "local_path": "data/raw/databricks/docs/official/compute_troubleshooting.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / troubleshooting / cluster-error-codes",
+      "original_url": "https://docs.databricks.com/compute/troubleshooting/cluster-error-codes",
+      "description": "Official Databricks documentation page: /compute/troubleshooting/cluster-error-codes",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_troubleshooting_cluster_error_codes",
+      "local_path": "data/raw/databricks/docs/official/compute_troubleshooting_cluster_error_codes.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / troubleshooting / debugging-spark-ui",
+      "original_url": "https://docs.databricks.com/compute/troubleshooting/debugging-spark-ui",
+      "description": "Official Databricks documentation page: /compute/troubleshooting/debugging-spark-ui",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_troubleshooting_debugging_spark_ui",
+      "local_path": "data/raw/databricks/docs/official/compute_troubleshooting_debugging_spark_ui.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / troubleshooting / query-watchdog",
+      "original_url": "https://docs.databricks.com/compute/troubleshooting/query-watchdog",
+      "description": "Official Databricks documentation page: /compute/troubleshooting/query-watchdog",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_troubleshooting_query_watchdog",
+      "local_path": "data/raw/databricks/docs/official/compute_troubleshooting_query_watchdog.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / use-compute",
+      "original_url": "https://docs.databricks.com/compute/use-compute",
+      "description": "Official Databricks documentation page: /compute/use-compute",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_use_compute",
+      "local_path": "data/raw/databricks/docs/official/compute_use_compute.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "compute / web-terminal",
+      "original_url": "https://docs.databricks.com/compute/web-terminal",
+      "description": "Official Databricks documentation page: /compute/web-terminal",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_compute_web_terminal",
+      "local_path": "data/raw/databricks/docs/official/compute_web_terminal.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "connect / streaming / kafka / authentication",
+      "original_url": "https://docs.databricks.com/connect/streaming/kafka/authentication",
+      "description": "Official Databricks documentation page: /connect/streaming/kafka/authentication",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_connect_streaming_kafka_authentication",
+      "local_path": "data/raw/databricks/docs/official/connect_streaming_kafka_authentication.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "connect / streaming / kafka / faq",
+      "original_url": "https://docs.databricks.com/connect/streaming/kafka/faq",
+      "description": "Official Databricks documentation page: /connect/streaming/kafka/faq",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_connect_streaming_kafka_faq",
+      "local_path": "data/raw/databricks/docs/official/connect_streaming_kafka_faq.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "connect / streaming / kinesis",
+      "original_url": "https://docs.databricks.com/connect/streaming/kinesis",
+      "description": "Official Databricks documentation page: /connect/streaming/kinesis",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_connect_streaming_kinesis",
+      "local_path": "data/raw/databricks/docs/official/connect_streaming_kinesis.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "connect / streaming / pub-sub",
+      "original_url": "https://docs.databricks.com/connect/streaming/pub-sub",
+      "description": "Official Databricks documentation page: /connect/streaming/pub-sub",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_connect_streaming_pub_sub",
+      "local_path": "data/raw/databricks/docs/official/connect_streaming_pub_sub.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "connect / streaming / pulsar",
+      "original_url": "https://docs.databricks.com/connect/streaming/pulsar",
+      "description": "Official Databricks documentation page: /connect/streaming/pulsar",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_connect_streaming_pulsar",
+      "local_path": "data/raw/databricks/docs/official/connect_streaming_pulsar.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-engineering / batch-vs-streaming",
+      "original_url": "https://docs.databricks.com/data-engineering/batch-vs-streaming",
+      "description": "Official Databricks documentation page: /data-engineering/batch-vs-streaming",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_data_engineering_batch_vs_streaming",
+      "local_path": "data/raw/databricks/docs/official/data_engineering_batch_vs_streaming.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-engineering / concepts",
+      "original_url": "https://docs.databricks.com/data-engineering/concepts",
+      "description": "Official Databricks documentation page: /data-engineering/concepts",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_data_engineering_concepts",
+      "local_path": "data/raw/databricks/docs/official/data_engineering_concepts.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-engineering / fan-in-fan-out",
+      "original_url": "https://docs.databricks.com/data-engineering/fan-in-fan-out",
+      "description": "Official Databricks documentation page: /data-engineering/fan-in-fan-out",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_data_engineering_fan_in_fan_out",
+      "local_path": "data/raw/databricks/docs/official/data_engineering_fan_in_fan_out.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-engineering / observability-best-practices",
+      "original_url": "https://docs.databricks.com/data-engineering/observability-best-practices",
+      "description": "Official Databricks documentation page: /data-engineering/observability-best-practices",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_data_engineering_observability_best_practices",
+      "local_path": "data/raw/databricks/docs/official/data_engineering_observability_best_practices.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-engineering / procedural-vs-declarative",
+      "original_url": "https://docs.databricks.com/data-engineering/procedural-vs-declarative",
+      "description": "Official Databricks documentation page: /data-engineering/procedural-vs-declarative",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_data_engineering_procedural_vs_declarative",
+      "local_path": "data/raw/databricks/docs/official/data_engineering_procedural_vs_declarative.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-engineering / schema-evolution",
+      "original_url": "https://docs.databricks.com/data-engineering/schema-evolution",
+      "description": "Official Databricks documentation page: /data-engineering/schema-evolution",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_data_engineering_schema_evolution",
+      "local_path": "data/raw/databricks/docs/official/data_engineering_schema_evolution.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-engineering / tables-views",
+      "original_url": "https://docs.databricks.com/data-engineering/tables-views",
+      "description": "Official Databricks documentation page: /data-engineering/tables-views",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_data_engineering_tables_views",
+      "local_path": "data/raw/databricks/docs/official/data_engineering_tables_views.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-engineering / what-is-cdc",
+      "original_url": "https://docs.databricks.com/data-engineering/what-is-cdc",
+      "description": "Official Databricks documentation page: /data-engineering/what-is-cdc",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_data_engineering_what_is_cdc",
+      "local_path": "data/raw/databricks/docs/official/data_engineering_what_is_cdc.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / abac-vs-rls-cm",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/abac-vs-rls-cm",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/abac-vs-rls-cm",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_abac_vs_rls_cm",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_abac_vs_rls_cm.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / best-practices",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/best-practices",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/best-practices",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_best_practices",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_best_practices.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / common-patterns",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/common-patterns",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/common-patterns",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_common_patterns",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_common_patterns.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / core-concepts",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/core-concepts",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/core-concepts",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_core_concepts",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_core_concepts.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / grant-policies",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/grant-policies",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/grant-policies",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_grant_policies",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_grant_policies.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / mapping-tables",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/mapping-tables",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/mapping-tables",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_mapping_tables",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_mapping_tables.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / multi-domain",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/multi-domain",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/multi-domain",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_multi_domain",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_multi_domain.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / opensharing",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/opensharing",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/opensharing",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_opensharing",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_opensharing.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / performance",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/performance",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/performance",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_performance",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_performance.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / policies",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/policies",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/policies",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_policies",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_policies.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / policy-evaluation",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/policy-evaluation",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/policy-evaluation",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_policy_evaluation",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_policy_evaluation.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / requirements",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/requirements",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/requirements",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_requirements",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_requirements.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / secure-by-default",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/secure-by-default",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/secure-by-default",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_secure_by_default",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_secure_by_default.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / tutorial",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/tutorial",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/tutorial",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_tutorial",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_tutorial.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / abac / tutorial-sql",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/abac/tutorial-sql",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/abac/tutorial-sql",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_abac_tutorial_sql",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_abac_tutorial_sql.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / access-control / permissions-concepts",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/access-control/permissions-concepts",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/access-control/permissions-concepts",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_access_control_permissions_con",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_access_control_permissions_con.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / access-control / privileges-reference",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/access-control/privileges-reference",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/access-control/privileges-reference",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_access_control_privileges_refe",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_access_control_privileges_refe.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / access-control / table-acls",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/access-control/table-acls",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/access-control/table-acls",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_access_control_table_acls",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_access_control_table_acls.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / access-control / table-acls / any-file",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/access-control/table-acls/any-file",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/access-control/table-acls/any-file",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_access_control_table_acls_any",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_access_control_table_acls_any.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / access-control / table-acls / object-privileges",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/access-control/table-acls/object-privileges",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/access-control/table-acls/object-privileges",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_access_control_table_acls_obje",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_access_control_table_acls_obje.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / access-control / table-acls / table-acl",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/access-control/table-acls/table-acl",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/access-control/table-acls/table-acl",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_access_control_table_acls_tabl",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_access_control_table_acls_tabl.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / access-control / workspace-catalog-binding",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/access-control/workspace-catalog-binding",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/access-control/workspace-catalog-binding",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_access_control_workspace_catal",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_access_control_workspace_catal.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / best-practices",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/best-practices",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/best-practices",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_best_practices",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_best_practices.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / certify-deprecate-data",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/certify-deprecate-data",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/certify-deprecate-data",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_certify_deprecate_data",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_certify_deprecate_data.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / create-metastore",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/create-metastore",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/create-metastore",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_create_metastore",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_create_metastore.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / data-classification",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/data-classification",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/data-classification",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_data_classification",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_data_classification.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / data-classification-custom-classifiers",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/data-classification-custom-classifiers",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/data-classification-custom-classifiers",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_data_classification_custom_cla",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_data_classification_custom_cla.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / data-classification-tags",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/data-classification-tags",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/data-classification-tags",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_data_classification_tags",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_data_classification_tags.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / data-discovery",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/data-discovery",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/data-discovery",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_data_discovery",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_data_discovery.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / data-quality-monitoring / anomaly-detection",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/data-quality-monitoring/anomaly-detection",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/data-quality-monitoring/anomaly-detection",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_data_quality_monitoring_anomal",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_data_quality_monitoring_anomal.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / data-quality-monitoring / data-profiling",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/data-quality-monitoring/data-profiling",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/data-quality-monitoring/data-profiling",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_data_quality_monitoring_data_p",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_data_quality_monitoring_data_p.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / disable-hms",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/disable-hms",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/disable-hms",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_disable_hms",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_disable_hms.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / enable-workspaces",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/enable-workspaces",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/enable-workspaces",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_enable_workspaces",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_enable_workspaces.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / external-lineage",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/external-lineage",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/external-lineage",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_external_lineage",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_external_lineage.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / filters-and-masks / manually-apply",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/filters-and-masks/manually-apply",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/filters-and-masks/manually-apply",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_filters_and_masks_manually_app",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_filters_and_masks_manually_app.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / hive-metastore",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/hive-metastore",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/hive-metastore",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_hive_metastore",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_hive_metastore.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / jobs-update",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/jobs-update",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/jobs-update",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_jobs_update",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_jobs_update.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / manage-metastore",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/manage-metastore",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/manage-metastore",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_manage_metastore",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_manage_metastore.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / manage-privileges / access-request-destinations",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/manage-privileges/access-request-destinations",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/manage-privileges/access-request-destinations",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_manage_privileges_access_reque",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_manage_privileges_access_reque.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / manage-privileges / admin-privileges",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/manage-privileges/admin-privileges",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/manage-privileges/admin-privileges",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_manage_privileges_admin_privil",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_manage_privileges_admin_privil.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / manage-privileges / allowlist",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/manage-privileges/allowlist",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/manage-privileges/allowlist",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_manage_privileges_allowlist",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_manage_privileges_allowlist.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / managed-versus-external",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/managed-versus-external",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/managed-versus-external",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_managed_versus_external",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_managed_versus_external.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / object-storage-lifecycle",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/object-storage-lifecycle",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/object-storage-lifecycle",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_object_storage_lifecycle",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_object_storage_lifecycle.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / requirements",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/requirements",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/requirements",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_requirements",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_requirements.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / securable-objects",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/securable-objects",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/securable-objects",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_securable_objects",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_securable_objects.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / service-policies",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/service-policies",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/service-policies",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_service_policies",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_service_policies.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / service-policies / create-service-policy",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/service-policies/create-service-policy",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/service-policies/create-service-policy",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_service_policies_create_servic",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_service_policies_create_servic.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / service-policies / policy-function-reference",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/service-policies/policy-function-reference",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/service-policies/policy-function-reference",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_service_policies_policy_functi",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_service_policies_policy_functi.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / storage-conflicts",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/storage-conflicts",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/storage-conflicts",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_storage_conflicts",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_storage_conflicts.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / ucx",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/ucx",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/ucx",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_ucx",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_ucx.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / upgrade",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/upgrade",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/upgrade",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_upgrade",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_upgrade.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "data-governance / unity-catalog / upgrade / uc-only-migration",
+      "original_url": "https://docs.databricks.com/data-governance/unity-catalog/upgrade/uc-only-migration",
+      "description": "Official Databricks documentation page: /data-governance/unity-catalog/upgrade/uc-only-migration",
+      "topic_bucket_ids": [
+        "governance_security"
+      ],
+      "source_id": "doc_data_governance_unity_catalog_upgrade_uc_only_migration",
+      "local_path": "data/raw/databricks/docs/official/data_governance_unity_catalog_upgrade_uc_only_migration.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "delta / best-practices",
+      "original_url": "https://docs.databricks.com/delta/best-practices",
+      "description": "Official Databricks documentation page: /delta/best-practices",
+      "topic_bucket_ids": [
+        "lakehouse_delta"
+      ],
+      "source_id": "doc_delta_best_practices",
+      "local_path": "data/raw/databricks/docs/official/delta_best_practices.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "delta / merge",
+      "original_url": "https://docs.databricks.com/delta/merge",
+      "description": "Official Databricks documentation page: /delta/merge",
+      "topic_bucket_ids": [
+        "lakehouse_delta"
+      ],
+      "source_id": "doc_delta_merge",
+      "local_path": "data/raw/databricks/docs/official/delta_merge.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "delta / s3-limitations",
+      "original_url": "https://docs.databricks.com/delta/s3-limitations",
+      "description": "Official Databricks documentation page: /delta/s3-limitations",
+      "topic_bucket_ids": [
+        "lakehouse_delta"
+      ],
+      "source_id": "doc_delta_s3_limitations",
+      "local_path": "data/raw/databricks/docs/official/delta_s3_limitations.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "delta / selective-overwrite",
+      "original_url": "https://docs.databricks.com/delta/selective-overwrite",
+      "description": "Official Databricks documentation page: /delta/selective-overwrite",
+      "topic_bucket_ids": [
+        "lakehouse_delta"
+      ],
+      "source_id": "doc_delta_selective_overwrite",
+      "local_path": "data/raw/databricks/docs/official/delta_selective_overwrite.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "delta / uniform",
+      "original_url": "https://docs.databricks.com/delta/uniform",
+      "description": "Official Databricks documentation page: /delta/uniform",
+      "topic_bucket_ids": [
+        "lakehouse_delta"
+      ],
+      "source_id": "doc_delta_uniform",
+      "local_path": "data/raw/databricks/docs/official/delta_uniform.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "designer / build-transformation",
+      "original_url": "https://docs.databricks.com/designer/build-transformation",
+      "description": "Official Databricks documentation page: /designer/build-transformation",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_designer_build_transformation",
+      "local_path": "data/raw/databricks/docs/official/designer_build_transformation.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "designer / built-in-operators",
+      "original_url": "https://docs.databricks.com/designer/built-in-operators",
+      "description": "Official Databricks documentation page: /designer/built-in-operators",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_designer_built_in_operators",
+      "local_path": "data/raw/databricks/docs/official/designer_built_in_operators.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "designer / ingest-data",
+      "original_url": "https://docs.databricks.com/designer/ingest-data",
+      "description": "Official Databricks documentation page: /designer/ingest-data",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_designer_ingest_data",
+      "local_path": "data/raw/databricks/docs/official/designer_ingest_data.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "designer / operators-yaml-ref",
+      "original_url": "https://docs.databricks.com/designer/operators-yaml-ref",
+      "description": "Official Databricks documentation page: /designer/operators-yaml-ref",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_designer_operators_yaml_ref",
+      "local_path": "data/raw/databricks/docs/official/designer_operators_yaml_ref.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "designer / tutorial-all-ui-widgets",
+      "original_url": "https://docs.databricks.com/designer/tutorial-all-ui-widgets",
+      "description": "Official Databricks documentation page: /designer/tutorial-all-ui-widgets",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_designer_tutorial_all_ui_widgets",
+      "local_path": "data/raw/databricks/docs/official/designer_tutorial_all_ui_widgets.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "designer / tutorial-compound-interest-udf",
+      "original_url": "https://docs.databricks.com/designer/tutorial-compound-interest-udf",
+      "description": "Official Databricks documentation page: /designer/tutorial-compound-interest-udf",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_designer_tutorial_compound_interest_udf",
+      "local_path": "data/raw/databricks/docs/official/designer_tutorial_compound_interest_udf.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "designer / tutorial-gmail-email-sender",
+      "original_url": "https://docs.databricks.com/designer/tutorial-gmail-email-sender",
+      "description": "Official Databricks documentation page: /designer/tutorial-gmail-email-sender",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_designer_tutorial_gmail_email_sender",
+      "local_path": "data/raw/databricks/docs/official/designer_tutorial_gmail_email_sender.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "designer / tutorial-kmeans-clustering-udtf",
+      "original_url": "https://docs.databricks.com/designer/tutorial-kmeans-clustering-udtf",
+      "description": "Official Databricks documentation page: /designer/tutorial-kmeans-clustering-udtf",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_designer_tutorial_kmeans_clustering_udtf",
+      "local_path": "data/raw/databricks/docs/official/designer_tutorial_kmeans_clustering_udtf.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "designer / tutorial-send-slack-message-sql-udf",
+      "original_url": "https://docs.databricks.com/designer/tutorial-send-slack-message-sql-udf",
+      "description": "Official Databricks documentation page: /designer/tutorial-send-slack-message-sql-udf",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_designer_tutorial_send_slack_message_sql_udf",
+      "local_path": "data/raw/databricks/docs/official/designer_tutorial_send_slack_message_sql_udf.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "designer / user-operators",
+      "original_url": "https://docs.databricks.com/designer/user-operators",
+      "description": "Official Databricks documentation page: /designer/user-operators",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_designer_user_operators",
+      "local_path": "data/raw/databricks/docs/official/designer_user_operators.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "designer / what-is-lakeflow-designer",
+      "original_url": "https://docs.databricks.com/designer/what-is-lakeflow-designer",
+      "description": "Official Databricks documentation page: /designer/what-is-lakeflow-designer",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_designer_what_is_lakeflow_designer",
+      "local_path": "data/raw/databricks/docs/official/designer_what_is_lakeflow_designer.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "dev-tools / ci-cd / azure-devops",
+      "original_url": "https://docs.databricks.com/dev-tools/ci-cd/azure-devops",
+      "description": "Official Databricks documentation page: /dev-tools/ci-cd/azure-devops",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_dev_tools_ci_cd_azure_devops",
+      "local_path": "data/raw/databricks/docs/official/dev_tools_ci_cd_azure_devops.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "dev-tools / ci-cd / flows",
+      "original_url": "https://docs.databricks.com/dev-tools/ci-cd/flows",
+      "description": "Official Databricks documentation page: /dev-tools/ci-cd/flows",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_dev_tools_ci_cd_flows",
+      "local_path": "data/raw/databricks/docs/official/dev_tools_ci_cd_flows.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "dev-tools / ci-cd / jenkins",
+      "original_url": "https://docs.databricks.com/dev-tools/ci-cd/jenkins",
+      "description": "Official Databricks documentation page: /dev-tools/ci-cd/jenkins",
+      "topic_bucket_ids": [
+        "production_pipelines"
+      ],
+      "source_id": "doc_dev_tools_ci_cd_jenkins",
+      "local_path": "data/raw/databricks/docs/official/dev_tools_ci_cd_jenkins.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "files / cwd-dbr-14",
+      "original_url": "https://docs.databricks.com/files/cwd-dbr-14",
+      "description": "Official Databricks documentation page: /files/cwd-dbr-14",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_files_cwd_dbr_14",
+      "local_path": "data/raw/databricks/docs/official/files_cwd_dbr_14.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "files / files-recommendations",
+      "original_url": "https://docs.databricks.com/files/files-recommendations",
+      "description": "Official Databricks documentation page: /files/files-recommendations",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_files_files_recommendations",
+      "local_path": "data/raw/databricks/docs/official/files_files_recommendations.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "files / python-unit-tests",
+      "original_url": "https://docs.databricks.com/files/python-unit-tests",
+      "description": "Official Databricks documentation page: /files/python-unit-tests",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_files_python_unit_tests",
+      "local_path": "data/raw/databricks/docs/official/files_python_unit_tests.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "files / unzip-files",
+      "original_url": "https://docs.databricks.com/files/unzip-files",
+      "description": "Official Databricks documentation page: /files/unzip-files",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_files_unzip_files",
+      "local_path": "data/raw/databricks/docs/official/files_unzip_files.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "files / volumes",
+      "original_url": "https://docs.databricks.com/files/volumes",
+      "description": "Official Databricks documentation page: /files/volumes",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_files_volumes",
+      "local_path": "data/raw/databricks/docs/official/files_volumes.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "files / workspace-basics",
+      "original_url": "https://docs.databricks.com/files/workspace-basics",
+      "description": "Official Databricks documentation page: /files/workspace-basics",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_files_workspace_basics",
+      "local_path": "data/raw/databricks/docs/official/files_workspace_basics.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "files / workspace-init-scripts",
+      "original_url": "https://docs.databricks.com/files/workspace-init-scripts",
+      "description": "Official Databricks documentation page: /files/workspace-init-scripts",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_files_workspace_init_scripts",
+      "local_path": "data/raw/databricks/docs/official/files_workspace_init_scripts.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "files / workspace-interact",
+      "original_url": "https://docs.databricks.com/files/workspace-interact",
+      "description": "Official Databricks documentation page: /files/workspace-interact",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_files_workspace_interact",
+      "local_path": "data/raw/databricks/docs/official/files_workspace_interact.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "files / workspace-modules",
+      "original_url": "https://docs.databricks.com/files/workspace-modules",
+      "description": "Official Databricks documentation page: /files/workspace-modules",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_files_workspace_modules",
+      "local_path": "data/raw/databricks/docs/official/files_workspace_modules.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "files / write-data",
+      "original_url": "https://docs.databricks.com/files/write-data",
+      "description": "Official Databricks documentation page: /files/write-data",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_files_write_data",
+      "local_path": "data/raw/databricks/docs/official/files_write_data.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "getting-started",
+      "original_url": "https://docs.databricks.com/getting-started",
+      "description": "Official Databricks documentation page: /getting-started",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_getting_started",
+      "local_path": "data/raw/databricks/docs/official/getting_started.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "getting-started / architecture",
+      "original_url": "https://docs.databricks.com/getting-started/architecture",
+      "description": "Official Databricks documentation page: /getting-started/architecture",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_getting_started_architecture",
+      "local_path": "data/raw/databricks/docs/official/getting_started_architecture.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "getting-started / cloud-setup",
+      "original_url": "https://docs.databricks.com/getting-started/cloud-setup",
+      "description": "Official Databricks documentation page: /getting-started/cloud-setup",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_getting_started_cloud_setup",
+      "local_path": "data/raw/databricks/docs/official/getting_started_cloud_setup.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "getting-started / connect",
+      "original_url": "https://docs.databricks.com/getting-started/connect",
+      "description": "Official Databricks documentation page: /getting-started/connect",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_getting_started_connect",
+      "local_path": "data/raw/databricks/docs/official/getting_started_connect.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "getting-started / express-setup",
+      "original_url": "https://docs.databricks.com/getting-started/express-setup",
+      "description": "Official Databricks documentation page: /getting-started/express-setup",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_getting_started_express_setup",
+      "local_path": "data/raw/databricks/docs/official/getting_started_express_setup.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "getting-started / free-edition-limitations",
+      "original_url": "https://docs.databricks.com/getting-started/free-edition-limitations",
+      "description": "Official Databricks documentation page: /getting-started/free-edition-limitations",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_getting_started_free_edition_limitations",
+      "local_path": "data/raw/databricks/docs/official/getting_started_free_edition_limitations.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "getting-started / free-training",
+      "original_url": "https://docs.databricks.com/getting-started/free-training",
+      "description": "Official Databricks documentation page: /getting-started/free-training",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_getting_started_free_training",
+      "local_path": "data/raw/databricks/docs/official/getting_started_free_training.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "getting-started / free-trial-vs-free-edition",
+      "original_url": "https://docs.databricks.com/getting-started/free-trial-vs-free-edition",
+      "description": "Official Databricks documentation page: /getting-started/free-trial-vs-free-edition",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_getting_started_free_trial_vs_free_edition",
+      "local_path": "data/raw/databricks/docs/official/getting_started_free_trial_vs_free_edition.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "getting-started / high-level-architecture",
+      "original_url": "https://docs.databricks.com/getting-started/high-level-architecture",
+      "description": "Official Databricks documentation page: /getting-started/high-level-architecture",
+      "topic_bucket_ids": [
+        "databricks_basics"
+      ],
+      "source_id": "doc_getting_started_high_level_architecture",
+      "local_path": "data/raw/databricks/docs/official/getting_started_high_level_architecture.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "iceberg / clone",
+      "original_url": "https://docs.databricks.com/iceberg/clone",
+      "description": "Official Databricks documentation page: /iceberg/clone",
+      "topic_bucket_ids": [
+        "lakehouse_delta"
+      ],
+      "source_id": "doc_iceberg_clone",
+      "local_path": "data/raw/databricks/docs/official/iceberg_clone.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "iceberg / iceberg-v3",
+      "original_url": "https://docs.databricks.com/iceberg/iceberg-v3",
+      "description": "Official Databricks documentation page: /iceberg/iceberg-v3",
+      "topic_bucket_ids": [
+        "lakehouse_delta"
+      ],
+      "source_id": "doc_iceberg_iceberg_v3",
+      "local_path": "data/raw/databricks/docs/official/iceberg_iceberg_v3.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / add-data-external-locations",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/add-data-external-locations",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/add-data-external-locations",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_add_data_external_locations",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_add_data_external_locations.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / best-practices",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/best-practices",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/best-practices",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_best_practices",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_best_practices.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / directory-listing-mode",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/directory-listing-mode",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/directory-listing-mode",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_directory_listing",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_directory_listing.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / faq",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/faq",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/faq",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_faq",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_faq.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / file-detection-modes",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/file-detection-modes",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/file-detection-modes",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_file_detection_mo",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_file_detection_mo.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / file-events-explained",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/file-events-explained",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/file-events-explained",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_file_events_expla",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_file_events_expla.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / file-notification-mode",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/file-notification-mode",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/file-notification-mode",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_file_notification",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_file_notification.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / migrating-to-file-events",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/migrating-to-file-events",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/migrating-to-file-events",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_migrating_to_file",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_migrating_to_file.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / observability",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/observability",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/observability",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_observability",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_observability.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / patterns",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/patterns",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/patterns",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_patterns",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_patterns.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / production",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/production",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/production",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_production",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_production.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / schema",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/schema",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/schema",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_schema",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_schema.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / type-widening",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/type-widening",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/type-widening",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_type_widening",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_type_widening.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / auto-loader / unity-catalog",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/auto-loader/unity-catalog",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/auto-loader/unity-catalog",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_auto_loader_unity_catalog",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_auto_loader_unity_catalog.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / copy-into",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/copy-into",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/copy-into",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_copy_into",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_copy_into.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / copy-into / configure-data-access",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/copy-into/configure-data-access",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/copy-into/configure-data-access",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_copy_into_configure_data_acce",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_copy_into_configure_data_acce.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / copy-into / examples",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/copy-into/examples",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/copy-into/examples",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_copy_into_examples",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_copy_into_examples.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / copy-into / generate-temporary-credentials",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/copy-into/generate-temporary-credentials",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/copy-into/generate-temporary-credentials",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_copy_into_generate_temporary",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_copy_into_generate_temporary.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / copy-into / temporary-credentials",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/copy-into/temporary-credentials",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/copy-into/temporary-credentials",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_copy_into_temporary_credentia",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_copy_into_temporary_credentia.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / copy-into / tutorial-dbsql",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/copy-into/tutorial-dbsql",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/copy-into/tutorial-dbsql",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_copy_into_tutorial_dbsql",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_copy_into_tutorial_dbsql.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / copy-into / tutorial-notebook",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/copy-into/tutorial-notebook",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/copy-into/tutorial-notebook",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_copy_into_tutorial_notebook",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_copy_into_tutorial_notebook.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / copy-into / unity-catalog",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/copy-into/unity-catalog",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/copy-into/unity-catalog",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_copy_into_unity_catalog",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_copy_into_unity_catalog.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / cloud-object-storage / onboard-data",
+      "original_url": "https://docs.databricks.com/ingestion/cloud-object-storage/onboard-data",
+      "description": "Official Databricks documentation page: /ingestion/cloud-object-storage/onboard-data",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_cloud_object_storage_onboard_data",
+      "local_path": "data/raw/databricks/docs/official/ingestion_cloud_object_storage_onboard_data.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / community-build",
+      "original_url": "https://docs.databricks.com/ingestion/community-build",
+      "description": "Official Databricks documentation page: /ingestion/community-build",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_community_build",
+      "local_path": "data/raw/databricks/docs/official/ingestion_community_build.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / community-connectors",
+      "original_url": "https://docs.databricks.com/ingestion/community-connectors",
+      "description": "Official Databricks documentation page: /ingestion/community-connectors",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_community_connectors",
+      "local_path": "data/raw/databricks/docs/official/ingestion_community_connectors.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / community-deploy",
+      "original_url": "https://docs.databricks.com/ingestion/community-deploy",
+      "description": "Official Databricks documentation page: /ingestion/community-deploy",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_community_deploy",
+      "local_path": "data/raw/databricks/docs/official/ingestion_community_deploy.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / create-or-modify-table",
+      "original_url": "https://docs.databricks.com/ingestion/create-or-modify-table",
+      "description": "Official Databricks documentation page: /ingestion/create-or-modify-table",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_create_or_modify_table",
+      "local_path": "data/raw/databricks/docs/official/ingestion_create_or_modify_table.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / data-migration",
+      "original_url": "https://docs.databricks.com/ingestion/data-migration",
+      "description": "Official Databricks documentation page: /ingestion/data-migration",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_data_migration",
+      "local_path": "data/raw/databricks/docs/official/ingestion_data_migration.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / data-migration / clone-parquet",
+      "original_url": "https://docs.databricks.com/ingestion/data-migration/clone-parquet",
+      "description": "Official Databricks documentation page: /ingestion/data-migration/clone-parquet",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_data_migration_clone_parquet",
+      "local_path": "data/raw/databricks/docs/official/ingestion_data_migration_clone_parquet.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / data-migration / convert-to-delta",
+      "original_url": "https://docs.databricks.com/ingestion/data-migration/convert-to-delta",
+      "description": "Official Databricks documentation page: /ingestion/data-migration/convert-to-delta",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_data_migration_convert_to_delta",
+      "local_path": "data/raw/databricks/docs/official/ingestion_data_migration_convert_to_delta.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / file-metadata-column",
+      "original_url": "https://docs.databricks.com/ingestion/file-metadata-column",
+      "description": "Official Databricks documentation page: /ingestion/file-metadata-column",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_file_metadata_column",
+      "local_path": "data/raw/databricks/docs/official/ingestion_file_metadata_column.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / google-drive",
+      "original_url": "https://docs.databricks.com/ingestion/google-drive",
+      "description": "Official Databricks documentation page: /ingestion/google-drive",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_google_drive",
+      "local_path": "data/raw/databricks/docs/official/ingestion_google_drive.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / aha",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/aha",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/aha",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_aha",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_aha.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / aha-connection",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/aha-connection",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/aha-connection",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_aha_connection",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_aha_connection.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / aha-faq",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/aha-faq",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/aha-faq",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_aha_faq",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_aha_faq.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / aha-limits",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/aha-limits",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/aha-limits",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_aha_limits",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_aha_limits.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / aha-pipeline",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/aha-pipeline",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/aha-pipeline",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_aha_pipeline",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_aha_pipeline.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / aha-reference",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/aha-reference",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/aha-reference",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_aha_reference",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_aha_reference.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / aha-source-setup",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/aha-source-setup",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/aha-source-setup",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_aha_source_setup",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_aha_source_setup.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / aha-troubleshoot",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/aha-troubleshoot",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/aha-troubleshoot",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_aha_troubleshoot",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_aha_troubleshoot.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / aws-sql-db-firewall",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/aws-sql-db-firewall",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/aws-sql-db-firewall",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_aws_sql_db_firewall",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_aws_sql_db_firewall.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / column-selection",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/column-selection",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/column-selection",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_column_selection",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_column_selection.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / common-patterns",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/common-patterns",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/common-patterns",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_common_patterns",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_common_patterns.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / confluence",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/confluence",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/confluence",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_confluence",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_confluence.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / confluence-connection",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/confluence-connection",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/confluence-connection",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_confluence_connection",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_confluence_connection.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / confluence-faq",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/confluence-faq",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/confluence-faq",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_confluence_faq",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_confluence_faq.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / confluence-limits",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/confluence-limits",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/confluence-limits",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_confluence_limits",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_confluence_limits.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / confluence-pipeline",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/confluence-pipeline",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/confluence-pipeline",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_confluence_pipeline",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_confluence_pipeline.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / confluence-reference",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/confluence-reference",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/confluence-reference",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_confluence_reference",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_confluence_reference.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / confluence-source-setup",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/confluence-source-setup",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/confluence-source-setup",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_confluence_source_setup",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_confluence_source_setup.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / confluence-troubleshoot",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/confluence-troubleshoot",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/confluence-troubleshoot",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_confluence_troubleshoot",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_confluence_troubleshoot.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / d365",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/d365",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/d365",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_d365",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_d365.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / d365-connection",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/d365-connection",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/d365-connection",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_d365_connection",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_d365_connection.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / d365-faq",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/d365-faq",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/d365-faq",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_d365_faq",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_d365_faq.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / d365-limits",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/d365-limits",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/d365-limits",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_d365_limits",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_d365_limits.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / d365-pipeline",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/d365-pipeline",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/d365-pipeline",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_d365_pipeline",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_d365_pipeline.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / d365-reference",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/d365-reference",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/d365-reference",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_d365_reference",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_d365_reference.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / d365-source-setup",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/d365-source-setup",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/d365-source-setup",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_d365_source_setup",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_d365_source_setup.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / d365-troubleshoot",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/d365-troubleshoot",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/d365-troubleshoot",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_d365_troubleshoot",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_d365_troubleshoot.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / faq",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/faq",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/faq",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_faq",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_faq.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / full-refresh",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/full-refresh",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/full-refresh",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_full_refresh",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_full_refresh.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / gateway-event-logs",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/gateway-event-logs",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/gateway-event-logs",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_gateway_event_logs",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_gateway_event_logs.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / github-connection",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/github-connection",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/github-connection",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_github_connection",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_github_connection.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / github-limits",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/github-limits",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/github-limits",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_github_limits",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_github_limits.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / github-overview",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/github-overview",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/github-overview",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_github_overview",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_github_overview.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / github-pipeline",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/github-pipeline",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/github-pipeline",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_github_pipeline",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_github_pipeline.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / github-reference",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/github-reference",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/github-reference",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_github_reference",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_github_reference.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / github-source-setup",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/github-source-setup",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/github-source-setup",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_github_source_setup",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_github_source_setup.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-ads-concepts",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-ads-concepts",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-ads-concepts",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_ads_concepts",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_ads_concepts.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-ads-connection",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-ads-connection",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-ads-connection",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_ads_connection",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_ads_connection.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-ads-limits",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-ads-limits",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-ads-limits",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_ads_limits",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_ads_limits.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-ads-overview",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-ads-overview",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-ads-overview",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_ads_overview",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_ads_overview.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-ads-pipeline",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-ads-pipeline",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-ads-pipeline",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_ads_pipeline",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_ads_pipeline.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-ads-reference",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-ads-reference",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-ads-reference",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_ads_reference",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_ads_reference.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-ads-source-setup",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-ads-source-setup",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-ads-source-setup",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_ads_source_setup",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_ads_source_setup.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-ads-troubleshoot",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-ads-troubleshoot",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-ads-troubleshoot",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_ads_troubleshoot",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_ads_troubleshoot.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-analytics",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-analytics",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-analytics",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_analytics",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_analytics.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-analytics-concepts",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-analytics-concepts",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-analytics-concepts",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_analytics_concepts",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_analytics_concepts.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-analytics-connection",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-analytics-connection",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-analytics-connection",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_analytics_connection",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_analytics_connection.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-analytics-faq",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-analytics-faq",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-analytics-faq",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_analytics_faq",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_analytics_faq.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-analytics-limits",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-analytics-limits",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-analytics-limits",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_analytics_limits",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_analytics_limits.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-analytics-pipeline",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-analytics-pipeline",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-analytics-pipeline",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_analytics_pipeline",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_analytics_pipeline.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-analytics-reference",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-analytics-reference",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-analytics-reference",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_analytics_reference",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_analytics_reference.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-analytics-source-setup",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-analytics-source-setup",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-analytics-source-setup",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_analytics_source_setup",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_analytics_source_setup.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-analytics-troubleshoot",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-analytics-troubleshoot",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-analytics-troubleshoot",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_analytics_troubleshoot",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_analytics_troubleshoot.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-drive",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-drive",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-drive",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_drive",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_drive.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-drive-connection",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-drive-connection",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-drive-connection",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_drive_connection",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_drive_connection.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-drive-faq",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-drive-faq",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-drive-faq",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_drive_faq",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_drive_faq.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-drive-limits",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-drive-limits",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-drive-limits",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_drive_limits",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_drive_limits.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-drive-pipeline",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-drive-pipeline",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-drive-pipeline",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_drive_pipeline",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_drive_pipeline.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-drive-reference",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-drive-reference",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-drive-reference",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_drive_reference",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_drive_reference.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-drive-source-setup",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-drive-source-setup",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-drive-source-setup",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_drive_source_setup",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_drive_source_setup.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / google-drive-troubleshoot",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/google-drive-troubleshoot",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/google-drive-troubleshoot",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_google_drive_troubleshoot",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_google_drive_troubleshoot.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / hubspot-connection",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/hubspot-connection",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/hubspot-connection",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_hubspot_connection",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_hubspot_connection.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / hubspot-limits",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/hubspot-limits",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/hubspot-limits",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_hubspot_limits",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_hubspot_limits.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / hubspot-overview",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/hubspot-overview",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/hubspot-overview",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_hubspot_overview",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_hubspot_overview.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / hubspot-pipeline",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/hubspot-pipeline",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/hubspot-pipeline",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_hubspot_pipeline",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_hubspot_pipeline.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    },
+    {
+      "title": "ingestion / lakeflow-connect / hubspot-reference",
+      "original_url": "https://docs.databricks.com/ingestion/lakeflow-connect/hubspot-reference",
+      "description": "Official Databricks documentation page: /ingestion/lakeflow-connect/hubspot-reference",
+      "topic_bucket_ids": [
+        "ingestion_incremental"
+      ],
+      "source_id": "doc_ingestion_lakeflow_connect_hubspot_reference",
+      "local_path": "data/raw/databricks/docs/official/ingestion_lakeflow_connect_hubspot_reference.md",
+      "resource_type": "documentation",
+      "discovery_source": "sitemap"
+    }
+  ]
+}

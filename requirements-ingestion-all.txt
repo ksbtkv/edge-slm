@@ -1,0 +1,3 @@
+-r requirements-ingestion-pdf.txt
+-r requirements-ingestion-pptx.txt
+-r requirements-ingestion-media.txt
