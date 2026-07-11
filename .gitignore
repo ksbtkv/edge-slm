@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Local sandbox runtime (do NOT commit local env / venvs)
+sandbox/docker/.env
+sandbox/native/.venv/
+
+# OS
+.DS_Store
+
+# NOTE: sandbox/results/ IS intentionally tracked — the benchmark JSON and
+# REPORT.md are project deliverables (Stage 0 findings).
+
+# Stage 2: large local data (study_note_tasks.jsonl handoff, generated
+# instruction pairs, failure logs) — not committed, same convention as
+# data/processed/ in the edge_slm pipeline repo.
+stage2_dataset/data/
