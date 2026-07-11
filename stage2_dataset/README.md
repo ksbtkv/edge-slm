@@ -43,6 +43,10 @@ questions) and are now settled for this implementation:
 
 ## Usage
 
+Run all of this from a terminal **inside an already-running Ohm JupyterLab
+session** — `ohm test` executes in your current notebook pod, it doesn't
+submit anything itself (see the compute-compatibility notes below).
+
 ```bash
 # 1. Get the Stage 1.5 handoff data into place
 mkdir -p data
@@ -57,6 +61,10 @@ ohm test --command "python scripts/generate_instruction_pairs.py \
 
 # 3. Full run
 bash ohm/submit_teacher_gen.sh
+
+# 4. Find the actual job name (a suffix is appended on submit) and follow it
+ohm list
+ohm logs stage2-teacher-gen-<suffix>
 ```
 
 Output: `data/instruction_pairs.jsonl` (one Alpaca record per successfully
@@ -64,6 +72,10 @@ validated task) and `data/failures.jsonl` (tasks that never produced valid
 JSON, for manual review or a future repair pass).
 
 ## Pawsey/Ohm compute compatibility (checked 2026-07-11)
+
+Cross-checked against the actual platform deck
+(`ohm-infrav2-architecture-slides.pdf`, dated 2026-07-03), not just the
+informal Ohm notes in the top-level CLAUDE.md.
 
 - **`requirements.txt` is version-pinned, not floored**, specifically because
   of this: unpinned `vllm>=0.6.3` resolves to whatever's newest on PyPI right
@@ -79,11 +91,22 @@ JSON, for manual review or a future repair pass).
   the 50GiB `/home/jovyan` quota alongside the dataset files, but check
   `du -h -d 1 ~/.cache/huggingface` isn't already under pressure from other
   cached models before this job downloads.
-- **GPU/image request matches Ohm's documented profiles exactly**:
-  `--gpus 1 --cpu 16 --memory 96Gi` is the "1 GPU" profile as specified in
-  the Ohm quick reference, `--image pytorch-llm` is one of the two allowed
-  images. Single-GPU, single-node (`--tensor-parallel-size 1`), so the
-  "multi-node distributed training is early/unpolished" caveat doesn't apply.
+- **GPU/image request is valid but above the job default** — `--image
+  pytorch-llm` is one of the two allowed images. `--gpus 1 --cpu 16 --memory
+  96Gi` matches the *interactive notebook* "1 GPU" profile (deck slide 5),
+  but submitted jobs actually default to CPU 8 / memory 48Gi if left
+  unspecified (deck slide 12) — a separate, smaller default from the
+  notebook profile table. The explicit 16 CPU/96GiB request is intentional
+  headroom for model loading + batch generation, not a misreading of the
+  defaults, but it's worth knowing it's above what's strictly needed.
+  Single-GPU, single-node (`--tensor-parallel-size 1`), so the "multi-node
+  distributed training is still an early workflow" caveat doesn't apply.
+- **`ohm test` runs in your current notebook pod, not as a separate
+  submission** — it's for catching path/import/argument bugs before
+  requesting a GPU job, run from a JupyterLab terminal you already have
+  open. `ohm submit` is the actual job scheduler call. Submitted job names
+  get a random suffix appended — use `ohm list` to find the exact name
+  before `ohm logs`/`ohm status`/`ohm cancel`.
 - **Not verified from here** (no access to an actual Ohm session): whether
   the AWQ CUDA kernels vLLM ships actually run correctly on Ohm's specific
   A100 driver/CUDA 12.4 stack, and whether `autoawq`'s prebuilt wheel matches
