@@ -107,8 +107,9 @@ def main() -> None:
     ap.add_argument("--input", required=True, type=Path)
     ap.add_argument("--output", required=True, type=Path)
     ap.add_argument("--failures", required=True, type=Path)
-    ap.add_argument("--model", default="meta-llama/Llama-3.3-70B-Instruct")
-    ap.add_argument("--tensor-parallel-size", type=int, default=4)
+    ap.add_argument("--model", default="Qwen/Qwen2.5-32B-Instruct-AWQ")
+    ap.add_argument("--tensor-parallel-size", type=int, default=1)
+    ap.add_argument("--quantization", default="awq", help="pass '' to disable (e.g. for an unquantized checkpoint)")
     ap.add_argument("--max-repair-attempts", type=int, default=2)
     ap.add_argument("--max-tokens", type=int, default=2048)
     ap.add_argument("--temperature", type=float, default=0.2)
@@ -122,7 +123,11 @@ def main() -> None:
         tasks = tasks[: args.limit]
     print(f"Loaded {len(tasks)} tasks from {args.input}", file=sys.stderr)
 
-    llm = LLM(model=args.model, tensor_parallel_size=args.tensor_parallel_size)
+    llm = LLM(
+        model=args.model,
+        tensor_parallel_size=args.tensor_parallel_size,
+        quantization=args.quantization or None,
+    )
     sampling = SamplingParams(temperature=args.temperature, max_tokens=args.max_tokens)
 
     prompts = [t["prompt"] for t in tasks]
