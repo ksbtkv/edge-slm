@@ -1,0 +1,7 @@
+# Pinned to match the Ohm pytorch-llm image's PyTorch 2.5.1 exactly, so pip
+# does NOT pull a newer torch build (verified live against PyPI on
+# 2026-07-11: vllm's unpinned latest, 0.24.0, requires torch==2.11.0, which
+# would force a large incompatible reinstall on the job node).
+vllm==0.6.6.post1
+huggingface_hub>=0.25.0
+autoawq==0.2.9
