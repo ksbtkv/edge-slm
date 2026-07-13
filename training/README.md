@@ -1,8 +1,8 @@
 # Stage 3 — LoRA/QLoRA fine-tuning on the Ohm GPU Platform
 
 Fine-tunes the Stage 0 model (**Qwen2.5-3B-Instruct**) with 4-bit **QLoRA** on the
-Databricks study-note instruction dataset, and produces a LoRA adapter (optionally a
-merged fp16 model for Stage 4 GGUF quantization).
+Databricks study-note instruction dataset, and produces a LoRA adapter plus a
+**merged fp16 model** for Stage 4 GGUF / Open WebUI deployment (`deployment/`).
 
 This is the **HPC leg** of the pipeline. Upstream, the team's ingestion + instruction-pair
 work produces the training data; this stage consumes it and trains. It runs as a
@@ -42,8 +42,9 @@ From a JupyterLab terminal, with this `training/` directory in your `/home/jovya
 #    (equivalently: ohm test --command "python train.py --config config/qwen2.5_3b_qlora.yaml --dry-run")
 
 # 2. Submit the real fine-tuning job (1x A100).
+#    Production config sets merge_adapter: true; submit.sh also defaults EXTRA=--merge-adapter.
 ./ohm/submit.sh
-#    override anything: NAME=run2 EXTRA="--merge-adapter" ./ohm/submit.sh
+#    adapter-only smoke: EXTRA="" ./ohm/submit.sh
 
 # 3. Monitor (job name gets a short suffix — `ohm list` shows the exact name).
 ohm list
@@ -52,7 +53,10 @@ ohm logs   qwen25-3b-lora-<suffix>
 
 # 4. Fetch results — they're already in your home volume:
 #    training/outputs/qwen2.5-3b-lora/adapter/   (LoRA adapter)
-#    training/outputs/qwen2.5-3b-lora/merged/    (fp16 model, if --merge-adapter → Stage 4)
+#    training/outputs/qwen2.5-3b-lora/merged/    (fp16 model → Stage 4 GGUF)
+#
+# Stage 4 (laptop Open WebUI): see ../deployment/README.md
+#    ./scripts/convert_to_gguf.sh --merged ../training/outputs/qwen2.5-3b-lora/merged
 ```
 
 ## Parameterization

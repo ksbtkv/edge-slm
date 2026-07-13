@@ -39,5 +39,6 @@ save_total_limit: 3
 resume: false
 
 # --- output ---
-merge_adapter: false                      # set true to also emit merged fp16 (Stage 4 GGUF)
+# Production runs always emit merged/ for Stage 4 GGUF conversion.
+merge_adapter: true
 report_to: none

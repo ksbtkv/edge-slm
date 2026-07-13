@@ -12,7 +12,9 @@ CPU="${CPU:-16}"          # matches the 1-GPU notebook profile
 MEM="${MEM:-96Gi}"       # matches the 1-GPU notebook profile
 WORKDIR="${WORKDIR:-training}"
 CONFIG="${CONFIG:-config/qwen2.5_3b_qlora.yaml}"
-EXTRA="${EXTRA:-}"        # e.g. "--merge-adapter" to also emit the fp16 model
+# Default EXTRA always requests a merged fp16 model for Stage 4 GGUF export.
+# Adapter-only smoke: EXTRA="" ./ohm/submit.sh
+: "${EXTRA=--merge-adapter}"
 
 ohm submit \
   --name "${NAME}" \
@@ -30,3 +32,5 @@ echo "  ohm list                       # exact job name (gets a short suffix)"
 echo "  ohm status ${NAME}-<suffix>"
 echo "  ohm logs   ${NAME}-<suffix>"
 echo "Outputs land under \$WORKDIR/outputs/ in your /home/jovyan volume."
+echo "  adapter/  — LoRA weights"
+echo "  merged/   — fp16 model for Stage 4 (deployment/scripts/convert_to_gguf.sh)"

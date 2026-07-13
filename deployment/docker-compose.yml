@@ -1,0 +1,56 @@
+# Stage 4 — Open WebUI + Ollama (offline laptop)
+#
+# Usage (from deployment/):
+#   cp .env.example .env
+#   docker compose up -d
+#   open http://localhost:3000
+#
+# Before first start, register the model (GGUF must already exist under models/):
+#   ./scripts/register_model.sh
+# If Ollama runs inside Docker, either:
+#   A) register on the host and share ~/.ollama, or
+#   B) docker compose exec ollama ollama create ...  (see README)
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: edge-slm-ollama
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+      - ./models:/models:ro
+    restart: unless-stopped
+    # Uncomment for NVIDIA GPU on Linux:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: edge-slm-open-webui
+    depends_on:
+      - ollama
+    ports:
+      - "${WEBUI_PORT:-3000}:8080"
+    environment:
+      # Override in .env for host Ollama (Option A):
+      #   OLLAMA_BASE_URL=http://host.docker.internal:11434
+      # Default targets the Compose ollama service (full Docker stack).
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://ollama:11434}
+      - HF_HUB_OFFLINE=1
+      - WEBUI_AUTH=${WEBUI_AUTH:-false}
+      - DEFAULT_MODELS=${MODEL_NAME:-databricks-study-notes}
+    volumes:
+      - open_webui_data:/app/backend/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
+  open_webui_data:
