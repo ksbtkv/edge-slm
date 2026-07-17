@@ -114,9 +114,19 @@ python scripts/build_system_prompt.py
 
 ```bash
 cp .env.example .env
+
+# Host Ollama (default / .env.example)
+ollama serve   # if not already running
 docker compose up -d
 open http://localhost:3000
+
+# Full in-Docker Ollama (GGUF registered inside Compose)
+# Set OLLAMA_BASE_URL=http://ollama:11434 in .env first
+docker compose --profile full up -d
 ```
+
+Plain `docker compose up -d` starts **only** Open WebUI and does not bind
+`:11434` (the `ollama` service is behind Compose profile `full`).
 
 Environment (see `.env.example`):
 
@@ -124,23 +134,28 @@ Environment (see `.env.example`):
 |----------|---------|---------|
 | `MODEL_NAME` | `databricks-study-notes` | Default model in the UI |
 | `WEBUI_PORT` | `3000` | Browser port |
-| `OLLAMA_PORT` | `11434` | Ollama API |
+| `OLLAMA_PORT` | `11434` | Ollama API (published only with `--profile full`) |
 | `OLLAMA_BASE_URL` | `http://host.docker.internal:11434` in `.env.example` | Open WebUI → Ollama; use `http://ollama:11434` for Compose-only Ollama |
 | `WEBUI_AUTH` | `false` | Single-user laptop (no signup) |
 | `HF_HUB_OFFLINE` | `1` (in Compose) | No HuggingFace calls at runtime |
 
-### Registering the model inside Docker Ollama
+### Registering the model
 
-If you use the Compose `ollama` service (not a host install):
+**Preferred (host Ollama):** after the GGUF exists under `models/`:
 
 ```bash
-# After GGUF exists under models/
-docker compose up -d ollama
-docker compose exec ollama \
-  ollama create databricks-study-notes -f /models/../Modelfile
-# Prefer host register_model.sh with OLLAMA_HOST pointing at the container,
-# or copy Modelfile.generated and run create inside the container with
-# FROM /models/databricks-study-notes-q4.gguf
+./scripts/register_model.sh
+```
+
+**Docker Ollama (profile `full`):**
+
+```bash
+docker compose --profile full up -d ollama
+# From host, after GGUF exists under models/:
+./scripts/register_model.sh
+# Or copy Modelfile.generated into the container and:
+#   docker compose --profile full exec ollama ollama create databricks-study-notes -f /tmp/Modelfile
+# with FROM /models/databricks-study-notes-q4.gguf
 ```
 
 **Apple Silicon / Option A tip:** run **host-native Ollama** (Metal) for better
@@ -159,7 +174,7 @@ OLLAMA_BASE_URL=http://ollama:11434
 Then recreate Open WebUI so it picks up the env change:
 
 ```bash
-docker compose up -d --force-recreate open-webui
+docker compose --profile full up -d --force-recreate open-webui
 ```
 
 ---
@@ -172,6 +187,14 @@ docker compose up -d --force-recreate open-webui
 4. Expect **JSON only** with: `title`, `summary`, `key_concepts`,
    `important_features_or_tools`, `practical_workflow`,
    `common_mistakes_or_confusions`, `project_usage_notes`
+
+### Open WebUI tips
+
+- Select model **`databricks-study-notes`**
+- Disable **Tools / Functions** for the chat (avoids “none of the provided functions…” replies)
+- Set the chat system prompt from `prompts/system_prompt.txt` if the UI overrides the Modelfile `SYSTEM`
+- User message = **one passage only** (~120–700 words); no API/tool requests
+- Expect **raw study-note JSON**
 
 Starter prompt (also in `openwebui/presets/databricks_study_notes.json`):
 

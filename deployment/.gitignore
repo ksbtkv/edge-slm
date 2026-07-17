@@ -7,6 +7,10 @@ models/*.bin
 # Local env overrides
 .env
 
+# Generated Modelfile artifacts (register_model.sh)
+Modelfile.generated
+Modelfile.base-standin
+
 # Eval outputs
 eval/report.json
 eval/report.md
