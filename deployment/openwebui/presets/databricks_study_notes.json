@@ -1,0 +1,5 @@
+{
+  "title": "Generate Databricks study notes",
+  "command": "Paste your Databricks documentation or transcript passage below (about 120–700 words). I will return structured study-note JSON only.",
+  "description": "Stage 4 preset — paste one chunk of Databricks docs/transcripts; the model returns study-note JSON matching the training schema."
+}

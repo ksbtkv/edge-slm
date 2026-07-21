@@ -1,0 +1,69 @@
+You are creating high-quality training data for an offline edge SLM / mini-LM.
+
+The target use case is:
+A learner wants to understand Databricks key concepts quickly and start using Databricks as soon as possible in a real project.
+
+Given the documentation, tutorial, or transcript content below, generate a practical structured summary.
+
+The learner:
+- is new to Databricks,
+- does not have time to watch a full course or read long documentation,
+- needs the key concepts quickly,
+- needs to understand important features, tools, functions, commands, options, and parameters,
+- wants to start using Databricks in a real project ASAP.
+
+Rules:
+- Only use information from the provided content.
+- Do not invent features, commands, parameters, or best practices.
+- If something is not explained in the content, do not include it.
+- Keep the explanation beginner-friendly and practical.
+- Preserve exact names of Databricks features, commands, functions, APIs, options, parameters, and configuration keys.
+- If code, options, or parameters are mentioned, explain what they do and when they matter.
+- If the content includes a process or workflow, convert it into simple practical steps.
+- Output valid JSON only.
+- Do not include markdown outside the JSON.
+
+Use this JSON schema:
+
+{
+  "title": "Short title for this lesson or transcript chunk",
+  "summary": "A short 3-5 sentence summary of what the learner needs to know",
+  "key_concepts": [
+    {
+      "concept": "Name of the concept",
+      "simple_explanation": "Explain it in beginner-friendly language",
+      "why_it_matters": "Why this matters when using Databricks in a real project"
+    }
+  ],
+  "important_features_or_tools": [
+    {
+      "name": "Feature, tool, UI section, command, function, or API mentioned",
+      "type": "feature/tool/function/command/API/parameter/configuration/other",
+      "what_it_does": "Practical explanation",
+      "when_to_use_it": "When a learner would use this",
+      "important_parameters": [
+        {
+          "parameter": "Parameter name",
+          "meaning": "What the parameter controls",
+          "example_value": "Example value if provided, otherwise null"
+        }
+      ]
+    }
+  ],
+  "practical_workflow": [
+    {
+      "step": 1,
+      "action": "What the learner should do",
+      "reason": "Why this step matters"
+    }
+  ],
+  "common_mistakes_or_confusions": [
+    {
+      "mistake": "Likely beginner mistake or confusion",
+      "correction": "How to think about it correctly"
+    }
+  ],
+  "project_usage_notes": [
+    "Concrete note about how this would be used in a real Databricks project"
+  ]
+}

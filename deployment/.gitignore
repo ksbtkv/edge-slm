@@ -1,0 +1,24 @@
+# Model weights — never commit (large; regenerable from Stage 3 merged/)
+models/*.gguf
+models/*.safetensors
+models/*.bin
+!models/.gitkeep
+
+# Local env overrides
+.env
+
+# Generated Modelfile artifacts (register_model.sh)
+Modelfile.generated
+Modelfile.base-standin
+
+# Eval outputs
+eval/report.json
+eval/report.md
+eval/results.jsonl
+
+# llama.cpp clone (optional local build)
+.tools/
+
+__pycache__/
+*.pyc
+.DS_Store
