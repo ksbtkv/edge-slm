@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Conda / virtualenv
+.env
+env/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data and model outputs — these are too large for git
+data/raw/
+data/processed/
+outputs/
+*.gguf
+*.bin
+*.safetensors
+
+# OS noise
+.DS_Store
+.Rhistory
+*_ocr_outputs/
