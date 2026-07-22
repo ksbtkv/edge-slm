@@ -1,0 +1,2 @@
+# Local Trainer Backend (Apple Silicon / MLX). See ADR 0003.
+mlx-lm>=0.21
