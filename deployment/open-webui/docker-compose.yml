@@ -1,0 +1,33 @@
+# Open WebUI in front of the host's Ollama, which serves the fine-tuned
+# Student (edge-slm-study-notes). The supported interaction is strictly:
+# paste Databricks content, receive a structured study note (CONTEXT.md,
+# "Deployed Model").
+#
+# Prerequisites on the host:
+#   ollama create edge-slm-study-notes -f deployment/Modelfile.study-notes
+#
+# Start:
+#   docker compose -f deployment/open-webui/docker-compose.yml up -d
+# Then open http://localhost:3000 and select "edge-slm-study-notes".
+
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: edge-slm-webui
+    ports:
+      - "3000:8080"
+    environment:
+      # host.docker.internal resolves to the host on macOS/Windows Docker.
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - DEFAULT_MODELS=edge-slm-study-notes
+      - WEBUI_NAME=Databricks Study Notes
+      # Single-purpose local deployment: no signup flow.
+      - ENABLE_SIGNUP=false
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - open-webui-data:/app/backend/data
+    restart: unless-stopped
+
+volumes:
+  open-webui-data:
