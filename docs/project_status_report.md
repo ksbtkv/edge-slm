@@ -18,8 +18,8 @@ The committed codebase delivers a **reproducible data preparation pipeline** tha
 4. Splits content into **model-sized chunks**
 5. Emits **study_note generation tasks** — the final deliverable for the HPC pipeline
 
-**What is done:** Stages 0–1.5 (ingestion, source pack, chunking) — pipeline ends at `study_note_tasks.jsonl`  
-**What is next:** HPC pipeline — LLM enrichment, instruction-pair export, LoRA training (outside this repo)
+**What is done:** Stages 0–1.5 (ingestion, source pack, chunking) — data preparation ends at `study_note_tasks.jsonl`  
+**What is next:** Stages 2–6 in this repo — Teacher enrichment (Claude Haiku), training-pair export, LoRA fine-tuning (local MLX or Pawsey TRL+PEFT), evaluation, Ollama + Open WebUI deployment. See `docs/finetuning.md`.
 
 ---
 
@@ -45,7 +45,11 @@ The committed codebase delivers a **reproducible data preparation pipeline** tha
 | **1 — Ingestion**                  | **Complete**          | `Document` JSON per source file                      |
 | **1.5 — Source pack + chunking**   | **Complete**          | Pack artifacts + `study_note_tasks.jsonl`            |
 | **1.75 — Content acquisition**     | **Complete**          | Transcripts + doc exports under `data/raw/databricks/` |
-| **2 — HPC enrichment + training**  | **Separate pipeline** | LLM responses, instruction pairs, LoRA on Pawsey       |
+| **2 — Teacher enrichment**         | Implemented, not yet run | Validated study notes per task (Claude Haiku, Batch API) |
+| **3 — Training-pair export**       | Implemented, not yet run | `train.jsonl` / `valid.jsonl` + eval/holdout references |
+| **4 — LoRA fine-tuning**           | Implemented, not yet run | Adapter from local MLX or Pawsey TRL+PEFT (Canonical Run) |
+| **5 — Evaluation**                 | Implemented, not yet run | Baseline-vs-tuned metrics (structural, groundedness, judge) |
+| **6 — Deployment**                 | Implemented, not yet run | GGUF → Ollama → Open WebUI                              |
 
 
 ---
@@ -64,7 +68,9 @@ flowchart TD
     chunker --> tasksJSONL["study_note_tasks.jsonl\n(one task per chunk)"]
     buildPack --> packIndex["source_pack.json"]
     buildPack --> normManifest["manifest.normalized.json"]
-    tasksJSONL --> hpc["HPC pipeline:\nenrichment + LoRA"]
+    tasksJSONL --> enrichStage["Teacher enrichment\n(Claude Haiku)"]
+    enrichStage --> trainStage["Training pairs + LoRA\n(local MLX / Pawsey)"]
+    trainStage --> deployStage["Eval + Ollama + Open WebUI"]
 ```
 
 
@@ -78,12 +84,13 @@ flowchart TD
 | 2. Ingest          | Local file path      | `Document`        | JSON   | `data/processed/source_packs/<pack>/documents/<source_id>.json` |
 | 3. Index pack      | Manifest + documents | Pack index        | JSON   | `data/processed/source_packs/<pack>/source_pack.json`           |
 | 4. Chunk + task    | `Document` sections  | Study-note tasks  | JSONL  | `data/processed/source_packs/<pack>/study_note_tasks.jsonl`     |
-| 5. HPC (separate)  | Tasks JSONL          | Training pairs    | JSONL  | HPC pipeline on Pawsey                                          |
+| 5. Enrich          | Tasks JSONL          | Validated notes   | JSON   | `data/processed/enrichment/<pack>/notes/`                       |
+| 6. Export          | Notes + tasks        | Training pairs + references | JSONL | `data/processed/training/<pack>/`                     |
 
 
-### Primary pipeline output (handoff to HPC)
+### Primary data-preparation output
 
-The **main deliverable** of this repo is:
+The handoff point between data preparation and fine-tuning is:
 
 ```text
 data/processed/source_packs/<pack_id>/study_note_tasks.jsonl
@@ -96,7 +103,7 @@ Each line is one chunk-level task containing:
 - `expected_output_schema` — target JSON shape for structured study notes
 - Provenance: `source_id`, `chunk_id`, `topic_bucket_ids`, `split`, section/page/slide/time metadata
 
-Downstream LLM enrichment and training-pair construction run in the **HPC pipeline** on Pawsey, not in this repository.
+Downstream enrichment, training-pair export, fine-tuning, evaluation, and deployment now also live in this repository — see `docs/finetuning.md`. Only the canonical LoRA training run executes on Pawsey.
 
 ---
 
@@ -327,7 +334,7 @@ Current pack build (local, gitignored): **792 study-note tasks** from **~361,218
 
 Handoff snapshot: `data/processed/handoffs/databricks_ld_foundations_20260709/` (gitignored).
 
-**Out of scope for this repo:** LLM enrichment, instruction-pair export, LoRA training (HPC pipeline).
+**Downstream stages (now in this repo):** Teacher enrichment, training-pair export, LoRA training, evaluation, deployment — see `docs/finetuning.md`.
 
 ---
 
@@ -402,16 +409,19 @@ build_source_pack(
 
 ## 13. Next steps
 
-**This repo (optional, not blocking):**
+**Fine-tuning pipeline (implemented in this repo — see `docs/finetuning.md`):**
+
+1. Teacher enrichment of **792** tasks with Claude Haiku (Batch API) — `scripts/enrich_tasks.py`
+2. Training-pair export with the Canonical System Prompt — `scripts/export_training_pairs.py`
+3. LoRA fine-tuning of Qwen3-4B-Instruct — local MLX and/or the Canonical Run on Pawsey
+4. Baseline-vs-tuned evaluation (structural, groundedness, Sonnet judge) — `scripts/run_eval.py`
+5. GGUF → Ollama → Open WebUI deployment
+
+**Data preparation (optional, not blocking):**
 
 1. Deferred long transcripts — `video_cert_course` (~7.5h whisper) and remaining Spark DE playlist videos via `fetch_transcripts.py`, then rebuild
 2. Further docs discovery / curation if more coverage is desired
-
-**HPC pipeline (separate):**
-
-1. LLM enrichment of **792** tasks in `study_note_tasks.jsonl`
-2. Instruction-pair export for LoRA fine-tuning
-3. LoRA proof-of-concept on Pawsey
+3. **Transcript quality cleanup (deferred):** The 6 `pl_associate_*` exam-prep video transcripts (~49 train tasks, 6% of dataset) are quiz-walkthrough content with heavy whisper mis-transcriptions (e.g. "job cy" for "Jobs UI", "curry" for "query"); other transcripts carry milder errors ("transaction lock" for "transaction log"). If eval shows weak groundedness or wrong terminology, disable these sources in the manifest, rebuild the pack, and re-enrich only the affected tasks (~629 train tasks remain, still above the 500-chunk target)
 
 ---
 
@@ -420,10 +430,10 @@ build_source_pack(
 
 | Question                        | Answer                                                                                         |
 | ------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Where are we?                   | Ingestion, source-pack curation, and chunking are implemented; **792** tasks ready for HPC     |
+| Where are we?                   | Data preparation complete (**792** tasks); enrichment→training→eval→deployment stages implemented and ready to run |
 | What can the pipeline do today? | Turn local PDFs/docs/slides/audio/video into chunk-level study-note tasks with full provenance |
-| What is the main output?        | `study_note_tasks.jsonl` — final deliverable; handoff to HPC pipeline                          |
+| What is the main output?        | A fine-tuned, offline study-notes model served via Ollama + Open WebUI                         |
 | What is blocked on content?     | Nothing blocking — 500+ chunk target met; long cert/Spark DE transcripts deferred as optional  |
-| What comes next?                | HPC pipeline: LLM enrichment of 792 tasks, training pairs, LoRA on Pawsey                      |
+| What comes next?                | Run enrichment (Claude Haiku), train the LoRA (local MLX / Pawsey), evaluate, deploy           |
 
 
