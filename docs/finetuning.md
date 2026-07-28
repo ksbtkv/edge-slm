@@ -93,6 +93,12 @@ setup comments in `deployment/slurm/train_lora.slurm`, then:
 sbatch deployment/slurm/train_lora.slurm
 ```
 
+### Recorded runs
+
+| Run | Backend | Outcome |
+|---|---|---|
+| [2026-07-22 MLX `databricks_ld_foundations`](training_runs/2026-07-22_mlx_databricks_ld_foundations.md) | local MLX QLoRA | Completed; best val at iter **600** (0.757); final iter 1400 overfit (val 0.832). Development artifact only. |
+
 ## Stage 5 — Evaluation
 
 Three tiers on `eval_references.jsonl`, always for both the Baseline

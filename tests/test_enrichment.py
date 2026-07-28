@@ -58,6 +58,22 @@ def test_parse_tolerates_markdown_fences() -> None:
     assert parse_study_note_response(wrapped) == note
 
 
+def test_parse_strips_tool_call_wrappers() -> None:
+    note = make_valid_note()
+    payload = json.dumps(note)
+    wrapped = f"</tool_call>\n\n<tool_call>\n\n{payload}\n</tool_call>"
+    assert parse_study_note_response(wrapped) == note
+
+
+def test_parse_strips_tool_call_around_fenced_json() -> None:
+    note = make_valid_note()
+    wrapped = (
+        "<tool_call>\njunk\n</tool_call>\n"
+        f"```json\n{json.dumps(note)}\n```"
+    )
+    assert parse_study_note_response(wrapped) == note
+
+
 def test_parse_rejects_non_json() -> None:
     with pytest.raises(StudyNoteParseError):
         parse_study_note_response("no json here at all")
