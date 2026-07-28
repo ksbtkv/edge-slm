@@ -22,6 +22,7 @@ from typing import Any, Callable
 from enrichment.study_note_validation import (
     StudyNoteParseError,
     parse_study_note_response,
+    sanitize_study_note_response_text,
     validate_study_note,
 )
 from evaluation.groundedness import groundedness_score
@@ -35,8 +36,18 @@ DEFAULT_OLLAMA_URL = "http://localhost:11434"
 GenerateFn = Callable[[str], str]
 
 
+# Output budget for long study-note JSON; also set in Modelfile PARAMETER.
+DEFAULT_NUM_PREDICT = 4096
+DEFAULT_NUM_CTX = 8192
+
+
 def ollama_generate_fn(
-    model: str, *, base_url: str = DEFAULT_OLLAMA_URL, timeout_s: float = 600.0
+    model: str,
+    *,
+    base_url: str = DEFAULT_OLLAMA_URL,
+    timeout_s: float = 600.0,
+    num_predict: int = DEFAULT_NUM_PREDICT,
+    num_ctx: int = DEFAULT_NUM_CTX,
 ) -> GenerateFn:
     """Chat with a local Ollama model under the Canonical System Prompt."""
 
@@ -45,7 +56,11 @@ def ollama_generate_fn(
             {
                 "model": model,
                 "stream": False,
-                "options": {"temperature": 0.2},
+                "options": {
+                    "temperature": 0.2,
+                    "num_predict": num_predict,
+                    "num_ctx": num_ctx,
+                },
                 "messages": [
                     {"role": "system", "content": CANONICAL_SYSTEM_PROMPT},
                     {"role": "user", "content": source_content},
@@ -92,7 +107,9 @@ def evaluate_task(
         "judge": None,
     }
     try:
-        note = parse_study_note_response(raw)
+        # Sanitize before parse (same helper as parse_study_note_response) so
+        # eval scoring stays robust even if the raw cache still has wrappers.
+        note = parse_study_note_response(sanitize_study_note_response_text(raw))
     except StudyNoteParseError as exc:
         result["schema_errors"] = [str(exc)]
         return result

@@ -35,7 +35,8 @@ MODELFILE_TEMPLATE = """\
 FROM {from_ref}
 
 PARAMETER temperature 0.2
-PARAMETER num_ctx 4096
+PARAMETER num_ctx 8192
+PARAMETER num_predict 4096
 PARAMETER top_p 0.9
 
 SYSTEM \"\"\"

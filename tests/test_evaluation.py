@@ -132,6 +132,14 @@ def test_evaluate_task_on_garbage_output() -> None:
     assert result["groundedness"] is None
 
 
+def test_evaluate_task_sanitizes_tool_call_wrappers() -> None:
+    note = make_valid_note()
+    wrapped = f"</tool_call>\n\n{json.dumps(note)}"
+    result = evaluate_task(_reference(), lambda content: wrapped)
+    assert result["json_valid"] and result["schema_valid"]
+    assert result["raw_output"] == wrapped
+
+
 def test_run_evaluation_writes_metrics_and_caches(tmp_path: Path) -> None:
     references_path = tmp_path / "eval_references.jsonl"
     references_path.write_text(

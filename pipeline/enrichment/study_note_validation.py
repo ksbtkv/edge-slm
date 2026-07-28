@@ -10,13 +10,28 @@ back to the Teacher on retry.
 from __future__ import annotations
 
 import json
+import re
 from typing import Any
 
 _SCALAR_EXAMPLE_TYPES = (str, int, float, bool)
 
+# Qwen3 / Ollama sometimes emits tool-call XML around (or instead of) JSON.
+_TOOL_CALL_TAG_RE = re.compile(r"</?tool_call\b[^>]*>", re.IGNORECASE)
+
 
 class StudyNoteParseError(Exception):
     """Raised when a response cannot be parsed into a JSON object at all."""
+
+
+def sanitize_study_note_response_text(text: str) -> str:
+    """
+    Strip Qwen-style tool-call wrappers before JSON extraction.
+
+    Removes ``<tool_call>`` / ``</tool_call>`` tags (paired or orphan) without
+    deleting the text between them, so a JSON object nested inside a wrapper
+    is preserved. Idempotent; safe to run on clean JSON.
+    """
+    return _TOOL_CALL_TAG_RE.sub("", text).strip()
 
 
 def parse_study_note_response(text: str) -> dict[str, Any]:
@@ -25,8 +40,9 @@ def parse_study_note_response(text: str) -> dict[str, Any]:
 
     Tolerates markdown code fences and prose around the JSON object, even
     though the prompt forbids them: we extract the outermost {...} span.
+    Also strips Qwen-style ``<tool_call>`` wrappers first.
     """
-    stripped = text.strip()
+    stripped = sanitize_study_note_response_text(text)
     try:
         parsed = json.loads(stripped)
     except json.JSONDecodeError:
