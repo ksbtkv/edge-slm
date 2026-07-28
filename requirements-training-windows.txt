@@ -1,0 +1,12 @@
+# Local Trainer Backend (Windows / Linux + NVIDIA GPU) — QLoRA via TRL + PEFT + bitsandbytes.
+# The 4-bit path lets the 4B student fit a small (~8 GB) laptop dGPU.
+#
+# Install torch with the CUDA wheel FIRST (match the machine's CUDA), e.g.:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu124
+# bitsandbytes ships Windows CUDA wheels (>=0.43); no source build needed.
+transformers>=4.51
+trl>=0.17
+peft>=0.15
+datasets>=3.0
+accelerate>=1.0
+bitsandbytes>=0.43
