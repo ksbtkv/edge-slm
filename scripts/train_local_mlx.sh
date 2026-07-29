@@ -25,20 +25,24 @@ shift 2
 # 4-bit base keeps QLoRA within a 16GB M-series budget.
 MODEL="${EDGE_SLM_STUDENT_MLX:-mlx-community/Qwen3-4B-Instruct-2507-4bit}"
 
-# ~678 pairs / batch 1 * 2 epochs ≈ 1400 iters. Batch 1 + grad checkpointing
-# keeps peak memory low; raise --batch-size on machines with more RAM.
+# Iters: a full run of the ~640-pair set overfits past ~600 iters — validation
+# loss bottoms at iter ~600 (0.854) then rises to 0.990 by 1400 while train loss
+# keeps falling (see docs/mlx_loss_curve.svg). So the default is 600, and we save
+# + eval every 100 so the best checkpoint is easy to pick. Raise --iters (append
+# e.g. `--iters 1400`) only if you add more data or regularisation.
+# Batch 1 + grad checkpointing keeps peak memory ~5.5 GB (fits a 16 GB Mac).
 python -m mlx_lm lora \
   --model "$MODEL" \
   --train \
   --data "$DATA_DIR" \
   --adapter-path "$ADAPTER_DIR" \
   --batch-size 1 \
-  --iters 1400 \
+  --iters 600 \
   --learning-rate 1e-4 \
   --num-layers 16 \
   --grad-checkpoint \
-  --save-every 200 \
-  --steps-per-eval 200 \
+  --save-every 100 \
+  --steps-per-eval 100 \
   "$@"
 
 echo "Adapter written to $ADAPTER_DIR"

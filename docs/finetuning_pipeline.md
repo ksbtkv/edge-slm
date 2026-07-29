@@ -92,6 +92,34 @@ A tight 3-part live demo that tells the "runs everywhere" story:
 Have a **pre-trained Mac adapter** ready (a full run takes a while) so step 3 is instant; kick
 off the live Mac run in step 2 just to show it starting.
 
+## Validated end-to-end on Mac (Qwen3-4B, repo dataset)
+
+A real full run on the repo's 640-example Databricks dataset (M3 Max, ~407 tok/s, 5.5 GB
+peak, ~1.9 h) confirms the local path — and surfaced a training finding:
+
+![MLX fine-tune loss curve](mlx_loss_curve.svg)
+
+**Validation loss bottoms at ~iter 600 (0.854) then overfits back to 0.990 by 1400**, while
+train loss keeps falling (0.90 → 0.44). So `train_local_mlx.sh` now defaults to **600 iters**;
+deploy the iter-600 checkpoint, not a longer run.
+
+The full deploy chain that produced a running Ollama model (Qwen3 needs llama.cpp for GGUF —
+`mlx_lm`'s GGUF export and Ollama's safetensors import don't yet support the arch):
+
+```bash
+# 1. fuse the best checkpoint and de-quantize to bf16 (standard HF safetensors)
+python -m mlx_lm fuse --model mlx-community/Qwen3-4B-Instruct-2507-4bit \
+  --adapter-path <best_iter600> --save-path fused_bf16 --dequantize
+# 2. HF -> GGUF (llama.cpp supports Qwen3)
+python llama.cpp/convert_hf_to_gguf.py fused_bf16 --outfile model.f16.gguf --outtype f16
+# 3. import + quantize into Ollama (edge-sized ~2.5 GB)
+ollama create edge-slm-databricks -q q4_K_M -f Modelfile   # FROM model.f16.gguf + SYSTEM prompt
+# 4. run
+ollama run edge-slm-databricks "Turn this into structured study notes: <content>"
+```
+
+The deployed model generates the structured study-note schema it was trained on.
+
 ## Notes / honesty
 
 - **Canonical run:** adapters from different backends are not bit-identical (different
