@@ -416,6 +416,7 @@ def transcribe_video_file(
     device: str = "cpu",
     compute_type: str = "int8",
     language: str | None = "en",
+    title: str | None = None,
 ) -> Document:
     video_path = Path(input_path)
 
@@ -811,8 +812,14 @@ def ingest_media(
     device: str = "cpu",
     compute_type: str = "int8",
     language: str | None = "en",
+    title: str | None = None,
 ) -> Document:
-    """Ingest a local audio or video file."""
+    """Ingest a local audio or video file.
+
+    I accept title here because the source-pack builder passes title into every
+    ingestor through dispatch.ingest(..., title=...). Text/PDF/PPTX already work
+    with that pattern, so media needs to accept it too.
+    """
     media_path = Path(input_path)
 
     if is_supported_audio_file(media_path):
@@ -823,6 +830,7 @@ def ingest_media(
             device=device,
             compute_type=compute_type,
             language=language,
+            title=title,
         )
 
     if is_supported_video_file(media_path):
@@ -833,6 +841,7 @@ def ingest_media(
             device=device,
             compute_type=compute_type,
             language=language,
+            title=title,
         )
 
     raise ValueError(
