@@ -98,6 +98,7 @@ sbatch deployment/slurm/train_lora.slurm
 | Run | Backend | Outcome |
 |---|---|---|
 | [2026-07-22 MLX `databricks_ld_foundations`](training_runs/2026-07-22_mlx_databricks_ld_foundations.md) | local MLX QLoRA | Completed; best val at iter **600** (0.757); final iter 1400 overfit (val 0.832). Development artifact only. |
+| [2026-07-29 MLX v2 `databricks_ld_foundations_le4096`](training_runs/2026-07-29_mlx_databricks_ld_foundations_v2.md) | local MLX QLoRA | Completed; 600 iters, LR `5e-5`, ≤4096 filter; val **0.776**. Free-tier: JSON **0.835** / schema **0.741** (was 0.671 / 0.659). |
 
 ## Stage 5 — Evaluation
 
