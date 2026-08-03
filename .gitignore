@@ -16,7 +16,9 @@ venv/
 
 # Data and model outputs — these are too large for git
 data/raw/
-data/processed/
+data/processed/*
+!data/processed/training/
+!data/processed/training/**
 outputs/
 *.gguf
 *.bin

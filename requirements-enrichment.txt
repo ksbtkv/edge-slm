@@ -1,0 +1,3 @@
+# Teacher enrichment (Stage 2) and the LLM-as-judge eval tier (Stage 5).
+# Needs ANTHROPIC_API_KEY in the environment.
+anthropic>=0.40
