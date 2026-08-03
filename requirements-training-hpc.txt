@@ -1,0 +1,10 @@
+# HPC Trainer Backend (TRL + PEFT) — the Canonical Run on Pawsey Setonix.
+#
+# Install torch separately FIRST with the ROCm wheel (Setonix GPUs are AMD):
+#   pip install --index-url https://download.pytorch.org/whl/rocm6.2 torch
+# On CUDA machines, plain `pip install torch` instead.
+transformers>=4.51
+trl>=0.17
+peft>=0.15
+datasets>=3.0
+accelerate>=1.0
