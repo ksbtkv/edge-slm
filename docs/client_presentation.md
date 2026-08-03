@@ -9,7 +9,7 @@
 
 Build an **offline small language model (edge SLM)** that helps learners quickly understand **Databricks Data Engineering Foundations** — key concepts, tools, and practical workflows — without reading full documentation or watching long videos.
 
-This repo prepares **study-note tasks** from curated sources. LLM enrichment and LoRA training run in a **separate HPC pipeline** on Pawsey.
+This repo carries the full lifecycle: it prepares **study-note tasks** from curated sources, enriches them with a Teacher model (Claude Haiku), fine-tunes the Student (Qwen3-4B) via LoRA — locally on MLX or on Pawsey — evaluates the result, and deploys it behind Open WebUI. See `docs/finetuning.md`.
 
 ---
 
