@@ -3,26 +3,26 @@
 Offline edge small-language-model pipeline for turning heterogeneous learning
 sources into reproducible **study-note task** datasets.
 
-The pipeline ends at `study_note_tasks.jsonl`. LLM enrichment, instruction-pair
-export, and LoRA training run in a **separate HPC pipeline** on Pawsey.
+Stages 0–1.5 end at `study_note_tasks.jsonl`. Stages 2–6 (enrichment through
+deployment) live in the same repository — see `docs/finetuning.md`. Stakeholder
+status (Implemented / Executed) is in `docs/project_status_report.md`. Ad-hoc
+folder packs can also be driven via the Streamlit Pipeline Runner (`docs/gui.md`).
 
 ## Current status
 
-The committed codebase covers **Stages 0–1.5**:
-
-| Stage | Status | What it does |
-|---|---|---|
-| Ingestion | Done | Convert local files into a shared `Document` / `Section` schema |
-| Source pack | Done | Curate sources via manifest, ingest a pack, write dataset artifacts |
-| Chunking | Done | Turn sections into model-sized chunks for study-note tasks |
-| Acquisition | Done | One-time scripts to download transcripts and export doc pages |
+| Stage | What it does |
+|---|---|
+| Acquisition | One-time scripts to download transcripts and export doc pages |
+| Ingestion | Convert local files into a shared `Document` / `Section` schema |
+| Source pack | Curate sources via manifest, ingest a pack, write dataset artifacts |
+| Chunking | Turn sections into model-sized chunks for study-note tasks |
 
 ```text
 source file  ->  Document (sections)  ->  TextChunk  ->  study_note_tasks.jsonl
                                                               |
                                                               v
-                                              (HPC pipeline — separate repo)
-                                    LLM enrichment -> training pairs -> LoRA
+                         (same repo — docs/finetuning.md)
+              Teacher enrichment -> Training Pairs -> LoRA -> eval -> deploy
 ```
 
 ## Project layout
@@ -34,7 +34,7 @@ edge_slm/
   tests/                  # pytest + smoke scripts
   data/manifests/         # source-pack manifests (tracked)
   data/raw/               # local sample/source files (gitignored)
-  data/processed/         # generated pack outputs (gitignored)
+  data/processed/         # generated outputs (mostly gitignored; training/ tracked)
 ```
 
 Key modules:
@@ -199,11 +199,26 @@ Starter manifest:
   hyperlink targets in that document
 - `data/manifests/examples/study_note_example_delta_streaming.json` — the
   client-provided gold example output (Delta Lake streaming study notes), used
-  as a schema-compliance reference for the HPC enrichment pipeline
+  as a schema-compliance reference for Teacher enrichment
 
 Place curated source files under `data/raw/databricks/`, then enable matching
 manifest entries with `"enabled": true`. All entries in the starter manifest
 ship disabled until local files are added.
+
+### Current pack snapshot (`databricks_ld_foundations`)
+
+Local build (gitignored under `data/processed/source_packs/`):
+
+| Metric | Value |
+|---|---|
+| Manifest sources | 428 total (**303** enabled after quality pass) |
+| Study-note tasks | **792** (~361,218 source words) |
+| Train / eval / holdout | 678 / 86 / 28 |
+| Chunk-quality audit (`--threshold 120`) | **0** undersized tasks |
+
+Optional remaining coverage (deferred, not blocking): `video_cert_course` transcription (~7.5h) and remaining Spark DE playlist video transcripts.
+
+**Transcript quality (deferred cleanup):** The 6 `pl_associate_*` exam-prep video transcripts (~49 train tasks, ~6% of the dataset) are quiz-walkthrough content with heavy whisper mis-transcriptions. If eval shows weak groundedness or wrong terminology, disable these sources in the manifest, rebuild the pack, and re-enrich only the affected tasks.
 
 Build the pack:
 
@@ -351,9 +366,9 @@ extensions.
 Non-Databricks files work with the same ingestion and chunking layers. Only the
 checked-in Databricks manifest and study-note prompt are domain-specific.
 
-## HPC handoff
+## Handoff to enrichment / training
 
-This repo's deliverable is `study_note_tasks.jsonl`. Each line includes:
+Data preparation's handoff artifact is `study_note_tasks.jsonl`. Each line includes:
 
 | Field | Purpose |
 |---|---|
@@ -365,13 +380,25 @@ This repo's deliverable is `study_note_tasks.jsonl`. Each line includes:
 The gold example at `data/manifests/examples/study_note_example_delta_streaming.json`
 shows the expected output quality and schema.
 
-Downstream (separate HPC pipeline): LLM enrichment → validated study-note JSON
-→ instruction pairs → LoRA fine-tuning on Pawsey.
+Downstream stages (Teacher enrichment → Training Pairs → LoRA → eval → deploy)
+live in this same repository — see `docs/finetuning.md`. The Pawsey job is the
+Canonical Run for reported results (ADR 0003), not a separate codebase.
+
+### Git tracking vs local-only
+
+| Path | In git? | Contents |
+|---|---|---|
+| `pipeline/`, `tests/`, `scripts/` | Yes | Code |
+| `data/manifests/` | Yes | Source manifests + gold example |
+| `data/processed/training/` | Yes | Exported Training Pairs + eval/holdout references |
+| `data/raw/` | No | Large source files |
+| `data/processed/source_packs/`, `enrichment/`, `adapters/`, … | No | Generated pack, notes, weights |
+| `docs/training_runs/` | Yes | Dated run narratives (stakeholder-citable) |
 
 ### Packaging a dated handoff snapshot
 
 After a successful pack build, copy the deliverables into a dated folder under
-`data/processed/handoffs/` (gitignored with the rest of `data/processed/`):
+`data/processed/handoffs/` (gitignored with other generated pack outputs):
 
 ```bash
 DATE=$(date +%Y%m%d)
@@ -380,8 +407,7 @@ mkdir -p "$HANDOFF"
 cp data/processed/source_packs/databricks_ld_foundations/study_note_tasks.jsonl "$HANDOFF/"
 cp data/processed/source_packs/databricks_ld_foundations/source_pack.json "$HANDOFF/"
 cp data/processed/source_packs/databricks_ld_foundations/manifest.normalized.json "$HANDOFF/"
-# Add HANDOFF.md with task counts, splits, and the gold-example path, then
-# copy the folder to the Pawsey HPC workspace.
+# Add HANDOFF.md with task counts, splits, and the gold-example path.
 ```
 
 Current local snapshot (example): `data/processed/handoffs/databricks_ld_foundations_20260709/`.

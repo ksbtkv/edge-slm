@@ -1,7 +1,10 @@
 # Edge SLM — Databricks L&D Training Data Pipeline
 
 **UWA AI Winter Project · Visagio SLM**  
-**Client presentation · July 2026**
+**Client presentation excerpt**
+
+> **Derived from** [`docs/project_status_report.md`](project_status_report.md) **as of 2026-08-03.**  
+> That living report is the stakeholder source of truth. When the report’s status, evidence, or next ladder changes, update this file (or mark it stale).
 
 ---
 
@@ -9,7 +12,7 @@
 
 Build an **offline small language model (edge SLM)** that helps learners quickly understand **Databricks Data Engineering Foundations** — key concepts, tools, and practical workflows — without reading full documentation or watching long videos.
 
-This repo carries the full lifecycle: it prepares **study-note tasks** from curated sources, enriches them with a Teacher model (Claude Haiku), fine-tunes the Student (Qwen3-4B) via LoRA — locally on MLX or on Pawsey — evaluates the result, and deploys it behind Open WebUI. See `docs/finetuning.md`.
+This repo carries the full lifecycle: it prepares **study-note tasks** from curated sources, enriches them with a Teacher model (Claude Haiku), fine-tunes the Student (Qwen3-4B) via LoRA — locally on MLX or on Pawsey — evaluates the result, and deploys it behind Open WebUI. See `docs/finetuning.md` and the [status report](project_status_report.md).
 
 ---
 
@@ -46,10 +49,11 @@ flowchart TD
         end
     end
 
-    subgraph hpc [HPC pipeline — separate]
-        TASKS --> GEN[LLM enrichment]
-        GEN --> PAIRS[training pairs]
-        PAIRS --> LORA[LoRA on Pawsey]
+    subgraph ft [Same repo — enrichment → train → eval → deploy]
+        TASKS --> GEN[Teacher enrichment]
+        GEN --> PAIRS[Training pairs]
+        PAIRS --> LORA[LoRA — local MLX / Pawsey Canonical]
+        LORA --> EVAL[Eval + Ollama deploy path]
     end
 ```
 
@@ -58,23 +62,31 @@ flowchart TD
 ```text
 source file → Document (sections) → TextChunk → study_note_tasks.jsonl
                                                       ↓
-                                    (HPC pipeline: enrichment → LoRA)
+              Teacher enrichment → Training Pairs → LoRA → eval → Ollama
 ```
 
 ---
 
 ## 4. What is built today
 
-| Stage | Status | Deliverable |
-|---|---|---|
-| **0 — Acquisition** | Done | Download video audio + transcribe; export doc pages to Markdown |
-| **1 — Ingestion** | Done | PDF, PPTX, Markdown, text, audio/video → shared schema |
-| **1.5 — Source pack** | Done | Manifest → documents + **792 tasks** (`study_note_tasks.jsonl`) |
+Full Implemented / Executed table: [`project_status_report.md`](project_status_report.md).
 
-| Downstream (HPC pipeline) | Owner |
-|---|---|
-| LLM enrichment + training pairs | Pawsey HPC pipeline |
-| LoRA fine-tuning | Pawsey HPC pipeline |
+| Stage | Implemented | Executed | Notes |
+|---|---|---|---|
+| **0–1.5 — Data prep** | Yes | Local pack / tracked docs | **792** study-note tasks |
+| **2–3 — Enrich + export** | Yes | Tracked | Training pairs + eval/holdout refs in git |
+| **4 — LoRA** | Yes | Tracked (MLX dev) | **Canonical (Pawsey): not run** |
+| **5 — Eval** | Yes | Tracked (free-tier) | **Holdout: not run** |
+| **6 — Deploy path** | Yes | Tracked (Ollama) / Not run (Open WebUI) | Not a production Deployed Model |
+
+### Operator and end-user UIs
+
+How-to: [`docs/gui.md`](gui.md).
+
+| UI | Implemented | Executed | Role |
+|---|---|---|---|
+| **Streamlit Pipeline Runner** | Yes | Not run | Operator tooling (`GUI/app.py`) |
+| **Open WebUI** | Yes | Not run | Deployed Model front-end (paste → Study Note) |
 
 ---
 
@@ -116,9 +128,9 @@ Built from [`data/manifests/databricks_ld_foundations.json`](../data/manifests/d
 
 ---
 
-## 6. Study-note task format (HPC handoff)
+## 6. Study-note task format (enrichment handoff)
 
-Each line in `study_note_tasks.jsonl` is a self-contained unit for downstream LLM enrichment:
+Each line in `study_note_tasks.jsonl` is a self-contained unit for Teacher enrichment:
 
 | Field group | Examples |
 |---|---|
@@ -149,7 +161,7 @@ Structured JSON includes:
 - `important_features_or_tools` — APIs, options, parameters
 - `practical_workflow`, `common_mistakes_or_confusions`, `project_usage_notes`
 
-The HPC pipeline validates LLM output against this schema. The gold example is a **whole-page summary**; tasks use **chunk-level** inputs (~450 words) for realistic passage summarization.
+Teacher enrichment validates LLM output against this schema. The gold example is a **whole-page summary**; tasks use **chunk-level** inputs (~450 words) for realistic passage summarization.
 
 ---
 
@@ -220,12 +232,14 @@ Sources are tagged against six thematic buckets for filtering and reporting:
 
 ## 12. Next steps
 
-| Step | Owner |
-|---|---|
-| HPC: LLM enrichment of **792** tasks | HPC pipeline |
-| HPC: export training pairs + LoRA on Pawsey | HPC pipeline |
-| Optional: deferred long transcripts (`video_cert_course` ~7.5h, Spark DE playlist) — not blocking | `fetch_transcripts.py` (local, when convenient) |
-| Optional: re-discover / widen official docs if needed | `discover_databricks_docs.py` + rebuild |
+Ordered ladder (from the [status report](project_status_report.md)):
+
+1. **Pawsey Canonical Run** (TRL+PEFT)
+2. **Tracked eval compare** (baseline vs Canonical-tuned)
+3. **Deployment path** for the Canonical adapter (GGUF → Ollama → Open WebUI)
+4. **Holdout Run** — once, after iteration stops
+
+Optional data-prep follow-ups (not blocking): deferred long transcripts; transcript cleanup — see `docs/ingestion.md`.
 
 **Rebuild the source pack** (after adding sources or changing chunk settings):
 
@@ -244,10 +258,10 @@ build_source_pack(
 
 ## 13. Summary
 
-We have a **working, reproducible pipeline** from curated Databricks sources (plus official docs discovery and playlist expansion) to **792 handoff-ready tasks** in `study_note_tasks.jsonl`, with output shape defined by the **Delta streaming gold example**.
+We have a **working, reproducible pipeline** from curated Databricks sources through Teacher enrichment, training-pair export, and **local MLX** fine-tune/eval experiments. Output shape is defined by the **Delta streaming gold example**.
 
-| Done (this repo) | Next (HPC pipeline) |
+| Done | Still ahead |
 |---|---|
-| Ingestion across formats | LLM enrichment |
-| Manifest-driven source pack | Training-pair export |
-| Chunked, provenance-rich tasks | LoRA fine-tuning on Pawsey |
+| 792 tasks → enriched → Training Pairs (tracked) | Pawsey **Canonical Run** |
+| Local MLX LoRA + free-tier eval (dev metrics) | Tracked Canonical eval + deploy path |
+| Local Ollama path exercised | **Holdout Run** (final numbers only) |

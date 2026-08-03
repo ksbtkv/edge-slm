@@ -3,7 +3,7 @@
 Stages 2–6 of the Edge SLM pipeline. Stage 1 (ingestion → `study_note_tasks.jsonl`)
 is documented in `docs/ingestion.md`. Vocabulary (Teacher, Student, Judge,
 Canonical System Prompt, …) is defined in `CONTEXT.md`; key decisions in
-`docs/adr/`.
+`docs/adr/`. Stakeholder status: `docs/project_status_report.md`.
 
 ## Overview
 
@@ -133,6 +133,8 @@ PYTHONPATH=pipeline python scripts/run_eval.py compare \
 after all iteration is finished, to report final unbiased numbers.
 
 ## Stage 6 — Deployment (Ollama + Open WebUI)
+
+Operator/end-user UI how-to (Streamlit Pipeline Runner vs Open WebUI): `docs/gui.md`.
 
 ```bash
 # Merge the adapter and quantise (backend = mlx or trl)

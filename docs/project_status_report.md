@@ -1,439 +1,127 @@
 # Edge SLM — Project Status Report
 
+**Audience:** Visagio (client) and UWA supervisors  
 **Repository:** [github.com/ksbtkv/edge_slm](https://github.com/ksbtkv/edge_slm)  
-**Report date:** June 2026  
-**Latest commit:** `6653427` — README and pipeline stages through source-pack chunking
+**As of:** 2026-08-03  
+**Latest commit at write time:** `b6f662d`
+
+This is the living stakeholder snapshot. Slide-oriented excerpts live in
+`docs/client_presentation.md` and must stay consistent with this file.
+Domain vocabulary: `CONTEXT.md`. How-to detail: `docs/ingestion.md`,
+`docs/finetuning.md`, `docs/gui.md`. Decisions: `docs/adr/`.
 
 ---
 
 ## 1. Executive summary
 
-The Edge SLM project is building an **offline, edge-deployable small language model** that helps learners understand technical content quickly — starting with **Databricks Data Engineering Foundations**.
+The Edge SLM project is building an **offline, edge-deployable small language
+model** that turns Databricks learning content into structured **Study Notes** —
+starting with **Databricks Data Engineering Foundations**.
 
-The committed codebase delivers a **reproducible data preparation pipeline** that:
-
-1. Ingests heterogeneous local sources (PDF, PPTX, text, Markdown, audio, video)
-2. Normalises them into a single JSON `Document` contract
-3. Curates sources via a manifest-driven **source pack**
-4. Splits content into **model-sized chunks**
-5. Emits **study_note generation tasks** — the final deliverable for the HPC pipeline
-
-**What is done:** Stages 0–1.5 (ingestion, source pack, chunking) — data preparation ends at `study_note_tasks.jsonl`  
-**What is next:** Stages 2–6 in this repo — Teacher enrichment (Claude Haiku), training-pair export, LoRA fine-tuning (local MLX or Pawsey TRL+PEFT), evaluation, Ollama + Open WebUI deployment. See `docs/finetuning.md`.
+**Where we are:** the full lifecycle is implemented in this repo. Data
+preparation, Teacher enrichment, and training-pair export have been run.
+Local MLX LoRA runs and free-tier eval exist as **development evidence**. The
+**Canonical Run** (Pawsey), **Holdout Run**, and a production-ready
+**Deployed Model** have **not** been completed.
 
 ---
 
 ## 2. Project objective
 
-
-| Goal             | Description                                                                                            |
-| ---------------- | ------------------------------------------------------------------------------------------------------ |
-| Target use case  | Offline edge model that turns long tutorials, docs, and transcripts into structured learning summaries |
-| First domain     | Databricks Data Engineering Foundations                                                                |
-| First task type  | Documentation/transcript chunk → structured study notes (JSON)                                         |
-| Design principle | Scriptable, repeatable, provenance-preserving pipeline suitable for future domains                     |
-
+| Goal | Description |
+|---|---|
+| Target use case | Offline edge model: paste content → structured Study Note |
+| First domain | Databricks Data Engineering Foundations |
+| First task type | Documentation/transcript chunk → structured study notes (JSON) |
+| Design principle | Scriptable, provenance-preserving pipeline suitable for future domains |
 
 ---
 
-## 3. Pipeline status
+## 3. Status conventions
 
+| Column | Allowed values |
+|---|---|
+| **Implemented** | `Not started` / `Partial` / `Yes` — code exists in this repo |
+| **Executed** | `Not run` / `Local-only` / `Tracked` / `Canonical` / `Holdout` |
 
-| Stage                              | Status                | Deliverable                                          |
-| ---------------------------------- | --------------------- | ---------------------------------------------------- |
-| **0 — Model selection / hardware** | External to this repo | Report and model choice (referenced in project PDFs) |
-| **1 — Ingestion**                  | **Complete**          | `Document` JSON per source file                      |
-| **1.5 — Source pack + chunking**   | **Complete**          | Pack artifacts + `study_note_tasks.jsonl`            |
-| **1.75 — Content acquisition**     | **Complete**          | Transcripts + doc exports under `data/raw/databricks/` |
-| **2 — Teacher enrichment**         | Implemented, not yet run | Validated study notes per task (Claude Haiku, Batch API) |
-| **3 — Training-pair export**       | Implemented, not yet run | `train.jsonl` / `valid.jsonl` + eval/holdout references |
-| **4 — LoRA fine-tuning**           | Implemented, not yet run | Adapter from local MLX or Pawsey TRL+PEFT (Canonical Run) |
-| **5 — Evaluation**                 | Implemented, not yet run | Baseline-vs-tuned metrics (structural, groundedness, judge) |
-| **6 — Deployment**                 | Implemented, not yet run | GGUF → Ollama → Open WebUI                              |
+**Executed grades:**
 
+- **Local-only** — produced on a machine; artifact not in git (and no committed run note)
+- **Tracked** — citable from git (`docs/training_runs/`, tracked `data/processed/training/`, or equivalent committed evidence)
+- **Canonical** — Pawsey Trainer Backend run designated for reported results and the Deployed Model (ADR 0003)
+- **Holdout** — single final evaluation on holdout references; run once at the end
 
 ---
 
-## 4. Data flow and JSON handoff points
+## 4. Pipeline status
 
-The pipeline is a chain of **JSON-native artifacts**. Each stage reads the previous artefact and writes the next.
+| Stage | Implemented | Executed | Deliverable |
+|---|---|---|---|
+| **0 — Acquisition** | Yes | Local-only | Transcripts + doc exports under `data/raw/` (gitignored) |
+| **1 — Ingestion** | Yes | Tracked | `Document` JSON contract + tests (`docs/ingestion.md`) |
+| **1.5 — Source pack + chunking** | Yes | Tracked | 792 tasks documented in `docs/ingestion.md` (pack JSONL itself gitignored) |
+| **2 — Teacher enrichment** | Yes | Tracked | Validated notes → evidenced by tracked export (`export_summary.json`: 5 rejects / 792 tasks) |
+| **3 — Training-pair export** | Yes | Tracked | `train.jsonl` / `valid.jsonl` + eval/holdout references under `data/processed/training/` |
+| **4 — LoRA fine-tuning** | Yes | Tracked | Local MLX adapters (dev). **Canonical (Pawsey): Not run** |
+| **5 — Evaluation** | Yes | Tracked | Free-tier baseline-vs-tuned (no Judge, no Holdout). **Holdout: Not run** |
+| **6 — Deployment** | Yes | Tracked (Ollama) / Not run (Open WebUI) | Local GGUF → Ollama path in MLX run notes; Open WebUI compose ready. **Not a production Deployed Model** |
 
-```mermaid
-flowchart TD
-    rawFiles["Local source files\n(data/raw/)"] --> manifest["Source manifest JSON\ndata/manifests/*.json"]
-    manifest --> buildPack["build_source_pack()"]
-    rawFiles --> ingest["dispatch.ingest()"]
-    ingest --> docJSON["documents/source_id.json\n(Document schema v1.0)"]
-    docJSON --> chunker["chunk_document()"]
-    chunker --> tasksJSONL["study_note_tasks.jsonl\n(one task per chunk)"]
-    buildPack --> packIndex["source_pack.json"]
-    buildPack --> normManifest["manifest.normalized.json"]
-    tasksJSONL --> enrichStage["Teacher enrichment\n(Claude Haiku)"]
-    enrichStage --> trainStage["Training pairs + LoRA\n(local MLX / Pawsey)"]
-    trainStage --> deployStage["Eval + Ollama + Open WebUI"]
-```
-
-
-
-### Handoff summary
-
-
-| Step               | Input                | Output            | Format | Location                                                        |
-| ------------------ | -------------------- | ----------------- | ------ | --------------------------------------------------------------- |
-| 1. Curate          | Client source list   | Source manifest   | JSON   | `data/manifests/databricks_ld_foundations.json`                 |
-| 2. Ingest          | Local file path      | `Document`        | JSON   | `data/processed/source_packs/<pack>/documents/<source_id>.json` |
-| 3. Index pack      | Manifest + documents | Pack index        | JSON   | `data/processed/source_packs/<pack>/source_pack.json`           |
-| 4. Chunk + task    | `Document` sections  | Study-note tasks  | JSONL  | `data/processed/source_packs/<pack>/study_note_tasks.jsonl`     |
-| 5. Enrich          | Tasks JSONL          | Validated notes   | JSON   | `data/processed/enrichment/<pack>/notes/`                       |
-| 6. Export          | Notes + tasks        | Training pairs + references | JSONL | `data/processed/training/<pack>/`                     |
-
-
-### Primary data-preparation output
-
-The handoff point between data preparation and fine-tuning is:
-
-```text
-data/processed/source_packs/<pack_id>/study_note_tasks.jsonl
-```
-
-Each line is one chunk-level task containing:
-
-- `source_content` — model-sized input text
-- `prompt` — full generation prompt (rules + expected output schema + content)
-- `expected_output_schema` — target JSON shape for structured study notes
-- Provenance: `source_id`, `chunk_id`, `topic_bucket_ids`, `split`, section/page/slide/time metadata
-
-Downstream enrichment, training-pair export, fine-tuning, evaluation, and deployment now also live in this repository — see `docs/finetuning.md`. Only the canonical LoRA training run executes on Pawsey.
+Stage 0 model-selection paperwork remains external to this repo (project PDFs).
 
 ---
 
-## 5. Code layout — the deliverable
+## 5. Operator and end-user UIs
 
-```text
-edge_slm/
-├── README.md                          # Developer setup and usage
-├── docs/
-│   └── project_status_report.md       # This report
-├── requirements*.txt                  # Core + optional format dependencies
-├── pytest.ini
-│
-├── data/
-│   ├── manifests/                     # Tracked: curated source manifests
-│   │   ├── databricks_ld_foundations.json
-│   │   └── examples/
-│   │       └── study_note_example_delta_streaming.json  # Client gold example
-│   ├── raw/                           # Gitignored: local source files
-│   └── processed/                     # Gitignored: generated pack outputs
-│
-├── pipeline/
-│   └── ingestion/
-│       ├── schema.py                  # Document / Section contract
-│       ├── serialize.py               # JSON save/load with version gate
-│       ├── dispatch.py                # ingest(path) — format routing
-│       ├── pdf_ingestor.py
-│       ├── pptx_ingestor.py
-│       ├── text_ingestor.py
-│       ├── markdown_ingestor.py
-│       ├── audio_video_ingestor.py
-│       ├── chunking.py                # Model-sized chunking
-│       ├── source_manifest.py         # Manifest validation
-│       ├── source_pack.py             # Pack builder
-│       └── study_notes_schema.py      # Prompt + output schema
-│
-└── tests/
-    ├── test_ingestion_fast.py         # Schema, dispatch, text/md fixtures
-    ├── test_ingestion_slow.py         # Real PDF/PPTX/audio/video (opt-in)
-    ├── test_source_pack.py            # Manifest, pack build, chunking
-    └── smoke_test_ingestion.py        # Human-readable end-to-end smoke test
-```
+| UI | Implemented | Executed | Role |
+|---|---|---|---|
+| **Streamlit Pipeline Runner** (`GUI/app.py`) | Yes | Not run | Operator tooling for local prepare → enrich → export → MLX smoke → handover |
+| **Open WebUI** (`deployment/open-webui/`) | Yes | Not run | End-user front-end for the Deployed Model (paste → Study Note) |
 
-### Module responsibilities
-
-
-| Module                  | Role                                                         |
-| ----------------------- | ------------------------------------------------------------ |
-| `dispatch.py`           | Single entry point: `ingest(path) → Document`                |
-| `schema.py`             | Locked typed contract between all stages                     |
-| `serialize.py`          | Only sanctioned disk boundary for `Document` JSON            |
-| `chunking.py`           | Sections → model-sized `TextChunk` records                   |
-| `source_manifest.py`    | Validates curated source lists (IDs, buckets, splits, paths) |
-| `source_pack.py`        | Orchestrates ingest + chunk + task emission for a manifest   |
-| `study_notes_schema.py` | Databricks study-note prompt and target JSON schema          |
-
+How-to: [`docs/gui.md`](gui.md).
 
 ---
 
-## 6. Contract and schema
+## 6. Evidence summary
 
-### 6.1 Document schema (version `1.0`)
-
-Every ingestor returns the same `Document` type. This is the **core contract** for the entire pipeline.
-
-**Document** (required fields):
-
-
-| Field            | Type          | Meaning                                           |
-| ---------------- | ------------- | ------------------------------------------------- |
-| `document_id`    | string        | Unique id, e.g. `pdf_a1b2c3d4`                    |
-| `source_type`    | string        | `local_file`, `youtube_url`, `url`, `manual_text` |
-| `source_path`    | string | null | Original file path                                |
-| `modality`       | string        | `document`, `slides`, `audio`, `video`, `text`    |
-| `content_type`   | string        | `pdf_text`, `slide_text`, `transcript`, etc.      |
-| `ingestor`       | string        | Which module produced this document               |
-| `method`         | string        | Extraction backend label                          |
-| `sections`       | list          | Ordered list of `Section` objects                 |
-| `schema_version` | string        | `"1.0"` — enforced on load                        |
-
-
-**Section** (atomic structural unit):
-
-
-| Field                         | Type          | Meaning                              |
-| ----------------------------- | ------------- | ------------------------------------ |
-| `index`                       | int           | 0-based position in document         |
-| `text`                        | string        | Cleaned canonical content            |
-| `raw_text`                    | string | null | Byte-faithful extraction original    |
-| `heading`                     | string | null | Section or slide heading             |
-| `page_number`                 | int | null    | PDF page (1-based)                   |
-| `slide_number`                | int | null    | PPTX slide (1-based)                 |
-| `start_time_s` / `end_time_s` | float | null  | Transcript segment timing            |
-| `speaker`                     | string | null | ASR speaker label                    |
-| `confidence`                  | float | null  | Extraction confidence                |
-| `extraction_method`           | string | null | e.g. `pymupdf4llm`, `faster-whisper` |
-
-
-**Design rule:** Sections are faithful source structure. Chunking is a separate downstream step and does not alter the `Document` schema.
-
-### 6.2 Source manifest schema (version `1.0`)
-
-Used to define a curated dataset pack. Checked-in starter:
-
-`data/manifests/databricks_ld_foundations.json`
-
-
-| Top-level field | Purpose                                         |
-| --------------- | ----------------------------------------------- |
-| `pack_id`       | Unique pack identifier                          |
-| `domain`        | e.g. Databricks Data Engineering Foundations    |
-| `topic_buckets` | Six thematic groupings for dataset organisation |
-| `sources`       | List of curated sources with metadata           |
-
-
-Each **source** record:
-
-
-| Field              | Purpose                                               |
-| ------------------ | ----------------------------------------------------- |
-| `source_id`        | Stable identifier                                     |
-| `title`            | Human-readable name                                   |
-| `resource_type`    | `video_transcript`, `documentation`, `tutorial`, etc. |
-| `original_url`     | Provenance URL (metadata only; no auto-fetch yet)     |
-| `local_path`       | Path to curated local file/transcript                 |
-| `topic_bucket_ids` | One or more topic tags                                |
-| `split`            | `train`, `eval`, `holdout`, or `unassigned`           |
-| `priority`         | Ingestion ordering                                    |
-| `enabled`          | Whether to include in pack build                      |
-
-
-### 6.3 Study-note task record (JSONL line)
-
-One record per model-sized chunk in `study_note_tasks.jsonl`:
-
-
-| Field                                              | Purpose                                     |
-| -------------------------------------------------- | ------------------------------------------- |
-| `task_id`                                          | Unique task identifier                      |
-| `source_content`                                   | Chunk text fed to the generator             |
-| `prompt`                                           | Full instruction including rules and schema |
-| `expected_output_schema`                           | Target JSON structure                       |
-| `chunk_id`, `chunk_index`, `chunk_word_count`      | Chunk metadata                              |
-| `source_section_indexes`                           | Traceability back to document sections      |
-| `source_headings`, `source_pages`, `source_slides` | Location provenance                         |
-| `topic_bucket_ids`, `split`                        | Dataset organisation                        |
-| `document_id`, `document_path`                     | Link to parent `Document` JSON              |
-
-
-### 6.4 Target study-note output schema
-
-The model is expected to produce JSON with:
-
-- `title`, `summary`
-- `key_concepts[]`
-- `important_features_or_tools[]`
-- `practical_workflow[]`
-- `common_mistakes_or_confusions[]`
-- `project_usage_notes[]`
-
-Rules embedded in the prompt: **source-only**, beginner-friendly, preserve exact Databricks names, **JSON only** (no markdown wrapper).
+- **Source pack (local):** 792 study-note tasks from 303 enabled sources; train/eval/holdout 678/86/28. Details: `docs/ingestion.md` (pack snapshot).
+- **Enrichment → export (tracked):** `data/processed/training/databricks_ld_foundations/` — 640 train / 34 valid pairs; 85 eval + 28 holdout Teacher References; 5 tasks skipped unenriched.
+- **MLX v1 (tracked, dev):** [2026-07-22 run note](training_runs/2026-07-22_mlx_databricks_ld_foundations.md) — best val at iter 600; later iters overfit. Not the Canonical Run.
+- **MLX v2 (tracked, dev):** [2026-07-29 run note](training_runs/2026-07-29_mlx_databricks_ld_foundations_v2.md) — 600 iters, LR `5e-5`, ≤4096 filter; val **0.776**.
+- **Free-tier eval (tracked narrative, dev — not Holdout):** tuned MLX v2 vs baseline — JSON **0.835** / schema **0.741** (prior tuned iter600: 0.671 / 0.659). Full tables in the v2 run note.
+- **Streamlit Pipeline Runner:** code in git (`GUI/app.py`); no tracked run narrative — Executed **Not run**. See [`docs/gui.md`](gui.md).
+- **Open WebUI:** compose in git; not evidenced in `docs/training_runs/` — Executed **Not run**. See [`docs/gui.md`](gui.md).
+- **Judge / Holdout:** not spent.
+- **Pawsey Canonical Run:** not run.
 
 ---
 
-## 7. Supported input formats
+## 7. Non-claims
 
-
-| Format     | Extensions                                               | Backend                 |
-| ---------- | -------------------------------------------------------- | ----------------------- |
-| PDF        | `.pdf`                                                   | pymupdf4llm             |
-| PowerPoint | `.pptx`                                                  | python-pptx             |
-| Plain text | `.txt`, `.text`                                          | stdlib                  |
-| Markdown   | `.md`, `.markdown`                                       | stdlib                  |
-| Audio      | `.mp3`, `.wav`, `.m4a`, `.flac`, `.aac`, `.ogg`, `.opus` | faster-whisper          |
-| Video      | `.mp4`, `.mov`, `.mkv`, `.avi`, `.webm`                  | ffmpeg + faster-whisper |
-
-
-Optional dependencies load lazily — the pipeline does not require all backends to be installed unless that format is used.
+- No **Canonical Run** results yet — local MLX metrics are **development only**.
+- No **Holdout** numbers yet — free-tier eval on the eval split is not final.
+- No claim of a **production-ready / client-shipped Deployed Model** until that path is Executed beyond local Ollama experiments.
 
 ---
 
-## 8. Chunking behaviour
+## 8. Next (ordered)
 
-Default configuration (`ChunkingConfig`):
+1. **Pawsey Canonical Run** — TRL+PEFT LoRA on Setonix (ADR 0003)
+2. **Tracked eval compare** — baseline vs Canonical-tuned (structural, groundedness; Judge as needed)
+3. **Deployment path** — merge → GGUF → Ollama → Open WebUI for the Canonical adapter
+4. **Holdout Run** — once, after iteration stops; never used to tune
 
-
-| Parameter       | Default | Purpose                                                                 |
-| --------------- | ------- | ----------------------------------------------------------------------- |
-| `target_words`  | 450     | Preferred chunk size                                                    |
-| `max_words`     | 700     | Hard upper bound before split                                           |
-| `min_words`     | 120     | Minimum chunk size (undersized chunks merge or are dropped; sole short chunk kept) |
-| `overlap_words` | 60      | Overlap between split chunks only                                       |
-
-
-Behaviour:
-
-- Normal sections → kept as one chunk
-- Short adjacent sections → merged up to `target_words`
-- Oversized sections → split at paragraph/sentence boundaries
-- After merge/split, `_enforce_min_words` runs before overlap
-- Provenance preserved: section indexes, headings, page/slide/time range
-
-**Example (validated locally):** Edge SLM project PDF — 10 sections → 3 chunks (~490, 503, 275 words).
+Optional data-prep follow-ups (not on the critical path): deferred long transcripts; `pl_associate_*` transcript cleanup if groundedness suffers — see `docs/ingestion.md`.
 
 ---
 
-## 9. Databricks source pack — current state
+## 9. Links
 
-The pack started from **15 curated sources** in the client's dataset source pack document (`databricks_ld_dataset_source_pack.docx`) and has been expanded with official docs discovery and playlist video expansion:
-
-- Original curated mix: videos/playlists + documentation, tutorial, article, and certification pages
-- **6 topic buckets** (basics, Delta Lake, Spark, ingestion, pipelines, governance)
-- Auto-discovered `docs.databricks.com` pages (via `llms.txt` + capped sitemap seeding)
-- Playlist parents expanded into per-video `video_transcript` children (`--expand-playlists`)
-
-Every original curated `original_url` was verified against the source pack document. Discovered docs use cloud-agnostic `docs.databricks.com` URLs.
-
-The client's worked example (Delta Lake streaming study notes, section 7 of the source pack document) is captured as a gold reference fixture at `data/manifests/examples/study_note_example_delta_streaming.json`. A test asserts it conforms to the study-note output schema for use by the HPC enrichment pipeline.
-
-Content acquisition scripts:
-
-- `scripts/discover_databricks_docs.py` — seed/merge official doc URLs from `llms.txt` (+ optional sitemap)
-- `scripts/fetch_docs.py` — trafilatura Markdown export for documentation/article sources
-- `scripts/fetch_transcripts.py` — yt-dlp + faster-whisper; `--expand-playlists` creates per-video transcript sources
-- `scripts/audit_chunk_quality.py` — flag undersized study-note tasks after a pack build
-
-Current pack build (local, gitignored): **792 study-note tasks** from **~361,218 source words** across **303 enabled/ingested sources** (manifest has 428 sources; missing/deferred videos, thin pages, and Lakeflow Connect vendor deep-dives are disabled) — well above the 500-chunk target. Chunk-quality audit flags **0** tasks below 120 words. Optional remaining coverage (deferred, not blocking): `video_cert_course` transcription (~7.5h) and remaining Spark DE playlist video transcripts.
-
-Handoff snapshot: `data/processed/handoffs/databricks_ld_foundations_20260709/` (gitignored).
-
-**Downstream stages (now in this repo):** Teacher enrichment, training-pair export, LoRA training, evaluation, deployment — see `docs/finetuning.md`.
-
----
-
-## 10. Validation and quality assurance
-
-Automated tests:
-
-```bash
-PYTHONPATH=pipeline pytest                    # fast suite
-RUN_SLOW_INGESTION=1 PYTHONPATH=pipeline pytest  # full suite with real files
-```
-
-Coverage includes:
-
-- Schema round-trip and version gate
-- Dispatch routing for all registered extensions
-- Manifest validation (duplicate IDs, unknown buckets, missing files)
-- Source-pack build and chunk-based task emission
-- Gold example fixture conformance to the study-note output schema
-- Chunk split, merge, and provenance preservation
-- Real-file ingestion for PDF, PPTX, audio, video (slow/opt-in)
-
-Manual smoke test:
-
-```bash
-PYTHONPATH=pipeline python -m tests.smoke_test_ingestion
-```
-
-Validated locally on project fixtures: text, Markdown, PDF, PPTX, audio, and video all ingest and round-trip successfully.
-
----
-
-## 11. What is tracked in git vs local only
-
-
-| Path              | In git? | Contents                                |
-| ----------------- | ------- | --------------------------------------- |
-| `pipeline/`       | Yes     | All pipeline code                       |
-| `tests/`          | Yes     | Test suite                              |
-| `data/manifests/` | Yes     | Source manifests (small JSON)           |
-| `data/raw/`       | No      | Large source files (PDFs, audio, video) |
-| `data/processed/` | No      | Generated pack outputs                  |
-| `outputs/`        | No      | Ad-hoc exports                          |
-
-
----
-
-## 12. How to reproduce (developer)
-
-```bash
-conda activate edge-slm
-cd edge_slm
-pip install -r requirements-dev.txt
-pip install -r requirements-ingestion-all.txt
-
-# Run tests
-PYTHONPATH=pipeline pytest
-RUN_SLOW_INGESTION=1 PYTHONPATH=pipeline pytest
-
-# Build Databricks pack (after enabling manifest sources)
-PYTHONPATH=pipeline python -c "
-from ingestion.source_pack import build_source_pack
-build_source_pack(
-    'data/manifests/databricks_ld_foundations.json',
-    'data/processed/source_packs/databricks_ld_foundations',
-    skip_missing_files=True,
-)
-"
-```
-
----
-
-## 13. Next steps
-
-**Fine-tuning pipeline (implemented in this repo — see `docs/finetuning.md`):**
-
-1. Teacher enrichment of **792** tasks with Claude Haiku (Batch API) — `scripts/enrich_tasks.py`
-2. Training-pair export with the Canonical System Prompt — `scripts/export_training_pairs.py`
-3. LoRA fine-tuning of Qwen3-4B-Instruct — local MLX and/or the Canonical Run on Pawsey
-4. Baseline-vs-tuned evaluation (structural, groundedness, Sonnet judge) — `scripts/run_eval.py`
-5. GGUF → Ollama → Open WebUI deployment
-
-**Data preparation (optional, not blocking):**
-
-1. Deferred long transcripts — `video_cert_course` (~7.5h whisper) and remaining Spark DE playlist videos via `fetch_transcripts.py`, then rebuild
-2. Further docs discovery / curation if more coverage is desired
-3. **Transcript quality cleanup (deferred):** The 6 `pl_associate_*` exam-prep video transcripts (~49 train tasks, 6% of dataset) are quiz-walkthrough content with heavy whisper mis-transcriptions (e.g. "job cy" for "Jobs UI", "curry" for "query"); other transcripts carry milder errors ("transaction lock" for "transaction log"). If eval shows weak groundedness or wrong terminology, disable these sources in the manifest, rebuild the pack, and re-enrich only the affected tasks (~629 train tasks remain, still above the 500-chunk target)
-
----
-
-## 14. Summary for client
-
-
-| Question                        | Answer                                                                                         |
-| ------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Where are we?                   | Data preparation complete (**792** tasks); enrichment→training→eval→deployment stages implemented and ready to run |
-| What can the pipeline do today? | Turn local PDFs/docs/slides/audio/video into chunk-level study-note tasks with full provenance |
-| What is the main output?        | A fine-tuned, offline study-notes model served via Ollama + Open WebUI                         |
-| What is blocked on content?     | Nothing blocking — 500+ chunk target met; long cert/Spark DE transcripts deferred as optional  |
-| What comes next?                | Run enrichment (Claude Haiku), train the LoRA (local MLX / Pawsey), evaluate, deploy           |
-
-
+| Doc | Role |
+|---|---|
+| [`CONTEXT.md`](../CONTEXT.md) | Domain glossary |
+| [`docs/ingestion.md`](ingestion.md) | Stages 0–1.5 how-to + pack snapshot |
+| [`docs/finetuning.md`](finetuning.md) | Stages 2–6 how-to + recorded runs table |
+| [`docs/gui.md`](gui.md) | Streamlit Pipeline Runner + Open WebUI how-to |
+| [`docs/adr/`](adr/) | Locked decisions (incl. [ADR 0004](adr/0004-stakeholder-status-report.md) status conventions) |
+| [`docs/training_runs/`](training_runs/) | Dated MLX run narratives |
+| [`docs/client_presentation.md`](client_presentation.md) | Talk deck excerpt (must sync with this report) |
