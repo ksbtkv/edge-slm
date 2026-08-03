@@ -1,0 +1,23 @@
+{
+  "source": "data/processed/training/databricks_ld_foundations",
+  "filtered_to": "data/processed/training/databricks_ld_foundations_le4096",
+  "max_seq_length": 4096,
+  "model_tokenizer": "Qwen/Qwen3-4B-Instruct-2507",
+  "splits": [
+    {
+      "split": "train",
+      "kept": 625,
+      "dropped": 15,
+      "max_len_before_filter": 4862,
+      "over_limit": 15
+    },
+    {
+      "split": "valid",
+      "kept": 32,
+      "dropped": 2,
+      "max_len_before_filter": 4385,
+      "over_limit": 2
+    }
+  ],
+  "note": "Pairs with chat-template token length > max_seq_length dropped; original export untouched."
+}
