@@ -3,7 +3,7 @@
 Stages 2–6 of the Edge SLM pipeline. Stage 1 (ingestion → `study_note_tasks.jsonl`)
 is documented in `docs/ingestion.md`. Vocabulary (Teacher, Student, Judge,
 Canonical System Prompt, …) is defined in `CONTEXT.md`; key decisions in
-`docs/adr/`. Stakeholder status: `docs/project_status_report.md`.
+`docs/adr/`.
 
 ## Overview
 
@@ -95,10 +95,7 @@ sbatch deployment/slurm/train_lora.slurm
 
 ### Recorded runs
 
-| Run | Backend | Outcome |
-|---|---|---|
-| [2026-07-22 MLX `databricks_ld_foundations`](training_runs/2026-07-22_mlx_databricks_ld_foundations.md) | local MLX QLoRA | Completed; best val at iter **600** (0.757); final iter 1400 overfit (val 0.832). Development artifact only. |
-| [2026-07-29 MLX v2 `databricks_ld_foundations_le4096`](training_runs/2026-07-29_mlx_databricks_ld_foundations_v2.md) | local MLX QLoRA | Completed; 600 iters, LR `5e-5`, ≤4096 filter; val **0.776**. Free-tier: JSON **0.835** / schema **0.741** (was 0.671 / 0.659). |
+Databricks study-notes run history lives in `edge_slm-visagio-archive` (`docs/training_runs/`), not in this repo.
 
 ## Stage 5 — Evaluation
 

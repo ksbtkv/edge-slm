@@ -19,7 +19,9 @@ data/raw/
 data/processed/*
 !data/processed/training/
 !data/processed/training/**
+data/gui_runs/
 outputs/
+logs/
 *.gguf
 *.bin
 *.safetensors

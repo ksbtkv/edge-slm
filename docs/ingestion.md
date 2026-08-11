@@ -4,8 +4,7 @@ Offline edge small-language-model pipeline for turning heterogeneous learning
 sources into reproducible **study-note task** datasets.
 
 Stages 0–1.5 end at `study_note_tasks.jsonl`. Stages 2–6 (enrichment through
-deployment) live in the same repository — see `docs/finetuning.md`. Stakeholder
-status (Implemented / Executed) is in `docs/project_status_report.md`. Ad-hoc
+deployment) live in the same repository — see `docs/finetuning.md`. Ad-hoc
 folder packs can also be driven via the Streamlit Pipeline Runner (`docs/gui.md`).
 
 ## Current status
@@ -393,7 +392,6 @@ Canonical Run for reported results (ADR 0003), not a separate codebase.
 | `data/processed/training/` | Yes | Exported Training Pairs + eval/holdout references |
 | `data/raw/` | No | Large source files |
 | `data/processed/source_packs/`, `enrichment/`, `adapters/`, … | No | Generated pack, notes, weights |
-| `docs/training_runs/` | Yes | Dated run narratives (stakeholder-citable) |
 
 ### Packaging a dated handoff snapshot
 

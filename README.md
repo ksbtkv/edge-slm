@@ -1,6 +1,9 @@
-# 26W-ADV-VisagioSLM
-In this project, we will be working with Visagio on a Small Language Model (SLM) leveraging access to the Pawsey Supercomputing Research Centre. The project will involve fine-tuning open-source SLMs and edge models on domain-specific data using parameter-efficient techniques such as LoRA and QLoRA, running at scale on HPC infrastructure.
+# Edge SLM Wizard
 
-**Project status (stakeholders):** [`docs/project_status_report.md`](docs/project_status_report.md) — living Implemented/Executed snapshot for Visagio and UWA supervisors. Talk deck excerpt: [`docs/client_presentation.md`](docs/client_presentation.md) (must sync with the status report). Operator / Deployed Model UIs: [`docs/gui.md`](docs/gui.md).
+A wizard that lets a non-technical End User choose a local small language model, install it, optionally fine-tune it on their own task and data, evaluate it, and run it — entirely on their own machine.
+
+**Operator / Deployed Model UIs:** [`docs/gui.md`](docs/gui.md).
 
 This repository carries the full lifecycle: data preparation (`docs/ingestion.md`), Teacher enrichment, fine-tuning, evaluation, and end-user deployment (`docs/finetuning.md`). Domain vocabulary lives in `CONTEXT.md`; key decisions in `docs/adr/`.
+
+Grew out of the Visagio/Databricks study-notes club project, archived at [`edge_slm-visagio-archive`](https://github.com/ksbtkv/edge_slm-visagio-archive) — see [`docs/adr/0005`](docs/adr/0005-repo-split-from-visagio-project.md) for why this is a separate repo rather than a pivot in place.

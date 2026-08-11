@@ -7,7 +7,7 @@ Two browser surfaces ship with this repo. They serve different audiences.
 | **Streamlit Pipeline Runner** | Operator tooling — upload sources and drive a local prepare → enrich → export → MLX smoke-train → handover flow | `GUI/app.py` |
 | **Open WebUI** | End-user front-end for the **Deployed Model** — paste content, receive a Study Note (via host Ollama) | `deployment/open-webui/docker-compose.yml` |
 
-Stakeholder status for both: `docs/project_status_report.md`. Domain vocabulary (Deployed Model, Study Note): `CONTEXT.md`. Full Stage 6 merge/GGUF/Ollama steps: `docs/finetuning.md`.
+Domain vocabulary: `CONTEXT.md`. Full Stage 6 merge/GGUF/Ollama steps: `docs/finetuning.md`.
 
 ---
 

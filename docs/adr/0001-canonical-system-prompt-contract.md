@@ -1,3 +1,7 @@
+---
+status: superseded by ADR-0005 (repo split) — kept for the general Canonical System Prompt pattern, which the new product's Task Templates reuse; the Study Note-specific claims below no longer apply.
+---
+
 # Canonical System Prompt is a locked train/inference contract
 
 The study-note tasks store a ~700-word teacher prompt with the full JSON schema embedded — designed for Claude, not for the 4B student. We decided the student is trained on a short fixed system prompt (the rules, without the schema dump) with the raw chunk as the user message, and that exact byte-identical prompt ships in the deployed Ollama Modelfile. The schema and rules are baked into the weights by fine-tuning rather than repeated at inference.
