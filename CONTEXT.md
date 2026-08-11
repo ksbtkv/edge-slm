@@ -1,69 +1,77 @@
-# Edge SLM
+# Edge SLM Wizard
 
-An offline, edge-deployable small language model that turns Databricks learning content into structured study notes. This repo carries the full lifecycle: source ingestion, teacher enrichment, fine-tuning, evaluation, and end-user deployment.
+A wizard that lets a non-technical End User choose a local small language model, install it, optionally fine-tune it on their own task and data, evaluate it, and run it — entirely on their own machine. Grew out of the Visagio/Databricks study-notes pipeline (`edge_slm-visagio-archive`), whose pipeline plumbing it reuses but whose single hardcoded task it replaces with open-ended Task Templates.
 
 ## Language
 
-### Data preparation
+### Product & audience
 
-**Source Pack**:
-A curated, manifest-driven collection of ingested sources for one domain, built into chunk-level tasks.
+**End User**:
+The non-technical person operating the wizard end-to-end — picks a model, optionally supplies a task and data, gets a model running locally.
+_Avoid_: final user, customer, operator
 
-**Study-Note Task**:
-One model-sized chunk plus its generation prompt and provenance; a line in `study_note_tasks.jsonl`.
-_Avoid_: chunk task, sample
+**Advanced Mode**:
+The escape hatch that exposes ML-level choices (Trainer Backend selection, HPC Submission, quantization, etc.) hidden from the default End User flow.
+_Avoid_: expert mode, power-user mode
 
-**Study Note**:
-The structured JSON output (title, summary, key concepts, …) produced from one chunk's content.
+### Task definition
 
-### Enrichment
-
-**Teacher**:
-The frontier model (Claude Haiku) that generates reference study notes from task content. One teacher for all splits.
-_Avoid_: oracle, generator LLM
-
-**Enrichment**:
-Running every study-note task through the Teacher and validating the response against the study-note schema.
-
-**Teacher Reference**:
-A validated Teacher output for an eval or holdout task. Used only to judge the student; never trained on.
-_Avoid_: gold label (the client's hand-written example is the "gold example")
-
-**Reject**:
-A task whose Teacher response still fails schema validation after one error-feedback retry. Excluded from the dataset and logged for inspection.
-
-### Fine-tuning
-
-**Training Pair**:
-One supervised example exported for fine-tuning: Canonical System Prompt + raw chunk content as input, validated Teacher study note as target. Built only from train-split tasks.
-_Avoid_: instruction pair
+**Task Template**:
+A reusable definition of what the End User is fine-tuning for: a Canonical System Prompt plus an Output Schema, with an optional Eval Rubric. Ships with built-in templates; Advanced Mode lets a user define their own.
+_Avoid_: task type, use case
 
 **Canonical System Prompt**:
-The short fixed system prompt (rules without the schema dump) used verbatim in both training pairs and the deployed model. Byte-identical across training and inference — a locked contract.
+The fixed system prompt for a Task Template, used verbatim in Training Pairs and at inference — a locked contract between training and deployment.
+
+**Output Schema**:
+The structured shape a Task Template's fine-tuned model must produce. Mandatory part of every Task Template.
+
+**Eval Rubric**:
+An optional, task-specific scoring guide for the Judge. When a Task Template omits one, evaluation falls back to a generic quality/coherence score.
+
+### Entry points
+
+**Entry Point**:
+One of the ways an End User starts working with a model, distinguished by how much raw material they bring. v1 ships three:
+
+- **Try It**: no data, no fine-tuning — install and run a stock Model Catalog entry as-is, to sanity-check it on this machine.
+- **Task + Raw Data**: End User supplies unstructured content; the wizard runs Teacher enrichment over it to produce Training Pairs.
+- **Prepared Dataset**: End User already has a trainer-ready dataset; skips straight to fine-tuning.
+
+_Avoid_: Task-only (considered and deferred to roadmap — no dataset at all, wizard would have to synthesize training data from a task description alone; not solved for v1)
+
+**Customize It**:
+The full install → data → fine-tune → evaluate → inference flow, as opposed to Try It.
+
+### Models & training
+
+**Model Catalog**:
+The curated list of base models the wizard supports. Each entry has known hardware requirements, a quantization path, and a LoRA configuration validated in advance. End Users choose from this list, not an arbitrary model ID — the wizard only promises "this will work on your machine" for models it has actually vetted.
+_Avoid_: model registry, model zoo
+
+**Base Model**:
+A Model Catalog entry before any fine-tuning — what a Try It flow installs and runs as-is.
 
 **Student**:
-The small base model being fine-tuned to imitate the Teacher on this task.
-_Avoid_: edge model (ambiguous with the deployed artifact)
+A Base Model once it enters a Customize It flow to be fine-tuned.
+_Avoid_: edge model
 
-**Trainer Backend**:
-One of the interchangeable fine-tuning implementations (local MLX, Pawsey TRL+PEFT). All backends consume the same Training Pairs and emit a LoRA adapter for the same downstream path.
-
-**Canonical Run**:
-The training run whose adapter is used for reported results and the Deployed Model — produced on Pawsey. Local runs are development artifacts.
-
-### Evaluation
-
-**Baseline**:
-The untuned Student run under the same Canonical System Prompt. Every eval metric is reported as tuned-vs-Baseline.
+**Teacher**:
+The frontier cloud model that generates reference outputs from a Task + Raw Data entry point, validated against the Task Template's Output Schema.
+_Avoid_: oracle, generator LLM
 
 **Judge**:
-The frontier model (Claude Sonnet — deliberately distinct from and stronger than the Teacher) that rubric-scores Student outputs against Teacher References.
+The frontier cloud model — deliberately distinct from and stronger than the Teacher — that scores a Student's outputs, against the Eval Rubric when one exists, or a generic quality check otherwise.
 _Avoid_: evaluator, grader
 
-**Holdout Run**:
-The single, final evaluation on the 28 holdout tasks after all iteration is finished. Run once; its numbers are never used to tune anything.
+**Training Pair**:
+One supervised example for fine-tuning: Canonical System Prompt + input, targeting a validated Teacher output (or a Prepared Dataset's own example).
 
-### Deployment
+**Trainer Backend**:
+One of the interchangeable fine-tuning implementations. v1 ships Local MLX (macOS/Apple Silicon); HPC Submission is the second, Advanced-Mode-only backend.
 
-**Deployed Model**:
-The merged, quantised GGUF of the fine-tuned Student, served by Ollama with the Canonical System Prompt in its Modelfile, behind Open WebUI. Supports exactly one interaction: paste content, receive a Study Note.
+### Advanced Mode: HPC
+
+**HPC Submission**:
+A general capability for offloading pipeline work to Pawsey, not a fine-tuning-specific mechanism — v1 wires up fine-tuning only, but the abstraction is shaped so enrichment can plug in later without a rewrite. Lives behind Advanced Mode; assumes the End User already holds Pawsey credentials and an allocation — the wizard submits and monitors jobs, it does not provision access. Requires explicit one-time consent before an End User's data first leaves their machine for it.
+_Avoid_: Pawsey backend, remote training
